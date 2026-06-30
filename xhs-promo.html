@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小红书宣传图 - 上岸码头</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#e5e7eb; padding:30px; display:flex; flex-wrap:wrap; gap:30px; justify-content:center; }
+
+.card {
+  width:540px; height:720px;
+  border-radius:20px; overflow:hidden; position:relative;
+  font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+  flex-shrink:0; box-shadow:0 12px 40px rgba(0,0,0,0.25);
+}
+
+/* ===== 图1：拼贴风封面 — 随意堆叠截图 + 超大标题 ===== */
+.cover-white {
+  background:#fafbfc; padding:0; display:flex; flex-direction:column; position:relative; overflow:hidden;
+}
+/* 背景装饰 */
+.cover-white::before {
+  content:''; position:absolute; top:-60px; right:-80px; width:300px; height:300px;
+  background:radial-gradient(circle, rgba(231,76,60,0.06) 0%, transparent 70%);
+  border-radius:50%;
+}
+.cover-white::after {
+  content:''; position:absolute; bottom:-40px; left:-60px; width:220px; height:220px;
+  background:radial-gradient(circle, rgba(26,26,46,0.04) 0%, transparent 70%);
+  border-radius:50%;
+}
+/* 标题区 */
+.cover-white .cw-header {
+  padding:28px 28px 6px; position:relative; z-index:1;
+}
+.cover-white .cw-tag {
+  display:inline-block; background:#e74c3c; color:#fff; padding:5px 14px; border-radius:14px;
+  font-size:11px; font-weight:700; margin-bottom:10px;
+}
+.cover-white h2 { font-size:46px; font-weight:900; color:#1a1a2e; line-height:1.2; }
+.cover-white h2 .hl { color:#e74c3c; }
+.cover-white .cw-sub { font-size:13px; color:#8b93a5; margin-top:2px; }
+/* 截图堆叠区 */
+.cover-white .cw-shots { flex:1; position:relative; z-index:1; margin:8px 16px 16px; }
+.cover-white .cw-shots .shot {
+  position:absolute; background:#fff; border-radius:10px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.06);
+  overflow:hidden; border:1px solid #e8eaef;
+}
+.cover-white .shot .sh {
+  background:linear-gradient(135deg,#1a1a2e,#1e2d4a); color:#fff; padding:7px 10px;
+  font-size:9px; font-weight:700; text-align:center;
+}
+.cover-white .shot .sb {
+  padding:6px 8px; font-size:7px; display:flex; flex-direction:column; gap:3px;
+}
+.cover-white .shot .sb .r {
+  display:flex; align-items:center; gap:3px; font-size:7px;
+}
+.cover-white .shot .sb .r .qk {
+  margin-left:auto; font-size:6px; background:#fff7ed; color:#ea580c;
+  padding:1px 5px; border-radius:3px; font-weight:600;
+}
+.cover-white .shot .sb .mo { text-align:center; font-size:7px; color:#9ca3af; padding-top:2px; }
+.cover-white .shot .sht { display:flex; gap:2px; padding:3px 8px; flex-wrap:wrap; }
+.cover-white .shot .sht span {
+  font-size:6px; padding:2px 6px; border-radius:5px; background:#f3f4f6; color:#6b7280;
+}
+.cover-white .shot .sht span.act { background:#e74c3c; color:#fff; }
+.cover-white .shot .cg {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:2px; padding:2px 6px;
+  text-align:center; font-size:6px;
+}
+.cover-white .shot .cg .cc { background:#f9fafb; border-radius:4px; padding:4px 2px; }
+.cover-white .shot .cg .cc .en { font-size:12px; }
+.cover-white .shot .cg .cc .nn { font-weight:900; color:#e74c3c; font-size:9px; }
+
+/* ===== 图2：分类 + 热门 ===== */
+.cat-show {
+  background:#fff; padding:0; display:flex; flex-direction:column;
+}
+.cat-show .panel { padding:24px 20px; flex:1; display:flex; flex-direction:column; }
+.cat-show .panel-title { font-size:16px; font-weight:800; color:#1a1a2e; margin-bottom:4px; }
+.cat-show .panel-sub { font-size:12px; color:#6b7280; margin-bottom:16px; }
+.cat-show .cat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:18px; }
+.cat-show .cat-chip { background:#f9fafb; border-radius:12px; padding:14px 4px; text-align:center; border:1px solid #f3f4f6; }
+.cat-show .cat-chip .emoji { font-size:26px; }
+.cat-show .cat-chip .num { font-size:18px; font-weight:900; color:#e74c3c; }
+.cat-show .cat-chip .lbl { font-size:9px; color:#6b7280; margin-top:2px; }
+.cat-show .hot-list { background:#f9fafb; border-radius:14px; padding:16px; flex:1; }
+.cat-show .hot-list h4 { font-size:13px; font-weight:700; margin-bottom:10px; color:#1a1a2e; }
+.cat-show .hot-row { display:flex; align-items:center; padding:7px 0; border-bottom:1px solid #f3f4f6; font-size:11px; gap:8px; }
+.cat-show .hot-row:last-child { border-bottom:none; }
+.cat-show .hot-tag { font-size:8px; padding:2px 7px; border-radius:8px; font-weight:600; }
+.cat-show .hot-tag.new { background:#fee2e2; color:#dc2626; }
+.cat-show .hot-tag.hot { background:#fef3c7; color:#d97706; }
+
+/* ===== 图3：搜索演示 ===== */
+.search-demo {
+  background:#fff; padding:0; display:flex; flex-direction:column;
+}
+.search-demo .sd-header { padding:24px 20px 16px; }
+.search-demo .sd-header .sd-hint { font-size:15px; font-weight:700; color:#1a1a2e; margin-bottom:10px; }
+.search-demo .sd-input { width:100%; padding:12px 16px; border:2px solid #e74c3c; border-radius:12px; font-size:14px; outline:none; color:#1a1a2e; background:#fef2f2; }
+.search-demo .sd-input::placeholder { color:#9ca3af; }
+.search-demo .search-tags { display:flex; gap:6px; flex-wrap:wrap; padding:0 20px 12px; }
+.search-demo .search-tag { padding:5px 12px; border-radius:14px; font-size:11px; background:#fef2f2; color:#dc2626; font-weight:600; }
+.search-demo .sd-results { flex:1; padding:0 20px 20px; overflow-y:auto; }
+.search-demo .sd-result-item { display:flex; align-items:center; padding:10px 14px; background:#f9fafb; border-radius:10px; margin-bottom:6px; font-size:11px; gap:8px; }
+.search-demo .sd-result-item .match { background:#fef3c7; padding:0 3px; border-radius:3px; font-weight:700; }
+.search-demo .sd-hint { font-size:11px; color:#9ca3af; text-align:center; padding:8px; }
+
+/* ===== 图4：手机端 ===== */
+.phone-show {
+  background:#fff; padding:0; display:flex; align-items:center; justify-content:center; position:relative;
+}
+.phone-show .ps-annot { position:absolute; left:24px; top:24px; font-size:14px; font-weight:700; color:#1a1a2e; line-height:2; }
+.phone-show .ps-annot em { color:#e74c3c; font-style:normal; }
+.phone-show .phone-frame {
+  width:250px; height:500px; background:#f5f6fa; border-radius:28px;
+  border:3px solid #333; overflow:hidden; box-shadow:0 16px 40px rgba(0,0,0,0.15);
+}
+.phone-show .pf-top { background:linear-gradient(135deg,#1a1a2e,#16213e); color:#fff; text-align:center; padding:10px 8px; }
+.phone-show .pf-top b { font-size:12px; }
+.phone-show .pf-top p { font-size:8px; opacity:0.7; }
+.phone-show .pf-list { padding:8px 10px; }
+.phone-show .pf-item { background:#fff; border-radius:7px; padding:7px 9px; margin-bottom:5px; font-size:10px; display:flex; gap:4px; align-items:center; }
+.phone-show .pf-bottom { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(90deg,#fef3c7,#fee2e2); padding:10px; display:flex; gap:8px; justify-content:center; border-top:2px solid #fca5a5; }
+.phone-show .pf-btn { padding:5px 14px; border-radius:14px; font-size:10px; font-weight:700; color:#fff; background:linear-gradient(135deg,#e74c3c,#f97316); }
+.phone-show .ps-side { position:absolute; right:100px; top:55%; width:100px; background:#fff; border-radius:12px; padding:12px 10px; text-align:center; box-shadow:0 4px 20px rgba(0,0,0,0.1); font-size:9px; border:1.5px solid #fee2e2; }
+.phone-show .ps-side .t { font-weight:700; color:#dc2626; font-size:10px; }
+.phone-show .ps-side .b { background:linear-gradient(135deg,#e74c3c,#f97316); color:#fff; padding:5px 0; border-radius:10px; margin:5px 0; font-size:9px; font-weight:700; }
+
+/* ===== 图5：结尾 ===== */
+.end-card {
+  background:#fff; padding:32px 28px; display:flex; flex-direction:column; text-align:center;
+}
+.end-card .big-icon { font-size:56px; margin-bottom:12px; }
+.end-card h3 { font-size:28px; font-weight:900; color:#1a1a2e; margin-bottom:6px; }
+.end-card .end-sub { font-size:14px; color:#6b7280; margin-bottom:20px; }
+.end-card .end-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
+.end-card .end-item { background:#f9fafb; border-radius:12px; padding:16px; }
+.end-card .end-item .n { font-size:28px; font-weight:900; color:#e74c3c; }
+.end-card .end-item .l { font-size:11px; color:#6b7280; margin-top:2px; }
+.end-card .end-cta { background:#fef2f2; border-radius:16px; padding:20px; border:1px solid #fee2e2; }
+.end-card .end-cta p { font-size:14px; margin:5px 0; color:#1a1a2e; }
+.end-card .end-cta .big { font-size:22px; font-weight:900; color:#dc2626; }
+.end-card .end-url { font-size:11px; color:#9ca3af; margin-top:12px; }
+
+.card > .lbl { position:absolute; top:10px; left:14px; background:rgba(0,0,0,0.5); color:#fff; padding:3px 10px; border-radius:10px; font-size:9px; z-index:5; }
+</style>
+</head>
+<body>
+
+<!-- 图1：拼贴风封面 — 随意堆叠+超大标题 -->
+<div class="card cover-white" style="position:relative">
+  <div class="lbl">图1 · 封面图</div>
+  <div class="cw-header">
+    <span class="cw-tag">🆓 全部免费分享</span>
+    <h2>我做了一个<br><span class="hl">考公资料网站</span></h2>
+    <div class="cw-sub">浏览器打开就能用 · 不用下载 · 不用加群 · 不用付费</div>
+  </div>
+  <div class="cw-shots">
+    <!-- 截图1：课程列表 — 左上，微微右旋 -->
+    <div class="shot" style="top:5px;left:4px;width:160px;height:195px;transform:rotate(1.5deg);z-index:2;">
+      <div class="sh">🏖️ 上岸码头 · 2026合集</div>
+      <div class="sb">
+        <div class="r">2027国考980<span class="qk">夸克</span></div>
+        <div class="r">花生十三系统班<span class="qk">夸克</span></div>
+        <div class="r">CG超大杯刷题营<span class="qk">夸克</span></div>
+        <div class="r">李铁时政串讲<span class="qk">夸克</span></div>
+        <div class="r">李梦娇常识88条<span class="qk">夸克</span></div>
+        <div class="mo">··· 339门课程 ···</div>
+      </div>
+    </div>
+    <!-- 截图2：分类标签 — 右上，微微左旋 -->
+    <div class="shot" style="top:0px;right:4px;width:155px;height:175px;transform:rotate(-2deg);z-index:3;">
+      <div class="sh">📊 课程分类</div>
+      <div class="cg" style="padding:5px 6px;">
+        <div class="cc"><div class="en">📦</div><div class="nn">61</div>国省考</div>
+        <div class="cc"><div class="en">🎯</div><div class="nn">62</div>押题</div>
+        <div class="cc"><div class="en">👨‍🏫</div><div class="nn">151</div>名师</div>
+        <div class="cc"><div class="en">📰</div><div class="nn">39</div>时政</div>
+        <div class="cc"><div class="en">💬</div><div class="nn">11</div>面试</div>
+        <div class="cc"><div class="en">📝</div><div class="nn">3</div>真题</div>
+      </div>
+    </div>
+    <!-- 截图3：搜索 — 中左，微微右旋 -->
+    <div class="shot" style="top:210px;left:12px;width:148px;height:145px;transform:rotate(-1deg);z-index:1;">
+      <div class="sh">🔍 搜老师/机构</div>
+      <div class="sht"><span class="act">花生十三</span><span>李铁</span><span>CG</span><span>FB</span></div>
+      <div class="sb">
+        <div class="r">花生十三飞扬系统班<span class="qk">夸克</span></div>
+        <div class="r">花生十三行测系统班<span class="qk">夸克</span></div>
+        <div class="r">花生十三冲刺套卷班<span class="qk">夸克</span></div>
+        <div class="mo">搜到6门 · 秒找课</div>
+      </div>
+    </div>
+    <!-- 截图4：手机端 — 中右，微微右旋 -->
+    <div class="shot" style="top:190px;right:10px;width:148px;height:160px;transform:rotate(2.5deg);z-index:2;">
+      <div class="sh">📱 手机浏览器打开</div>
+      <div class="sb">
+        <div class="r">📱 点夸克链接→保存网盘</div>
+        <div class="r">🎬 在线观看·倍速播放</div>
+        <div class="r">🔄 持续更新·链接稳定</div>
+        <div class="r" style="margin-top:3px;background:#fef3c7;padding:3px 5px;border-radius:4px;justify-content:center;font-weight:700;">🐧 QQ群 563208874</div>
+        <div class="r" style="background:#ecfdf5;padding:3px 5px;border-radius:4px;justify-content:center;font-weight:700;color:#059669;">💚 zhiaplmm</div>
+      </div>
+    </div>
+    <!-- 截图5：小标签 — 底部 -->
+    <div class="shot" style="bottom:8px;left:50%;transform:translateX(-50%) rotate(-0.5deg);width:200px;height:auto;z-index:4;position:absolute;border-radius:8px;padding:7px 14px;text-align:center;background:linear-gradient(135deg,#fef2f2,#fff7ed);border:1px solid #fee2e2;">
+      <div style="font-size:11px;font-weight:800;color:#dc2626;">339门课程 · 夸克网盘 · 持续更新中</div>
+    </div>
+  </div>
+</div>
+
+<!-- 图2：分类统计 + 热门课程 -->
+<div class="card cat-show" style="position:relative">
+  <div class="lbl">图2 · 分类与热门</div>
+  <div class="panel">
+    <div class="panel-title">📊 339门课程 · 9大分类</div>
+    <div class="panel-sub">夸克网盘直接下载，全部免费</div>
+    <div class="cat-grid">
+      <div class="cat-chip"><div class="emoji">📦</div><div class="num">61</div><div class="lbl">国省考980</div></div>
+      <div class="cat-chip"><div class="emoji">🎯</div><div class="num">62</div><div class="lbl">押题模拟</div></div>
+      <div class="cat-chip"><div class="emoji">👨‍🏫</div><div class="num">151</div><div class="lbl">公考名师</div></div>
+      <div class="cat-chip"><div class="emoji">📰</div><div class="num">39</div><div class="lbl">时政热点</div></div>
+      <div class="cat-chip"><div class="emoji">💬</div><div class="num">11</div><div class="lbl">公考面试</div></div>
+      <div class="cat-chip"><div class="emoji">🏛️</div><div class="num">6</div><div class="lbl">事业单位</div></div>
+      <div class="cat-chip"><div class="emoji">📝</div><div class="num">3</div><div class="lbl">历年真题</div></div>
+      <div class="cat-chip"><div class="emoji">📌</div><div class="num">6</div><div class="lbl">其他</div></div>
+    </div>
+    <div class="hot-list">
+      <h4>🔥 热门课程</h4>
+      <div class="hot-row"><span class="hot-tag new">最新</span>2027国考980</div>
+      <div class="hot-row"><span class="hot-tag hot">热门</span>2026花生十三飞扬笔试系统班</div>
+      <div class="hot-row"><span class="hot-tag hot">热门</span>2026省考超大杯刷题营【CG】</div>
+      <div class="hot-row"><span class="hot-tag new">最新</span>2026李铁全年时政串讲</div>
+      <div class="hot-row"><span class="hot-tag hot">热门</span>2026李梦娇常识速记口诀88条</div>
+      <div class="hot-row">2025高照资料分析超大杯刷题营</div>
+      <div class="hot-row">2000-2025国省考历年真题合集</div>
+      <div class="hot-row">2026袁东申论领跑营全套</div>
+    </div>
+  </div>
+</div>
+
+<!-- 图3：搜索功能 -->
+<div class="card search-demo" style="position:relative">
+  <div class="lbl">图3 · 搜索找课</div>
+  <div class="sd-header">
+    <div class="sd-hint">🔍 搜老师、搜机构、搜课程名</div>
+    <input class="sd-input" value="花生十三" readonly>
+  </div>
+  <div class="search-tags">
+    <span class="search-tag">花生十三</span><span class="search-tag">李铁</span><span class="search-tag">CG</span>
+    <span class="search-tag">FB</span><span class="search-tag">袁东</span><span class="search-tag">高照</span>
+    <span class="search-tag">飞扬</span><span class="search-tag">李梦娇</span>
+  </div>
+  <div class="sd-results">
+    <div class="sd-result-item">📘 2026年<span class="match">花生十三</span>飞扬笔试系统班 <span style="margin-left:auto;font-size:9px;background:#fff7ed;color:#ea580c;padding:3px 8px;border-radius:5px;">📥 夸克</span></div>
+    <div class="sd-result-item">📘 2025年省考<span class="match">花生十三</span>行测系统班 <span style="margin-left:auto;font-size:9px;background:#fff7ed;color:#ea580c;padding:3px 8px;border-radius:5px;">📥 夸克</span></div>
+    <div class="sd-result-item">📘 2026年<span class="match">花生十三</span>全科争议题专项解析班 <span style="margin-left:auto;font-size:9px;background:#fff7ed;color:#ea580c;padding:3px 8px;border-radius:5px;">📥 夸克</span></div>
+    <div class="sd-result-item">📘 2026国考<span class="match">花生十三</span>冲刺套卷班 <span style="margin-left:auto;font-size:9px;background:#fff7ed;color:#ea580c;padding:3px 8px;border-radius:5px;">📥 夸克</span></div>
+    <div class="sd-result-item">📘 2025年国考<span class="match">花生十三</span>行测 <span style="margin-left:auto;font-size:9px;background:#fff7ed;color:#ea580c;padding:3px 8px;border-radius:5px;">📥 夸克</span></div>
+    <div class="sd-result-item">📘 <span class="match">花生十三</span>线下绝版课(必看) <span style="margin-left:auto;font-size:9px;background:#fff7ed;color:#ea580c;padding:3px 8px;border-radius:5px;">📥 夸克</span></div>
+    <div class="sd-hint">找到 6 门「花生十三」课程，点夸克按钮直接保存</div>
+  </div>
+</div>
+
+<!-- 图4：手机端展示 -->
+<div class="card phone-show" style="position:relative">
+  <div class="lbl">图4 · 手机也能用</div>
+  <div class="ps-annot">
+    📱 <em>手机浏览器</em>打开<br>
+    🔗 点击<em>夸克网盘</em><br>
+    💾 直接<em>保存</em>到网盘<br>
+    🎬 在线看·<em>支持倍速</em>
+  </div>
+  <div class="phone-frame">
+    <div class="pf-top">
+      <b>🏖️ 上岸码头</b>
+      <p>2026公考资料合集</p>
+      <span style="display:inline-block;background:#e74c3c;padding:1px 8px;border-radius:8px;font-size:7px;margin-top:3px;">🔄 持续更新</span>
+    </div>
+    <div class="pf-list">
+      <div class="pf-item">2027国考980 <span style="margin-left:auto;font-size:8px;background:#fff7ed;color:#ea580c;padding:2px 7px;border-radius:5px;">夸克</span></div>
+      <div class="pf-item">花生十三飞扬系统班 <span style="margin-left:auto;font-size:8px;background:#fff7ed;color:#ea580c;padding:2px 7px;border-radius:5px;">夸克</span></div>
+      <div class="pf-item">CG超大杯刷题营 <span style="margin-left:auto;font-size:8px;background:#fff7ed;color:#ea580c;padding:2px 7px;border-radius:5px;">夸克</span></div>
+      <div class="pf-item">李铁时政串讲全年 <span style="margin-left:auto;font-size:8px;background:#fff7ed;color:#ea580c;padding:2px 7px;border-radius:5px;">夸克</span></div>
+      <div class="pf-item">李梦娇常识速记88条 <span style="margin-left:auto;font-size:8px;background:#fff7ed;color:#ea580c;padding:2px 7px;border-radius:5px;">夸克</span></div>
+      <div class="pf-item">袁东申论领跑营 <span style="margin-left:auto;font-size:8px;background:#fff7ed;color:#ea580c;padding:2px 7px;border-radius:5px;">夸克</span></div>
+      <div class="pf-item">国省考历年真题合集 <span style="margin-left:auto;font-size:8px;background:#fff7ed;color:#ea580c;padding:2px 7px;border-radius:5px;">夸克</span></div>
+    </div>
+    <div class="pf-bottom">
+      <span class="pf-btn">🐧 QQ群</span>
+      <span class="pf-btn" style="background:linear-gradient(135deg,#07c160,#06ad56);">💚 微信</span>
+    </div>
+  </div>
+  <div class="ps-side">
+    <div class="t">🏖️ 上岸码头</div>
+    <div style="font-size:8px;color:#6b7280;margin:4px 0;">需要什么课<br>告诉我帮你找</div>
+    <div class="b">🐧 QQ群加入</div>
+    <div class="b" style="background:linear-gradient(135deg,#07c160,#06ad56);">💚 加微信</div>
+    <div style="font-size:8px;color:#9ca3af;margin-top:4px;">备注"上岸"拉群</div>
+  </div>
+</div>
+
+<!-- 图5：收尾 -->
+<div class="card end-card" style="position:relative">
+  <div class="lbl">图5 · 结尾</div>
+  <div class="big-icon">🏖️</div>
+  <h3>上岸码头</h3>
+  <div class="end-sub">考公资料免费分享站 · 2026持续更新</div>
+  <div class="end-grid">
+    <div class="end-item"><div class="n">339+</div><div class="l">门课程</div></div>
+    <div class="end-item"><div class="n">9</div><div class="l">大分类</div></div>
+    <div class="end-item"><div class="n">免费</div><div class="l">无需付费转发</div></div>
+    <div class="end-item"><div class="n">夸克</div><div class="l">网盘一键保存</div></div>
+  </div>
+  <div class="end-cta">
+    <p>📌 浏览器打开网站</p>
+    <p class="big">上岸码头</p>
+    <p style="font-size:12px;opacity:0.7;">建议存浏览器书签</p>
+    <p style="margin-top:8px;">🐧 QQ群：563208874</p>
+    <p>💚 微信：zhiaplmm（备注上岸）</p>
+  </div>
+  <div class="end-url">所有资料免费分享 · 仅供学习参考</div>
+</div>
+
+</body>
+</html>

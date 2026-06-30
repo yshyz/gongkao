@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026公考资料合集 - 持续更新中</title>
+<style>
+:root {
+  --bg: #f5f6fa;
+  --card: #fff;
+  --text: #1a1a2e;
+  --muted: #6b7280;
+  --accent: #e74c3c;
+  --blue: #2980b9;
+  --green: #27ae60;
+  --border: #e5e7eb;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:-apple-system,"Microsoft YaHei",sans-serif; line-height:1.6; }
+.container { max-width:900px; margin:0 auto; padding:16px; }
+
+/* Header */
+.header { background:linear-gradient(135deg,#1a1a2e,#16213e); color:#fff; text-align:center; padding:32px 20px; border-radius:16px; margin-bottom:16px; }
+.header h1 { font-size:24px; margin-bottom:6px; }
+.header .sub { font-size:13px; opacity:0.7; }
+.header .badge { display:inline-block; background:var(--accent); padding:4px 14px; border-radius:20px; font-size:12px; font-weight:700; margin-top:8px; animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+/* Search + Stats */
+.top-bar { display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap; }
+.search-box { flex:1; min-width:200px; padding:10px 14px; border:2px solid var(--border); border-radius:10px; font-size:14px; outline:none; transition:.2s; background:var(--card); }
+.search-box:focus { border-color:var(--accent); }
+.stat { display:flex; align-items:center; gap:4px; padding:8px 14px; background:var(--card); border-radius:10px; font-size:12px; color:var(--muted); border:1px solid var(--border); }
+.stat b { color:var(--accent); }
+
+/* Tabs */
+.tabs { display:flex; gap:6px; margin-bottom:14px; overflow-x:auto; padding-bottom:4px; }
+.tab { padding:8px 14px; border-radius:20px; font-size:13px; font-weight:600; white-space:nowrap; cursor:pointer; border:1px solid var(--border); background:var(--card); color:var(--muted); transition:.2s; }
+.tab.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+.tab:hover:not(.active) { border-color:#9ca3af; }
+
+/* Section */
+.section { background:var(--card); border-radius:12px; padding:18px; margin-bottom:12px; border:1px solid var(--border); }
+.section-title { font-size:16px; font-weight:700; margin-bottom:4px; display:flex; align-items:center; gap:6px; }
+.section-sub { font-size:12px; color:var(--muted); margin-bottom:12px; }
+
+/* Course Item */
+.course { display:flex; align-items:center; padding:10px 12px; border-bottom:1px solid #f3f4f6; gap:10px; transition:.2s; border-radius:6px; flex-wrap:wrap; }
+.course:hover { background:#f9fafb; }
+.course:last-child { border-bottom:none; }
+.course-num { font-size:11px; color:var(--muted); min-width:36px; }
+.course-name { flex:1; min-width:180px; font-size:14px; font-weight:500; }
+.course-tag { font-size:10px; padding:2px 8px; border-radius:10px; font-weight:600; white-space:nowrap; }
+.tag-new { background:#fee2e2; color:#dc2626; }
+.tag-hot { background:#fef3c7; color:#d97706; }
+.tag-free { background:#d1fae5; color:#059669; }
+.tag-update { background:#dbeafe; color:#2563eb; }
+
+.course-links { display:flex; gap:6px; flex-wrap:wrap; }
+.link-btn { display:inline-block; padding:4px 12px; border-radius:6px; font-size:12px; font-weight:600; text-decoration:none; transition:.2s; white-space:nowrap; }
+.link-quark { background:#fff7ed; color:#ea580c; border:1px solid #fed7aa; }
+.link-quark:hover { background:#fed7aa; }
+.link-baidu { background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe; }
+.link-baidu:hover { background:#bfdbfe; }
+
+/* Footer */
+.footer { text-align:center; padding:20px; margin-top:8px; }
+.footer .cta { display:inline-block; background:var(--accent); color:#fff; padding:10px 28px; border-radius:24px; font-weight:700; text-decoration:none; margin:8px; font-size:14px; }
+.footer .tip { color:var(--muted); font-size:12px; margin-top:10px; }
+
+/* Collapse */
+.collapse-btn { cursor:pointer; color:var(--blue); font-size:12px; float:right; }
+.collapse-btn:hover { text-decoration:underline; }
+
+.hidden { display:none; }
+.empty-msg { text-align:center; color:var(--muted); padding:30px; font-size:14px; }
+
+@media (max-width:500px) {
+  .course { flex-direction:column; align-items:flex-start; gap:6px; }
+  .course-links { justify-content:flex-start; }
+  .course-name { font-size:13px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>📚 2026公考资料合集</h1>
+  <p class="sub">国考 · 省考 · 事业单位 · 三支一扶 · 军队文职 · 教招教资 · 时政 · 面试</p>
+  <span class="badge">🔄 持续更新中</span>
+</div>
+
+<div class="top-bar">
+  <input class="search-box" id="search" placeholder="🔍 搜索课程名称、老师、机构...（如：花生十三、李铁、FB、CG）" oninput="filterCourses()">
+  <span class="stat">共 <b id="totalCount">0</b> 个课程 | 更新于 <span id="updateDate">--</span></span>
+</div>
+
+<div class="tabs" id="tabBar">
+  <button class="tab active" data-cat="all">全部</button>
+</div>
+
+<div id="content"></div>
+
+<div class="footer">
+  <p style="font-size:13px;color:var(--muted);">📌 链接打不开？用手机端转存即可 · 课程失效私信补链</p>
+  <a class="cta" href="#" onclick="alert('在这里放你的微信/QQ群链接')">💬 更多资料 · 加群获取</a>
+  <a class="cta" style="background:var(--blue);" href="#" onclick="alert('在这里放你的夸克网盘推广链接')">📥 夸克网盘领会员</a>
+  <p class="tip">⚠️ 所有资料来源于网络收集，仅供学习参考，请于下载后24小时内删除</p>
+</div>
+
+</div>
+
+<script>
+// ============ 数据区：在这里编辑你的链接 ============
+// 格式：{cat, tag:'new/hot/free/update', name, quark, baidu}
+// 夸克链接替换成你自己的推广链接，百度链接替换成你自己的
+
+const COURSES = [
+  // ===== 粉笔980 =====
+  {cat:'粉笔980',name:"2024省考(★980)",quark:'https://pan.quark.cn/s/b5c7e835e45d'},
+  {cat:'粉笔980',name:"2025四川省考980系统班",quark:'https://pan.quark.cn/s/ad8a07e8c2f1'},
+  {cat:'粉笔980',name:"2025江苏省考980系统班",quark:'https://pan.quark.cn/s/405e177146a5'},
+  {cat:'粉笔980',name:"2025浙江省考980系统班",quark:'https://pan.quark.cn/s/d7af4eb93baa'},
+  {cat:'粉笔980',name:"2025山东省考980系统班",quark:'https://pan.quark.cn/s/b1c4c1536e39'},
+  {cat:'粉笔980',name:"2025广东省考980系统班",quark:'https://pan.quark.cn/s/5f670345971c'},
+  {cat:'粉笔980',name:"2025年省考模考解析",quark:'https://pan.quark.cn/s/668ca3358030'},
+  {cat:'粉笔980',name:"2024国考(★980)",quark:'https://pan.quark.cn/s/b58aa1d5d065'},
+  {cat:'粉笔980',name:"2025国考(★980)",quark:'https://pan.quark.cn/s/96ab002b1e2a'},
+  {cat:'粉笔980',name:"2026年国考模考解析",quark:'https://pan.quark.cn/s/6e911c2df7be'},
+  {cat:'粉笔980',name:"2025下半年省考模考解析",quark:'https://pan.quark.cn/s/42aac2420584'},
+  {cat:'粉笔980',name:"2026年江苏省考980系统班",quark:'https://pan.quark.cn/s/18e4f23ec769'},
+  {cat:'粉笔980',name:"2026省考(★980)合集",quark:'https://pan.quark.cn/s/88664b454a65'},
+  {cat:'粉笔980',name:"2026国考(★980)",quark:'https://pan.quark.cn/s/1ff12691e174'},
+  {cat:'粉笔980',name:"2027国考980",quark:'https://pan.quark.cn/s/5da54a3da391'},
+  // ===== 押题模拟 =====
+  {cat:'押题模拟',name:"2025年事业单位【模拟&押题&资料包】",quark:'https://pan.quark.cn/s/5b23ead84722'},
+  // ===== 公考名师 =====
+  {cat:'公考名师',name:"2026年为民公考结构化面试理论基础课【人须在事上磨】",quark:'https://pan.quark.cn/s/79add30c6411'},
+  {cat:'公考名师',name:"2026年超格结构化面试学至考前班",quark:'https://pan.quark.cn/s/d7d18a23c31e'},
+  {cat:'公考名师',name:"2026年了凡日记面试精讲课",quark:'https://pan.quark.cn/s/7c8470a3dd55'},
+  {cat:'公考名师',name:"25个结构化面试必背答题母题",quark:'https://pan.quark.cn/s/36e91648affd'},
+  {cat:'公考名师',name:"2026年老夏说公务员面试：从小白到面霸",quark:'https://pan.quark.cn/s/91a0518d04e1'},
+  {cat:'公考名师',name:"2026年税务结构化小组面试基础课【老夏团队】",quark:'https://pan.quark.cn/s/d3bf684bc16a'},
+  {cat:'公考名师',name:"2026年国省考结构化面试基础课【老夏】",quark:'https://pan.quark.cn/s/361343df3595'},
+  {cat:'公考名师',name:"2026年相丽君面试个性化技巧精讲班",quark:'https://pan.quark.cn/s/1388fb1d3fdb'},
+  {cat:'公考名师',name:"2026年国考央选特招面试素养提升课",quark:'https://pan.quark.cn/s/39aadb8efa7d'},
+  {cat:'公考名师',name:"2026年广东省考面试抢先学【跃跃】",quark:'https://pan.quark.cn/s/6759ed1a1e58'},
+  {cat:'公考名师',name:"2026年袁东面试领跑营方法精讲班",quark:'https://pan.quark.cn/s/cddc95a7ed34'},
+  {cat:'公考名师',name:"2026年飞扬申论归纳概括题早课",quark:'https://pan.quark.cn/s/dd42a40a06c0'},
+  {cat:'公考名师',name:"2026年国考大宝小宝言语刷题答疑班",quark:'https://pan.quark.cn/s/bc9c7e2f33a2'},
+  {cat:'公考名师',name:"2026年袁东申论领跑营套题实战班",quark:'https://pan.quark.cn/s/0fb41ee3fa95'},
+  {cat:'公考名师',name:"2026年上岸村王炎数量关系·讲练大满贯",quark:'https://pan.quark.cn/s/7aed7590ffae'},
+  {cat:'公考名师',name:"2026年国省考王军涛常识判断理论课",quark:'https://pan.quark.cn/s/48a0348dbaa8'},
+  {cat:'公考名师',name:"上岸村忠政申论批改班【75期】",quark:'https://pan.quark.cn/s/3973f9f97d09'},
+  {cat:'公考名师',name:"花生十三线下绝版课(必看)",quark:'https://pan.quark.cn/s/4076a521ca05'},
+  {cat:'公考名师',name:"2026年相丽君政治素养刷题班",quark:'https://pan.quark.cn/s/732437d277b0'},
+  {cat:'公考名师',name:"2026年国考花生十三冲刺套卷班【一期】",quark:'https://pan.quark.cn/s/e5716bb75f6d'},
+  {cat:'公考名师',name:"2026年国考飞扬申论冲刺套卷班【一期】",quark:'https://pan.quark.cn/s/6ced09def5a7'},
+  {cat:'公考名师',name:"2026年CG（五合一）行测+申论超大杯",quark:'https://pan.quark.cn/s/5cac736d1155'},
+  {cat:'公考名师',name:"2026年老闻言语高频成语300词",quark:'https://pan.quark.cn/s/42e4a21d8e2a'},
+  {cat:'公考名师',name:"2026年老闻言语百日攻坚",quark:'https://pan.quark.cn/s/6afc9084254c'},
+  {cat:'公考名师',name:"2026年飞扬申论分析理解题",quark:'https://pan.quark.cn/s/139de8e775aa'},
+  {cat:'公考名师',name:"2026年相丽君文章写作训练营",quark:'https://pan.quark.cn/s/870ec1dc5ad6'},
+  {cat:'公考名师',name:"2026年白鹭申论破题阵突破营",quark:'https://pan.quark.cn/s/f7d1a3001564'},
+  {cat:'公考名师',name:"2026年四海柳岩逻辑填空必刷300题",quark:'https://pan.quark.cn/s/cac7275e4499'},
+  {cat:'公考名师',name:"资料估算拔高9讲+1000道最新五年真题【叽叽喳喳的公考】",quark:'https://pan.quark.cn/s/a9bedf062043'},
+  {cat:'公考名师',name:"合并套题版：数量最新五年国省联选（59套）【叽叽喳喳的公考】",quark:'https://pan.quark.cn/s/8778cdf05719'},
+  {cat:'公考名师',name:"合并模块版：数量真题刷题课（800道）【叽叽喳喳的公考】",quark:'https://pan.quark.cn/s/3e577022d951'},
+  {cat:'公考名师',name:"速算基础+资料分析系统基础课+70道手把手速算例题 【叽叽喳喳的公考】",quark:'https://pan.quark.cn/s/2fa976f5dc96'},
+  {cat:'公考名师',name:"2026年公考大姨夫王军涛政治理论系统班",quark:'https://pan.quark.cn/s/d0ef121fdd0e'},
+  {cat:'公考名师',name:"2026年阿里木江言语基础理论",quark:'https://pan.quark.cn/s/60556b2dcebe'},
+  {cat:'公考名师',name:"2026年上岸村小黑政治理论&常识判断全家桶",quark:'https://pan.quark.cn/s/86d42140068b'},
+  {cat:'公考名师',name:"2026年大懒猫言语专项600题",quark:'https://pan.quark.cn/s/12736b88d1f7'},
+  {cat:'公考名师',name:"2026年苏金朋判断推理通关班",quark:'https://pan.quark.cn/s/8cc38c1a8981'},
+  {cat:'公考名师',name:"2026年大宝小宝言语降维体系课Pro",quark:'https://pan.quark.cn/s/acbecb500815'},
+  {cat:'公考名师',name:"2026年袁东申论超大杯刷题班",quark:'https://pan.quark.cn/s/1c2c9c0695c2'},
+  {cat:'公考名师',name:"2026年CG（五合一）行测+申论夸夸刷",quark:'https://pan.quark.cn/s/a2e628000ca6'},
+  {cat:'公考名师',name:"2026年龙飞平面图推500题刷题精讲班",quark:'https://pan.quark.cn/s/c9a4b5022bdb'},
+  {cat:'公考名师',name:"2026年青菜白玉汤判断推理体系课",quark:'https://pan.quark.cn/s/2d0c3fe9ab52'},
+  {cat:'公考名师',name:"2026年为民公考刘大师申论系统班",quark:'https://pan.quark.cn/s/c1eb74fe0e1e'},
+  {cat:'公考名师',name:"2026年鸿哥数量关系旗舰班",quark:'https://pan.quark.cn/s/7eb2ac172363'},
+  {cat:'公考名师',name:"2026年李卜常识政治理论开天斧",quark:'https://pan.quark.cn/s/1bb10f4237f0'},
+  {cat:'公考名师',name:"2026年宋捏捏资料分析一本通",quark:'https://pan.quark.cn/s/2b2b3e1bdb42'},
+  {cat:'公考名师',name:"2026年相丽君申论技巧趣学班",quark:'https://pan.quark.cn/s/a97b3babe458'},
+  {cat:'公考名师',name:"2026年老夫子申论公文素养课",quark:'https://pan.quark.cn/s/d4684daf875f'},
+  {cat:'公考名师',name:"2026年飞扬申论笔试系统班",quark:'https://pan.quark.cn/s/b15c1f65d2e9'},
+  {cat:'公考名师',name:"2026年花生十三飞扬笔试系统班",quark:'https://pan.quark.cn/s/6478ecb1ed2e'},
+  {cat:'公考名师',name:"2026年袁东大作文专项班",quark:'https://pan.quark.cn/s/d9fdf7fcc9f3'},
+  {cat:'公考名师',name:"2026年小P公考数资判系统班",quark:'https://pan.quark.cn/s/fb7ff5a2fdca'},
+  {cat:'公考名师',name:"2026年江牧云申论十全大补抢分课",quark:'https://pan.quark.cn/s/5cb358881a46'},
+  {cat:'公考名师',name:"2026年上岸村雨菲言语全新黄金九讲",quark:'https://pan.quark.cn/s/130cb034e4bf'},
+  {cat:'公考名师',name:"2026年白鹭申论扎马步营+易行",quark:'https://pan.quark.cn/s/78461443c106'},
+  {cat:'公考名师',name:"2026年花生十三全科争议题专项解析班",quark:'https://pan.quark.cn/s/c6b71cc4b502'},
+  {cat:'公考名师',name:"2026年国考陈八十行测全程无忧学",quark:'https://pan.quark.cn/s/8fbe3e8d440e'},
+  {cat:'公考名师',name:"2026年上岸村国省考行测申论一卡通",quark:'https://pan.quark.cn/s/a0697dcb94b1'},
+  {cat:'公考名师',name:"2026年国考大懒猫言语理解理论课",quark:'https://pan.quark.cn/s/f53e9482a170'},
+  {cat:'公考名师',name:"2026年叽叽喳喳数量精讲快解50套题",quark:'https://pan.quark.cn/s/822b42253e83'},
+  {cat:'公考名师',name:"2026年千寻申论系统课",quark:'https://pan.quark.cn/s/2688d3c7da50'},
+  {cat:'公考名师',name:"2026年国考过了暖冬笔试系统班",quark:'https://pan.quark.cn/s/7545b08f01b7'},
+  {cat:'公考名师',name:"26爱打篮球的公考人资料分析加速度（速算＋理论+专项刷题）",quark:'https://pan.quark.cn/s/b7863fd28ec5'},
+  {cat:'公考名师',name:"2026年国考珂佩申论基础班",quark:'https://pan.quark.cn/s/9bd79e767fbf'},
+  {cat:'公考名师',name:"2026年四川定向乡镇公务员高端班【JBC】",quark:'https://pan.quark.cn/s/78b53a589dc4'},
+  {cat:'公考名师',name:"2026年理论刷题课【超值6+1】",quark:'https://pan.quark.cn/s/bc88b4135a9d'},
+  {cat:'公考名师',name:"2026年超格行测申论（六合一）理论实战班",quark:'https://pan.quark.cn/s/3cc0c6e23dcf'},
+  {cat:'公考名师',name:"2026年初心行测领跑营系统班【六合一】",quark:'https://pan.quark.cn/s/c644d4718fd3'},
+  {cat:'公考名师',name:"2026年袁东申论方法实战班",quark:'https://pan.quark.cn/s/6213d2276970'},
+  {cat:'公考名师',name:"2026龙飞平面图形推理筑基先行班",quark:'https://pan.quark.cn/s/ea5fa5f5f082'},
+  {cat:'公考名师',name:"2026年国省事三考大姨夫三合一全家桶",quark:'https://pan.quark.cn/s/639b58f357a9'},
+  {cat:'公考名师',name:"2026年国省考小黑政治理论+常识判断系统班",quark:'https://pan.quark.cn/s/96217cbafd58'},
+  {cat:'公考名师',name:"2025年袁东申论领跑营套题实战班",quark:'https://pan.quark.cn/s/18293a1b6a44'},
+  {cat:'公考名师',name:"2025年王军涛常识（公基）超大杯刷题营",quark:'https://pan.quark.cn/s/b5bfc550cf59'},
+  {cat:'公考名师',name:"2025年飞扬申论综合分析",quark:'https://pan.quark.cn/s/c31454747865'},
+  {cat:'公考名师',name:"2025年国考阿里木江判断推理系统班",quark:'https://pan.quark.cn/s/427555e43fcb'},
+  {cat:'公考名师',name:"2025高照资料分析夸夸刷",quark:'https://pan.quark.cn/s/c8e4550da5f9'},
+  {cat:'公考名师',name:"2025年明莉申论突击理论刷题班",quark:'https://pan.quark.cn/s/e0fe3d28ab70'},
+  {cat:'公考名师',name:"2025年龙飞图形推理刷题超长精讲班",quark:'https://pan.quark.cn/s/b20a34bcafe2'},
+  {cat:'公考名师',name:"2025年白鹭申论套题实战演训班",quark:'https://pan.quark.cn/s/7db86784b8bc'},
+  {cat:'公考名师',name:"2025年阿里木江言语基础班",quark:'https://pan.quark.cn/s/1be2c9f28b9a'},
+  {cat:'公考名师',name:"2025年飞扬申论归纳概括题",quark:'https://pan.quark.cn/s/3ff5d865da29'},
+  {cat:'公考名师',name:"2025年相丽君文章写作高分素材课",quark:'https://pan.quark.cn/s/b5da32d0d590'},
+  {cat:'公考名师',name:"2025年站长申论强化班",quark:'https://pan.quark.cn/s/2fc06e89caa5'},
+  {cat:'公考名师',name:"2025年国考齐麟行测高分计划4班",quark:'https://pan.quark.cn/s/ef692838c068'},
+  {cat:'公考名师',name:"2025年袁东申论超大杯刷题提升班",quark:'https://pan.quark.cn/s/eeb69c1b9e07'},
+  {cat:'公考名师',name:"2025公考波哥讲行测+文正讲申论系统班",quark:'https://pan.quark.cn/s/0c7bc266088d'},
+  {cat:'公考名师',name:"2025年苏金朋判断推理系统课",quark:'https://pan.quark.cn/s/451cb559a8b9'},
+  {cat:'公考名师',name:"2025年大宝小宝国考言语降维体系课",quark:'https://pan.quark.cn/s/499e8297f9d8'},
+  {cat:'公考名师',name:"2025年丹丹常识公基专项课",quark:'https://pan.quark.cn/s/96cceb67ac68'},
+  {cat:'公考名师',name:"2025年笔航公考六略系统班",quark:'https://pan.quark.cn/s/e8acf50df02e'},
+  {cat:'公考名师',name:"2025年高照数量关系拿分稳稳班",quark:'https://pan.quark.cn/s/04fcd4df74b0'},
+  {cat:'公考名师',name:"2025年龙飞百大图形推理解析精品班",quark:'https://pan.quark.cn/s/41c2e8a0cc4e'},
+  {cat:'公考名师',name:"2025年王军涛常识公基（大盘基）系统精讲班",quark:'https://pan.quark.cn/s/fd5a15179777'},
+  {cat:'公考名师',name:"2025年国考齐麟行测高分计划3班",quark:'https://pan.quark.cn/s/09e543b354ed'},
+  {cat:'公考名师',name:"2025年国考明莉申论专项班3班",quark:'https://pan.quark.cn/s/87ea8d97f9c3'},
+  {cat:'公考名师',name:"2025年江牧云申论热点规范词",quark:'https://pan.quark.cn/s/c3c6c219003e'},
+  {cat:'公考名师',name:"2025年江牧云申论精讲精练全家桶",quark:'https://pan.quark.cn/s/a1906a6aaded'},
+  {cat:'公考名师',name:"2025年国考花生十三行测",quark:'https://pan.quark.cn/s/470157f5e378'},
+  {cat:'公考名师',name:"2025年国考飞扬申论",quark:'https://pan.quark.cn/s/e31b5aec0400'},
+  {cat:'公考名师',name:"2025年相丽君申论技巧趣学班",quark:'https://pan.quark.cn/s/7d0e7878bb5f'},
+  {cat:'公考名师',name:"2025年国考明莉申论专项班",quark:'https://pan.quark.cn/s/87ea8d97f9c3'},
+  {cat:'公考名师',name:"2025年鸿哥数量关系旗舰班",quark:'https://pan.quark.cn/s/fdb8351fdc6d'},
+  {cat:'公考名师',name:"龙飞百大图形推理解析精品班",quark:'https://pan.quark.cn/s/41c2e8a0cc4e'},
+];
+
+// ============ RENDER ============
+const CATS = ['押题模拟','国省考980','公考名师','事业单位','三支一扶','时政','公考面试','军队文职','公安专项','教招教资','历年真题','其他','赠送教辅'];
+const CAT_ICONS = {押题模拟:'🎯',国省考980:'📦',公考名师:'👨‍🏫',事业单位:'🏛️',三支一扶:'🌾',时政:'📰',公考面试:'💬',军队文职:'🎖️',公安专项:'👮',教招教资:'📖',历年真题:'📝',其他:'📌',赠送教辅:'🎁'};
+const TAG_MAP = {new:'最新',hot:'热门',free:'免费',update:'更新'};
+
+// Set update date
+document.getElementById('updateDate').textContent = new Date().toISOString().slice(0,10);
+
+// Build tabs
+CATS.forEach(cat => {
+  const btn = document.createElement('button');
+  btn.className = 'tab';
+  btn.dataset.cat = cat;
+  btn.textContent = (CAT_ICONS[cat]||'') + ' ' + cat;
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('search').value = '';
+    renderCourses(cat);
+  });
+  document.getElementById('tabBar').appendChild(btn);
+});
+
+function renderCourses(filter) {
+  const container = document.getElementById('content');
+  container.innerHTML = '';
+
+  const catsToShow = (filter === 'all') ? CATS : [filter];
+  let total = 0;
+
+  catsToShow.forEach(cat => {
+    const courses = COURSES.filter(c => c.cat === cat);
+    if (courses.length === 0) return;
+    total += courses.length;
+
+    const section = document.createElement('div');
+    section.className = 'section';
+    section.dataset.cat = cat;
+
+    let html = '<div class="section-title">' + (CAT_ICONS[cat]||'') + ' ' + cat;
+    html += '<span style="font-size:12px;color:var(--muted);font-weight:400;">（' + courses.length + '个）</span>';
+    html += '</div>';
+
+    courses.forEach((c, i) => {
+      html += '<div class="course" data-cat="' + cat + '" data-keywords="' + c.name + '">';
+      html += '<span class="course-num">' + String(i+1).padStart(2,'0') + '</span>';
+      html += '<span class="course-name">' + c.name + '</span>';
+      if (c.tag) {
+        html += '<span class="course-tag tag-' + c.tag + '">' + (TAG_MAP[c.tag]||c.tag) + '</span>';
+      }
+      html += '<span class="course-links">';
+      if (c.quark) html += '<a class="link-btn link-quark" href="' + c.quark + '" target="_blank" onclick="trackClick(\'' + cat + '\',\'quark\')">📥 夸克网盘</a>';
+      if (false && c.baidu) html += '<a class="link-btn link-baidu" href="' + c.baidu + '" target="_blank" onclick="trackClick(\'' + cat + '\',\'baidu\')">📦 百度网盘</a>';
+      html += '</span></div>';
+    });
+
+    section.innerHTML = html;
+    container.appendChild(section);
+  });
+
+  document.getElementById('totalCount').textContent = total;
+}
+
+function filterCourses() {
+  const kw = document.getElementById('search').value.toLowerCase().trim();
+  if (!kw) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelector('[data-cat="all"]').classList.add('active');
+    renderCourses('all');
+    return;
+  }
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  renderCourses('all');
+  // Hide non-matching courses
+  let count = 0;
+  document.querySelectorAll('.course').forEach(el => {
+    const keywords = (el.dataset.keywords || '').toLowerCase();
+    const cat = (el.dataset.cat || '').toLowerCase();
+    if (keywords.includes(kw) || cat.includes(kw)) {
+      el.style.display = '';
+      count++;
+    } else {
+      el.style.display = 'none';
+    }
+  });
+  // Hide empty sections
+  document.querySelectorAll('.section').forEach(sec => {
+    const visible = sec.querySelectorAll('.course[style*="display:"]').length;
+    const total = sec.querySelectorAll('.course').length;
+    if (visible === total) sec.style.display = 'none';
+    else sec.style.display = '';
+  });
+  document.getElementById('totalCount').textContent = count;
+}
+
+function trackClick(cat, type) {
+  console.log('点击：' + cat + ' | ' + type);
+  // 这里以后可以接入统计
+}
+
+// Init
+renderCourses('all');
+</script>
+</body>
+</html>
