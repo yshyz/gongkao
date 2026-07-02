@@ -111,15 +111,18 @@ body { background:var(--bg); color:var(--text); font-family:-apple-system,"Micro
   <span class="stat">共 <b id="totalCount">0</b> 个课程 | 更新于 <span id="updateDate">--</span></span>
 </div>
 
-<!-- 更新日志 -->
-<div id="updateLog" style="background:#fff;border:2px solid #e74c3c;border-radius:12px;padding:16px;margin-bottom:14px;">
-  <div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;" onclick="var l=document.getElementById('updateList');var a=document.getElementById('updateArrow');l.style.display=l.style.display==='none'?'block':'none';a.textContent=l.style.display==='none'?'▶':'▼'">
-    <span><span id="updateArrow" style="color:#e74c3c;">▼</span> <span style="font-weight:700;color:#e74c3c;">📋 更新日志</span> <span style="font-size:11px;color:#9ca3af;" id="updateDateLabel"></span></span>
-    <span style="font-size:11px;color:#e74c3c;font-weight:600;" id="updateCount"></span>
+<!-- 左侧更新日志按钮 -->
+<div id="updateSidebar" style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:998;">
+  <div id="updateToggle" onclick="var p=document.getElementById('updatePanel');var v=p.style.display==='block'?'none':'block';p.style.display=v;" style="background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff;padding:14px 8px;border-radius:0 10px 10px 0;cursor:pointer;writing-mode:vertical-rl;font-weight:700;font-size:14px;box-shadow:2px 0 10px rgba(0,0,0,0.2);">📋 更新日志</div>
+</div>
+<!-- 更新日志面板 -->
+<div id="updatePanel" style="display:none;position:fixed;left:50px;top:50%;transform:translateY(-50%);z-index:999;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.2);padding:20px;width:380px;max-height:70vh;overflow-y:auto;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+    <span style="font-weight:700;color:#e74c3c;">📋 更新日志</span>
+    <span style="font-size:11px;color:#9ca3af;" id="updateDateLabel"></span>
+    <span onclick="document.getElementById('updatePanel').style.display='none'" style="cursor:pointer;font-size:18px;color:#9ca3af;">✕</span>
   </div>
-  <div id="updateList" style="margin-top:10px;">
-    <div id="updateContent" style="font-size:13px;line-height:1.8;color:#4b5563;"></div>
-  </div>
+  <div id="updateContent" style="font-size:13px;line-height:1.8;color:#4b5563;"></div>
 </div>
 
 <div class="tabs" id="tabBar">
