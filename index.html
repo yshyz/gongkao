@@ -887,7 +887,20 @@ CATS.forEach(cat => {
   document.getElementById('tabBar').appendChild(btn);
 });
 
-function renderCourses(filter) {
+// 从课程名提取年份，用于排序
+	function getYear(n) {
+	  // 匹配 2027、2026 等四位年份
+	  var m = n.match(/20\d{2}/);
+	  if (m) return parseInt(m[0]);
+	  // 匹配独立的 27、26 等两位年份（如"27陈怀安"）
+	  m = n.match(/(?:^|[^\d])(2[7-9])(?:[^\d]|$)/);
+	  if (m) return 2000 + parseInt(m[1]);
+	  m = n.match(/(?:^|[^\d])(2[0-6])(?:[^\d]|$)/);
+	  if (m) return 2000 + parseInt(m[1]);
+	  return 0;
+	}
+
+	function renderCourses(filter) {
   const container = document.getElementById('content');
   container.innerHTML = '';
 
@@ -895,7 +908,11 @@ function renderCourses(filter) {
   let total = 0;
 
   catsToShow.forEach(cat => {
-    const courses = COURSES.filter(c => c.cat === cat);
+    let courses = COURSES.filter(c => c.cat === cat);
+    // 只在"全部"tab按年份降序排列（2027在前）
+    if (filter === 'all') {
+      courses = courses.slice().sort((a, b) => getYear(b.name) - getYear(a.name));
+    }
     if (courses.length === 0) return;
     total += courses.length;
 
@@ -976,19 +993,51 @@ document.querySelector('[data-cat="all"]').addEventListener('click', () => {
   var today = '2026-07-02';
   document.getElementById('updateDateLabel').textContent = ' · 最近更新：'+today;
 
+  // 7月2日更新的课程
+  var updatedCourses = [
+    {name:'2027国省考季花生十三飞扬系统班',type:'🔄 刷新'},
+    {name:'2027国考刘义恒以练代背',type:'🔄 刷新'},
+    {name:'2027年国省考相丽君申论解题思维趣学营',type:'🔄 刷新'},
+    {name:'2027超格鹤峰常识判断磨耳朵',type:'🔄 刷新'},
+    {name:'2027考季大懒猫言语刷刷刷直播课',type:'🔄 刷新'},
+    {name:'2027国省考大懒猫言语理论课',type:'🔄 刷新'},
+    {name:'2027年白宁国省考公专',type:'🔄 刷新'},
+    {name:'2027年波波公专',type:'🔄 刷新'},
+    {name:'2026超格时政讲练班',type:'🔄 刷新'},
+    {name:'2027年花生十三行测600题精讲课',type:'🔄 刷新'},
+    {name:'2027郭熙言语高分十二技',type:'🔄 刷新'},
+    {name:'2027年唐宋算经-九章算术一阶段·数量夯基',type:'🔄 刷新'},
+    {name:'2027小P公考国省考数资判系统班',type:'🔄 刷新'},
+    {name:'2027年超格行测+申论全家桶（精讲桶）',type:'🔄 刷新'},
+    {name:'2026河北特岗冲刺更新',type:'🔄 刷新'},
+    {name:'2026河南特岗冲刺更新',type:'🔄 刷新'},
+    {name:'2027年超格事业单位综应A类理论实战班',type:'🔄 刷新'},
+    {name:'2026李铁河南三支一扶全家桶',type:'🔄 刷新'},
+    {name:'2027超格综应A类实战桶',type:'🆕 新增'},
+    {name:'雨菲言语·27言语带背800词',type:'🆕 新增'},
+    {name:'27陈怀安行测圣经资料分析系统课',type:'🆕 新增'},
+  ];
+
+  var tableRows = '';
+  for (var i = 0; i < updatedCourses.length; i++) {
+    var c = updatedCourses[i];
+    var typeColor = c.type.indexOf('新增')>=0 ? '#059669' : '#2563eb';
+    tableRows += '<tr><td style=\"padding:5px 8px;border-bottom:1px solid #f3f4f6;font-size:11px;color:#9ca3af;\">'+(i+1)+'</td><td style=\"padding:5px 8px;border-bottom:1px solid #f3f4f6;font-size:13px;\">'+c.name+'</td><td style=\"padding:5px 8px;border-bottom:1px solid #f3f4f6;font-size:11px;color:'+typeColor+';font-weight:600;\">'+c.type+'</td></tr>';
+  }
+
   document.getElementById('updateContent').innerHTML =
-    '<div style=\"margin-bottom:10px;border-left:3px solid #e74c3c;padding-left:10px;\">'+
-    '<b>📅 2026-07-02</b> <span style=\"color:#6b7280;\">刷新21门+新增3门</span>'+
-    '<div style=\"font-size:12px;color:#6b7280;\">刷新：花生十三飞扬、刘义恒图推、相丽君申论、鹤峰常识、大懒猫言语、白宁公专、波波公专、郭熙十二技、唐宋算经、小P数资、超格精讲桶、花生600题、超格综应A、河北河南特岗、李铁三支一扶、超格时政</div>'+
-    '<div style=\"font-size:12px;color:#6b7280;\">新增：超格综应A实战桶、雨菲言语带背800词、陈怀安行测资料分析</div>'+
+    '<div style=\"margin-bottom:12px;border-left:3px solid #e74c3c;padding-left:10px;\">'+
+    '<b>📅 2026-07-02</b> <span style=\"color:#6b7280;font-size:12px;\">刷新18门+新增3门</span>'+
     '</div>'+
-    '<div style=\"margin-bottom:10px;border-left:3px solid #e74c3c;padding-left:10px;\">'+
-    '<b>📅 2026-07-02</b> <span style=\"color:#6b7280;\">新增147门永久链接</span>'+
-    '<div style=\"font-size:12px;color:#6b7280;\">事业单位/三支一扶/公安/教辅等147门首次生成永久链接</div>'+
+    '<table style=\"width:100%;border-collapse:collapse;margin-bottom:12px;\">'+
+    '<thead><tr style=\"background:#fef3c7;\"><th style=\"padding:6px 8px;text-align:left;font-size:11px;\">#</th><th style=\"padding:6px 8px;text-align:left;font-size:11px;\">课程名称</th><th style=\"padding:6px 8px;text-align:left;font-size:11px;\">类型</th></tr></thead>'+
+    '<tbody>'+tableRows+'</tbody>'+
+    '</table>'+
+    '<div style=\"margin-bottom:10px;border-left:3px solid #e5e7eb;padding-left:10px;\">'+
+    '<b>📅 2026-07-02</b> <span style=\"color:#6b7280;font-size:12px;\">新增147门永久链接（事业单位/三支一扶/公安/教辅等）</span>'+
     '</div>'+
     '<div style=\"margin-bottom:10px;border-left:3px solid #e5e7eb;padding-left:10px;\">'+
-    '<b>📅 2026-06-30</b> <span style=\"color:#6b7280;\">首次批量生成+网站重建</span>'+
-    '<div style=\"font-size:12px;color:#6b7280;\">207门课程上线+品牌升级为上岸码头</div>'+
+    '<b>📅 2026-06-30</b> <span style=\"color:#6b7280;font-size:12px;\">207门课程上线+品牌升级为上岸码头</span>'+
     '</div>';
 })();
 
