@@ -892,7 +892,7 @@ function renderCourses(filter) {
   let total = 0;
 
   catsToShow.forEach(cat => {
-    const courses = COURSES.filter(c => c.cat === cat);
+    const courses = COURSES.filter(c => c.cat === cat).sort((a,b) => {const ya = (a.name.match(/20d{2}/)||["0"])[0]; const yb = (b.name.match(/20d{2}/)||["0"])[0]; return parseInt(yb) - parseInt(ya);});
     if (courses.length === 0) return;
     total += courses.length;
 
@@ -969,41 +969,29 @@ document.querySelector('[data-cat="all"]').addEventListener('click', () => {
   });
 
 // ============ 更新日志 ============
-const UPDATE_LOG = [
-  {date:'2026-07-02', desc:'刷新21门课程内容+新增3门', count:24, items:[
-    '🔄 刷新：花生十三飞扬系统班、刘义恒图推、相丽君申论、鹤峰常识、大懒猫言语×2、白宁公专、波波公专、郭熙十二技、唐宋算经、小P数资、超格精讲桶、花生600题、超格综应A、河北/河南特岗、李铁三支一扶、超格时政',
-    '🆕 新增：超格综应A实战桶、雨菲言语带背800词、陈怀安行测资料分析'
-  ]},
-  {date:'2026-07-02', desc:'新增147门课程永久链接', count:147, items:[
-    '🆕 事业单位/三支一扶/公安/教辅等147门首次生成永久链接'
-  ]},
-  {date:'2026-06-30', desc:'首次批量生成永久链接+网站重建', count:207, items:[
-    '🆕 207门课程生成永久链接并上线网站',
-    '🏗️ 网站品牌升级为「上岸码头」'
-  ]}
-];
-
 (function initUpdateLog() {
-  const today = new Date().toISOString().slice(0,10);
+  var today = '2026-07-02';
   document.getElementById('updateDateLabel').textContent = ' · 最近更新：'+today;
 
-  let totalCourses = 0;
-  UPDATE_LOG.forEach(log => { if (log.date === today) totalCourses += log.count; });
-  document.getElementById('updateCount').textContent = '今日 +'+totalCourses+' 门';
+  var new7_2 = 24, new7_2b = 147, new6_30 = 207;
+  document.getElementById('updateCount').textContent = '累计更新 378 门';
 
-  let html = '';
-  UPDATE_LOG.forEach(log => {
-    html += '<div style="margin-bottom:12px;border-left:3px solid '+(log.date===today?'#e74c3c':'#e5e7eb')+';padding-left:10px;">';
-    html += '<div style="font-weight:700;color:#1a1a2e;margin-bottom:4px;">📅 '+log.date+' <span style="font-weight:400;color:#6b7280;">'+log.desc+'</span></div>';
-    log.items.forEach(item => {
-      html += '<div style="font-size:12px;color:#6b7280;padding:2px 0;">'+item+'</div>';
-    });
-    html += '</div>';
-  });
-  document.getElementById('updateContent').innerHTML = html;
+  document.getElementById('updateContent').innerHTML =
+    '<div style=\"margin-bottom:10px;border-left:3px solid #e74c3c;padding-left:10px;\">'+
+    '<b>📅 2026-07-02</b> <span style=\"color:#6b7280;\">刷新21门+新增3门</span>'+
+    '<div style=\"font-size:12px;color:#6b7280;\">刷新：花生十三飞扬、刘义恒图推、相丽君申论、鹤峰常识、大懒猫言语、白宁公专、波波公专、郭熙十二技、唐宋算经、小P数资、超格精讲桶、花生600题、超格综应A、河北河南特岗、李铁三支一扶、超格时政</div>'+
+    '<div style=\"font-size:12px;color:#6b7280;\">新增：超格综应A实战桶、雨菲言语带背800词、陈怀安行测资料分析</div>'+
+    '</div>'+
+    '<div style=\"margin-bottom:10px;border-left:3px solid #e74c3c;padding-left:10px;\">'+
+    '<b>📅 2026-07-02</b> <span style=\"color:#6b7280;\">新增147门永久链接</span>'+
+    '<div style=\"font-size:12px;color:#6b7280;\">事业单位/三支一扶/公安/教辅等147门首次生成永久链接</div>'+
+    '</div>'+
+    '<div style=\"margin-bottom:10px;border-left:3px solid #e5e7eb;padding-left:10px;\">'+
+    '<b>📅 2026-06-30</b> <span style=\"color:#6b7280;\">首次批量生成+网站重建</span>'+
+    '<div style=\"font-size:12px;color:#6b7280;\">207门课程上线+品牌升级为上岸码头</div>'+
+    '</div>';
 })();
 
-// Init
 renderCourses('all');
 </script>
 
