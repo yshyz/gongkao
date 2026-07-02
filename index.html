@@ -895,7 +895,7 @@ function renderCourses(filter) {
   let total = 0;
 
   catsToShow.forEach(cat => {
-    const courses = COURSES.filter(c => c.cat === cat).sort(function(a,b){var ya=(a.name.match(/20d{2}/)||[0])[0];var yb=(b.name.match(/20d{2}/)||[0])[0];return parseInt(yb)-parseInt(ya);}); const yb = (b.name.match(/20d{2}/)||["0"])[0]; return parseInt(yb) - parseInt(ya);});
+    const courses = COURSES.filter(c => c.cat === cat).sort(function(a,b){var ya=(a.name.match(/20d{2}/)||[0])[0];var yb=(b.name.match(/20d{2}/)||[0])[0];return parseInt(yb)-parseInt(ya);});
     if (courses.length === 0) return;
     total += courses.length;
 
