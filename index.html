@@ -895,7 +895,7 @@ function renderCourses(filter) {
   let total = 0;
 
   catsToShow.forEach(cat => {
-    const courses = COURSES.filter(c => c.cat === cat).sort((a,b)=>{let x=parseInt(a.name)||0;let y=parseInt(b.name)||0;return y-x;});});
+    const courses = COURSES.filter(c => c.cat === cat);});
     if (courses.length === 0) return;
     total += courses.length;
 
