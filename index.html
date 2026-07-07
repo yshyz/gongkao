@@ -92,6 +92,19 @@ body { background:var(--bg); color:var(--text); font-family:-apple-system,"Micro
 .mobile-contact .sc-btn { background:linear-gradient(135deg,#e74c3c,#f97316); color:#fff; padding:8px 18px; border-radius:20px; font-size:13px; font-weight:700; text-decoration:none; border:none; cursor:pointer; }
 .mobile-contact span { font-size:12px; color:#dc2626; font-weight:600; }
 
+
+/* 更新日历 */
+.day { border:1px solid var(--border); border-radius:10px; margin-bottom:8px; overflow:hidden; }
+.day-header { padding:12px 16px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; background:var(--card); }
+.day-header:hover { background:#f9fafb; }
+.day-header .day-title { font-size:14px; font-weight:600; }
+.day-header .day-summary { font-size:12px; color:var(--muted); }
+.day-header .arrow { color:var(--muted); font-size:12px; transition:transform .2s; }
+.day.open .arrow { transform:rotate(90deg); }
+.day.latest .day-header { border-left:3px solid var(--accent); background:#fff5f5; }
+.day-body { display:none; padding:0 16px 12px; }
+.day.open .day-body { display:block; }
+
 @media (max-width:500px) {
   .course { flex-direction:column; align-items:flex-start; gap:6px; }
   .course-links { justify-content:flex-start; }
@@ -115,23 +128,20 @@ body { background:var(--bg); color:var(--text); font-family:-apple-system,"Micro
 </div>
 
 
+<!-- 更新日历 -->
+    <div class="section" id="updateCalendar" style="background:linear-gradient(135deg,#fffbeb,#fff7ed);border:2px solid #fde68a;">
+      <div class="section-title" style="cursor:pointer" onclick="var c=document.getElementById('calBody');var a=document.getElementById('calArrow');c.style.display=c.style.display==='none'?'block':'none';a.innerHTML=c.style.display==='none'?'&#9654;':'&#9660;'">
+        &#128197; 更新日历
+        <span style="font-size:11px;color:var(--muted);font-weight:400;">点击展开/收起</span>
+        <span style="font-size:11px;color:#d97706;margin-left:auto;">最近更新：2026-07-07</span>
+        <span id="calArrow" style="color:var(--muted);">&#9660;</span>
+      </div>
+      <div id="calBody"></div>
+    </div>
+
 <div class="top-bar">
   <input class="search-box" id="search" placeholder="🔍 搜索课程名称、老师、机构...（如：花生十三、李铁、FB、CG）" oninput="filterCourses()">
   <span class="stat">共 <b id="totalCount">0</b> 个课程 | 更新于 <span id="updateDate">--</span></span>
-</div>
-
-<!-- 左侧更新日志按钮 -->
-<div id="updateSidebar" style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:998;">
-  <div id="updateToggle" onclick="var p=document.getElementById('updatePanel');var v=p.style.display==='block'?'none':'block';p.style.display=v;" style="background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff;padding:14px 8px;border-radius:0 10px 10px 0;cursor:pointer;writing-mode:vertical-rl;font-weight:700;font-size:14px;box-shadow:2px 0 10px rgba(0,0,0,0.2);">📋 更新日志</div>
-</div>
-<!-- 更新日志面板 -->
-<div id="updatePanel" style="display:none;position:fixed;left:50px;top:50%;transform:translateY(-50%);z-index:999;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.2);padding:20px;width:380px;max-height:70vh;overflow-y:auto;">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-    <span style="font-weight:700;color:#e74c3c;">📋 更新日志</span>
-    <span style="font-size:11px;color:#9ca3af;" id="updateDateLabel"></span>
-    <span onclick="document.getElementById('updatePanel').style.display='none'" style="cursor:pointer;font-size:18px;color:#9ca3af;">✕</span>
-  </div>
-  <div id="updateContent" style="font-size:13px;line-height:1.8;color:#4b5563;"></div>
 </div>
 
 <div class="tabs" id="tabBar">
@@ -232,7 +242,7 @@ const CAT_ICONS = {'2027新课':'🆕','2026合集':'📦'};
 const TAG_MAP = {new:'最新',hot:'热门',free:'免费',update:'更新'};
 
 // Set update date
-document.getElementById('updateDate').textContent = new Date().toISOString().slice(0,10);
+// date moved to calendar section
 
 // Build tabs
 CATS.forEach(cat => {
@@ -350,50 +360,53 @@ document.querySelector('[data-cat="all"]').addEventListener('click', () => {
     renderCourses('all');
   });
 
-// ============ 更新日志 ============
-(function initUpdateLog() {
-  var today = '2026-07-03';
-  document.getElementById('updateDateLabel').textContent = ' · 最近更新：'+today;
 
-  // 7月3日更新的课程
-  var updatedCourses = [
-    {name:'2027超格璐璐政治理论碎碎念（磨耳朵）',type:'🆕 新增'},
-    {name:'2027国省考季花生十三飞扬系统班',type:'🔄 刷新'},
-    {name:'2027国考刘义恒图推以练代背',type:'🔄 刷新'},
-    {name:'2027超格综应A类实战桶',type:'🔄 刷新'},
-    {name:'2027超格鹤峰常识判断磨耳朵',type:'🔄 刷新'},
-    {name:'27陈怀安行测圣经资料分析系统课',type:'🔄 刷新'},
-    {name:'2026李铁河南三支一扶全家桶',type:'🔄 刷新'},
-    {name:'📝 笔记更新：四海资料分析+刘义恒复盘+申论笔记',type:'📝 笔记'},
-  ];
-
-  var tableRows = '';
-  for (var i = 0; i < updatedCourses.length; i++) {
-    var c = updatedCourses[i];
-    var typeColor = c.type.indexOf('新增')>=0 ? '#059669' : '#2563eb';
-    tableRows += '<tr><td style=\"padding:5px 8px;border-bottom:1px solid #f3f4f6;font-size:11px;color:#9ca3af;\">'+(i+1)+'</td><td style=\"padding:5px 8px;border-bottom:1px solid #f3f4f6;font-size:13px;\">'+c.name+'</td><td style=\"padding:5px 8px;border-bottom:1px solid #f3f4f6;font-size:11px;color:'+typeColor+';font-weight:600;\">'+c.type+'</td></tr>';
-  }
-
-  document.getElementById('updateContent').innerHTML =
-    '<div style=\"margin-bottom:12px;border-left:3px solid #e74c3c;padding-left:10px;\">'+
-    '<b>📅 2026-07-03</b> <span style=\"color:#6b7280;font-size:12px;\">新增1门+刷新6门+笔记更新</span>'+
-    '</div>'+
-    '<table style=\"width:100%;border-collapse:collapse;margin-bottom:12px;\">'+
-    '<thead><tr style=\"background:#fef3c7;\"><th style=\"padding:6px 8px;text-align:left;font-size:11px;\">#</th><th style=\"padding:6px 8px;text-align:left;font-size:11px;\">课程名称</th><th style=\"padding:6px 8px;text-align:left;font-size:11px;\">类型</th></tr></thead>'+
-    '<tbody>'+tableRows+'</tbody>'+
-    '</table>'+
-    '<div style=\"margin-bottom:10px;border-left:3px solid #e5e7eb;padding-left:10px;\">'+
-    '<b>📅 2026-07-02</b> <span style=\"color:#6b7280;font-size:12px;\">新增147门永久链接（事业单位/三支一扶/公安/教辅等）</span>'+
-    '</div>'+
-    '<div style=\"margin-bottom:10px;border-left:3px solid #e5e7eb;padding-left:10px;\">'+
-    '<b>📅 2026-07-02</b> <span style=\"color:#6b7280;font-size:12px;\">刷新18门+新增3门</span>'+
-    '</div>'+
-    '<div style=\"margin-bottom:10px;border-left:3px solid #e5e7eb;padding-left:10px;\">'+
-    '<b>📅 2026-06-30</b> <span style=\"color:#6b7280;font-size:12px;\">207门课程上线+品牌升级为上岸码头</span>'+
-    '</div>';
-})();
 
 renderCourses('all');
+
+// ============ 填充更新日历 ============
+(function fillCalendar() {
+  var days = [
+    {date:"2026-07-07", title:"7月7日", summary:"🔄 更新 13 门 + 🆕 新增 2 门", courses:[
+      {name:"花生十三飞扬系统班 — 更言语01", type:"🔄 更新", link:"https://pan.quark.cn/s/077c6dbd17df"},
+      {name:"2027国考980系统班", type:"🔄 更新", link:"https://pan.quark.cn/s/13255933de20"},
+      {name:"多省联考系统班 — 25-30讲", type:"🔄 更新", link:"https://pan.quark.cn/s/8aa57ae46553"},
+      {name:"刘义恒以练代背 — 10讲", type:"🔄 更新", link:"https://pan.quark.cn/s/1c56a152b142"},
+      {name:"李铁河南三支一扶 — 公基时政刷题53", type:"🔄 更新", link:"https://pan.quark.cn/s/2d4c1c41f89e"},
+      {name:"超格综应A类实战桶 — 10讲", type:"🔄 更新", link:"https://pan.quark.cn/s/a66c5c9632b8"},
+      {name:"唐宋算经·数量夯基 — 11-12讲", type:"🔄 更新", link:"https://pan.quark.cn/s/4e4d92e9e777"},
+      {name:"雨菲言语带背800词 — 01讲", type:"🔄 更新", link:"https://pan.quark.cn/s/cfe21809b18e"},
+      {name:"超格事业单位综应A类精讲桶 — 17讲", type:"🔄 更新", link:"https://pan.quark.cn/s/479774b054b0"},
+      {name:"花生十三600题讲解 — 29-32套", type:"🔄 更新", link:"https://pan.quark.cn/s/8c7c326602bf"},
+      {name:"大懒猫言语刷刷刷直播课 — 12讲", type:"🔄 更新", link:"https://pan.quark.cn/s/e164ce342783"},
+      {name:"白宁公安联考公专 — 21-22讲", type:"🔄 更新", link:"https://pan.quark.cn/s/0da7550d95d6"},
+      {name:"上岸村林凡资料分析筑基11层", type:"🆕 新增", link:"https://pan.quark.cn/s/5142f7699c6c"},
+      {name:"王炎数量关系大满贯 — 02讲", type:"🔄 更新", link:"https://pan.quark.cn/s/d383bd9a6a6d"},
+      {name:"凯叔河南三支一扶考前冲刺5套卷", type:"🆕 新增", link:"https://pan.quark.cn/s/54d8c3bd4b84"}
+    ]}
+  ];
+  var html = "";
+  for (var i = 0; i < days.length; i++) {
+    var d = days[i];
+    html += "<div class=\"day latest open\">";
+    html += "<div class=\"day-header\" onclick=\"this.parentElement.classList.toggle(&#39;open&#39;)\">";
+    html += "<div><span class=\"day-title\">" + d.title + "</span>";
+    html += "<span class=\"day-summary\"> · " + d.summary + "</span></div>";
+    html += "<span class=\"arrow\">▶</span></div>";
+    html += "<div class=\"day-body\">";
+    for (var j = 0; j < d.courses.length; j++) {
+      var c = d.courses[j];
+      html += "<div class=\"course\"><span class=\"course-name\">" + c.name + "</span>";
+      if (c.type) html += "<span class=\"course-tag tag-update\">" + c.type + "</span>";
+      if (c.link) html += "<a class=\"link-btn link-quark\" href=\"" + c.link + "\" target=\"_blank\">点击转存</a>";
+      html += "</div>";
+    }
+    html += "</div></div>";
+  }
+  var calBody = document.getElementById("calBody");
+  if (calBody) calBody.innerHTML = html;
+})();
+
 </script>
 
 <!-- 侧边联系栏（桌面端） -->
