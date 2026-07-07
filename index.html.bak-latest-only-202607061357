@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公考补给站 - 资料整理中，请等待更新</title>
+<style>
+:root {
+  --bg: #f5f6fa;
+  --card: #fff;
+  --text: #1a1a2e;
+  --muted: #6b7280;
+  --accent: #e74c3c;
+  --blue: #2980b9;
+  --green: #27ae60;
+  --border: #e5e7eb;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); color:var(--text); font-family:-apple-system,"Microsoft YaHei",sans-serif; line-height:1.6; }
+.container { max-width:900px; margin:0 auto; padding:16px; }
+
+/* Header */
+.header { background:linear-gradient(135deg,#1a1a2e,#16213e); color:#fff; text-align:center; padding:32px 20px; border-radius:16px; margin-bottom:16px; }
+.header h1 { font-size:30px; margin-bottom:6px; letter-spacing:2px; }
+.header .sub { font-size:13px; opacity:0.7; }
+.header .badge { display:inline-block; background:var(--accent); padding:4px 14px; border-radius:20px; font-size:12px; font-weight:700; margin-top:8px; animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+/* Search + Stats */
+.top-bar { display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap; }
+.search-box { flex:1; min-width:200px; padding:10px 14px; border:2px solid var(--border); border-radius:10px; font-size:14px; outline:none; transition:.2s; background:var(--card); }
+.search-box:focus { border-color:var(--accent); }
+.stat { display:flex; align-items:center; gap:4px; padding:8px 14px; background:var(--card); border-radius:10px; font-size:12px; color:var(--muted); border:1px solid var(--border); }
+.stat b { color:var(--accent); }
+.maintenance-notice { background:linear-gradient(135deg,#fff7ed,#fee2e2); border:1px solid #fed7aa; border-left:5px solid var(--accent); border-radius:12px; padding:14px 16px; margin-bottom:14px; color:#7c2d12; }
+.maintenance-notice strong { display:block; font-size:15px; margin-bottom:3px; color:#c2410c; }
+.maintenance-notice span { font-size:13px; color:#9a3412; }
+
+/* Tabs */
+.tabs { display:flex; gap:6px; margin-bottom:14px; overflow-x:auto; padding-bottom:4px; }
+.tab { padding:8px 14px; border-radius:20px; font-size:13px; font-weight:600; white-space:nowrap; cursor:pointer; border:1px solid var(--border); background:var(--card); color:var(--muted); transition:.2s; }
+.tab.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+.tab:hover:not(.active) { border-color:#9ca3af; }
+
+/* Section */
+.section { background:var(--card); border-radius:12px; padding:18px; margin-bottom:12px; border:1px solid var(--border); }
+.section-title { font-size:16px; font-weight:700; margin-bottom:4px; display:flex; align-items:center; gap:6px; }
+.section-sub { font-size:12px; color:var(--muted); margin-bottom:12px; }
+
+/* Course Item */
+.course { display:flex; align-items:center; padding:10px 12px; border-bottom:1px solid #f3f4f6; gap:10px; transition:.2s; border-radius:6px; flex-wrap:wrap; }
+.course:hover { background:#f9fafb; }
+.course:last-child { border-bottom:none; }
+.course-num { font-size:11px; color:var(--muted); min-width:36px; }
+.course-name { flex:1; min-width:180px; font-size:14px; font-weight:500; }
+.course-tag { font-size:10px; padding:2px 8px; border-radius:10px; font-weight:600; white-space:nowrap; }
+.tag-new { background:#fee2e2; color:#dc2626; }
+.tag-hot { background:#fef3c7; color:#d97706; }
+.tag-free { background:#d1fae5; color:#059669; }
+.tag-update { background:#dbeafe; color:#2563eb; }
+
+.course-links { display:flex; gap:6px; flex-wrap:wrap; }
+.link-btn { display:inline-block; padding:4px 12px; border-radius:6px; font-size:12px; font-weight:600; text-decoration:none; transition:.2s; white-space:nowrap; }
+.link-quark { background:#fff7ed; color:#ea580c; border:1px solid #fed7aa; }
+.link-quark:hover { background:#fed7aa; }
+
+/* Footer */
+.footer { text-align:center; padding:20px; margin-top:8px; }
+.footer .cta { display:inline-block; background:var(--accent); color:#fff; padding:10px 28px; border-radius:24px; font-weight:700; text-decoration:none; margin:8px; font-size:14px; }
+.footer .tip { color:var(--muted); font-size:12px; margin-top:10px; }
+
+/* Collapse */
+.collapse-btn { cursor:pointer; color:var(--blue); font-size:12px; float:right; }
+.collapse-btn:hover { text-decoration:underline; }
+
+.hidden { display:none; }
+.empty-msg { text-align:center; color:var(--muted); padding:30px; font-size:14px; }
+
+/* 侧边联系栏 */
+.side-contact { position:fixed; right:16px; top:50%; transform:translateY(-50%); z-index:999; width:160px; background:var(--card); border-radius:16px; box-shadow:0 8px 30px rgba(0,0,0,0.15); padding:18px 14px; text-align:center; border:2px solid #fee2e2; }
+.side-contact .sc-title { font-size:13px; font-weight:700; color:#dc2626; margin-bottom:6px; }
+.side-contact .sc-desc { font-size:11px; color:var(--muted); margin-bottom:12px; line-height:1.5; }
+.side-contact .sc-btn { display:block; background:linear-gradient(135deg,#e74c3c,#f97316); color:#fff; padding:8px 0; border-radius:20px; font-size:12px; font-weight:700; text-decoration:none; margin-bottom:6px; cursor:pointer; border:none; width:100%; }
+.side-contact .sc-btn:hover { opacity:0.9; }
+.side-contact .sc-tip { font-size:10px; color:var(--muted); }
+
+@media (max-width:768px) {
+  .side-contact { display:none; }
+  .mobile-contact { display:flex !important; }
+}
+.mobile-contact { display:none; position:fixed; bottom:0; left:0; right:0; z-index:999; background:linear-gradient(90deg,#fef3c7,#fee2e2); padding:10px 16px; align-items:center; justify-content:center; gap:10px; border-top:2px solid #fca5a5; }
+.mobile-contact .sc-btn { background:linear-gradient(135deg,#e74c3c,#f97316); color:#fff; padding:8px 18px; border-radius:20px; font-size:13px; font-weight:700; text-decoration:none; border:none; cursor:pointer; }
+.mobile-contact span { font-size:12px; color:#dc2626; font-weight:600; }
+
+@media (max-width:500px) {
+  .course { flex-direction:column; align-items:flex-start; gap:6px; }
+  .course-links { justify-content:flex-start; }
+  .course-name { font-size:13px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <h1>📚 公考补给站</h1>
+  <p class="sub">公考资料重新整理中 · 2027新课陆续补充</p>
+  <span class="badge">🔧 正在整理资料，请等待更新</span>
+  <span class="badge" style="background:#27ae60;margin-left:8px;">🐧 加群获取更新</span>
+</div>
+
+<div class="maintenance-notice">
+  <strong>资料正在重新整理中</strong>
+  <span>旧链接已下架，课程资料会按 2027 年新内容陆续补齐。请先收藏本站，等待更新。</span>
+</div>
+
+
+<div class="top-bar">
+  <input class="search-box" id="search" placeholder="🔍 搜索课程名称、老师、机构...（如：花生十三、李铁、FB、CG）" oninput="filterCourses()">
+  <span class="stat">共 <b id="totalCount">0</b> 个课程 | 更新于 <span id="updateDate">--</span></span>
+</div>
+
+<!-- 左侧更新日志按钮 -->
+<div id="updateSidebar" style="position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:998;">
+  <div id="updateToggle" onclick="var p=document.getElementById('updatePanel');var v=p.style.display==='block'?'none':'block';p.style.display=v;" style="background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff;padding:14px 8px;border-radius:0 10px 10px 0;cursor:pointer;writing-mode:vertical-rl;font-weight:700;font-size:14px;box-shadow:2px 0 10px rgba(0,0,0,0.2);">📋 更新日志</div>
+</div>
+<!-- 更新日志面板 -->
+<div id="updatePanel" style="display:none;position:fixed;left:50px;top:50%;transform:translateY(-50%);z-index:999;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.2);padding:20px;width:380px;max-height:70vh;overflow-y:auto;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+    <span style="font-weight:700;color:#e74c3c;">📋 更新日志</span>
+    <span style="font-size:11px;color:#9ca3af;" id="updateDateLabel"></span>
+    <span onclick="document.getElementById('updatePanel').style.display='none'" style="cursor:pointer;font-size:18px;color:#9ca3af;">✕</span>
+  </div>
+  <div id="updateContent" style="font-size:13px;line-height:1.8;color:#4b5563;"></div>
+</div>
+
+<div class="tabs" id="tabBar">
+  <button class="tab active" data-cat="all">全部</button>
+</div>
+
+<div id="content"></div>
+
+<div class="footer">
+  <p style="font-size:13px;color:var(--muted);">📌 链接打不开？用手机端转存即可 · 课程失效私信补链</p>
+  <div style="background:linear-gradient(135deg,#fef3c7,#fee2e2);border-radius:12px;padding:18px;margin:12px 0;text-align:center;">
+    <p style="font-size:15px;font-weight:700;color:#dc2626;margin-bottom:4px;">📢 没有你需要的课程？</p>
+    <p style="font-size:13px;color:#6b7280;margin-bottom:12px;">告诉我你要找的资料，我帮你找并上传到网盘分享给你</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+      <a class="cta" style="font-size:14px;" href="#" onclick="navigator.clipboard.writeText('563208874');this.textContent='🐧 QQ群已复制！';setTimeout(()=>{this.textContent='🐧 QQ群：563208874'},1500);return false">🐧 QQ群：563208874（点击复制）</a>
+    </div>
+    <p style="font-size:11px;color:#9ca3af;margin-top:10px;">👆 QQ群直接搜索加入，一起交流备考</p>
+  </div>
+  <a class="cta" style="background:var(--blue);" href="#" onclick="alert('在这里放你的夸克网盘推广链接')">📥 夸克网盘领会员</a>
+  <p class="tip">⚠️ 所有资料来源于网络收集，仅供学习参考，请于下载后24小时内删除</p>
+</div>
+
+</div>
+
+<script>
+// ============ 数据区：在这里编辑你的链接 ============
+// 格式：{cat, name, quark} — 夸克链接替换成你自己的推广链接
+
+const COURSES = [
+  // ===== 2026/07/03 新增+刷新 =====
+  {cat:'最新',name:"2027超格璐璐政治理论碎碎念（磨耳朵）",quark:''},
+  {cat:'最新',name:"27陈怀安行测圣经资料分析系统课",quark:''},
+  {cat:'最新',name:"雨菲言语·27言语带背800词",quark:''},
+  {cat:'最新',name:"2027超格综应A类实战桶",quark:''},
+
+  {cat:'最新',name:"27陈怀安行测圣经资料分析系统课",quark:''},
+  {cat:'最新',name:"雨菲言语·27言语带背800词",quark:''},
+  {cat:'最新',name:"2027超格综应A类实战桶",quark:''},
+  // ===== 2026/07/02 新增147门 =====
+  {cat:'事业单位',name:"【035】2025上半年飞扬综应A类套题冲刺班",quark:''},
+  {cat:'公考名师',name:"【035】2025年瞪哥国考省考行测高分技巧课",quark:''},
+  {cat:'公考名师',name:"【034】2025年袁东申论领跑营方法精讲班",quark:''},
+  {cat:'公考名师',name:"【033】2025年高照资料分析理论实战班3+2学习法",quark:''},
+  {cat:'事业单位',name:"【032】2025年相丽君事业单位综应金卷预测班（A类）",quark:''},
+  {cat:'公考名师',name:"【032】2025年王小晨申论国省考理论+套卷课",quark:''},
+  {cat:'事业单位',name:"【031】2025年事业单位D类【CG】",quark:''},
+  {cat:'公考名师',name:"【031】2025年半月谈国考申论专项突破",quark:''},
+  {cat:'公考名师',name:"【030】2025年白鹭申论（60天上岸补充）",quark:''},
+  {cat:'事业单位',name:"【029】2025年上四川事业编综合岗【FB】",quark:''},
+  {cat:'公考名师',name:"【029】2025年国考齐麟行测高分计划2班",quark:''},
+  {cat:'事业单位',name:"【027】2025年山东事业单位精品冲刺课【FB】",quark:''},
+  {cat:'公考名师',name:"【027】2025年国考明莉申论专项班",quark:''},
+  {cat:'事业单位',name:"【026】2025年江苏事业单位经济类含行测全程班",quark:''},
+  {cat:'其他',name:"【017】2025年李铁每月时政刷题",quark:''},
+  {cat:'公考名师',name:"【017】2025年顾斐行测申论笔试全科抢分营",quark:''},
+  {cat:'国省考980',name:"【016】2025年张琦＆杨天明国省考申论系统班",quark:''},
+  {cat:'公考名师',name:"【013】2025年王鹍申论方法技巧大全",quark:''},
+  {cat:'其他',name:"【011】2025年李铁每月时政",quark:''},
+  {cat:'其他',name:"【004】2025年冯泽全年时政【四海】",quark:''},
+  {cat:'公考名师',name:"【003】2025年国考程永乐判断推理",quark:''},
+  {cat:'其他',name:"【002】2025年时政讲练班【CG】",quark:''},
+  {cat:'公考名师',name:"【002】2025年国考牟立志资料分析",quark:''},
+  {cat:'其他',name:"【001】2025年每月时政【FB】",quark:''},
+  {cat:'公考名师',name:"【001】2025年国考郭熙言语理解",quark:''},
+  {cat:'国省考980',name:"【41】2026年事业单位E类系统班【FB】",quark:''},
+  {cat:'事业单位',name:"【40】2026年全国通用事业单位D类综应(中小学)（快学版）【CG】",quark:''},
+  {cat:'事业单位',name:"【39】2026年全国通用事业单位D类综应(中小学)【CG】",quark:''},
+  {cat:'国省考980',name:"【37】2026年事业单位D类系统班【FB】",quark:''},
+  {cat:'国省考980',name:"【35】2026年事业单位C类系统班【FB】",quark:''},
+  {cat:'事业单位',name:"【33】2026年事考综B超大杯刷题营（理论+刷题）【CG】",quark:''},
+  {cat:'国省考980',name:"【31】2026年事业单位B类系统班【FB】",quark:''},
+  {cat:'事业单位',name:"【30】2026年相丽君综应精讲刷题班（A类）",quark:''},
+  {cat:'事业单位',name:"【29】2026年事考综A超大杯刷题营（理论+刷题）【CG】",quark:''},
+  {cat:'国省考980',name:"【16】2026年联考事业单位A类系统班【FB】",quark:''},
+  {cat:'事业单位',name:"【12】2026年事考职测超大杯刷题营【CG】",quark:''},
+  {cat:'公考名师',name:"【117】2026年广东省考挑战科学推理2000题",quark:''},
+  {cat:'公考名师',name:"【116】2026年国考&广东省考政治理论必刷1000题",quark:''},
+  {cat:'公考名师',name:"【115】2026年广东省考公专系统课",quark:''},
+  {cat:'公考名师',name:"【113】2026年广东省考政治理论（考点速通）",quark:''},
+  {cat:'公考名师',name:"【112】2026年广东省考行政执法专业科目必刷1000题",quark:''},
+  {cat:'公考名师',name:"【111】2026年广东省考行政执法申论专项",quark:''},
+  {cat:'公考名师',name:"【110】2026年广东省考体系重塑课【跃跃公考】",quark:''},
+  {cat:'事业单位',name:"【11】2026年职测+综应（五合一）超大杯【CG】",quark:''},
+  {cat:'公考名师',name:"【109】2026年申论名师堂合集",quark:''},
+  {cat:'公考名师',name:"【102】2026年白天行测申论高分超车班（含行测176绝技）【上岸智路】",quark:''},
+  {cat:'事业单位',name:"【10】2026年职测+综应（五合一）夸夸刷【CG】",quark:''},
+  {cat:'公考名师',name:"【098】2026年超好运小bud广东省考申论系统课",quark:''},
+  {cat:'事业单位',name:"【093】2026年江苏事业单位行测模考【启禾】",quark:''},
+  {cat:'事业单位',name:"【092】2026年李铁河南事考刷题【超大量全覆盖】",quark:''},
+  {cat:'事业单位',name:"【090】2026年江苏事业单位统考申论真题刷题课",quark:''},
+  {cat:'事业单位',name:"【09】2026年职测+综应（六合一）理论实战班【CG】",quark:''},
+  {cat:'事业单位',name:"【087】2026年江苏事业单位北宋申论",quark:''},
+  {cat:'公考名师',name:"【081】2026年事业单位联考超哥政治理论最后50题【CG】",quark:''},
+  {cat:'公考名师',name:"【081】2026年上岸智路白天行测强化课",quark:''},
+  {cat:'事业单位',name:"【08】2026年全国通用事业单位职测（快学版）【CG】",quark:''},
+  {cat:'国省考980',name:"【079】2026年河南事业单位系统班【FB】",quark:''},
+  {cat:'公考名师',name:"【077】2026年杨攀行测政治理论一课通（国省事）",quark:''},
+  {cat:'公考名师',name:"【076】2026年初心行测领跑营套题实战班",quark:''},
+  {cat:'公考名师',name:"【073】2026年陈老司国考申论基础强化",quark:''},
+  {cat:'事业单位',name:"【07】2026年全国通用事业单位职测【CG】",quark:''},
+  {cat:'其他',name:"【07】2026年李铁每月时政",quark:''},
+  {cat:'公考名师',name:"【068】2026年申论专项刷题营【粉刷刷】",quark:''},
+  ,
+  {cat:'事业单位',name:"【060】2026年袁东事业单位综应B考前急救包",quark:''},
+  {cat:'国省考980',name:"【06】2026年山东事业单位系统班【FB】",quark:''},
+  {cat:'事业单位',name:"【059】2026年袁东事业单位综应A考前急救包",quark:''},
+  {cat:'公考名师',name:"【059】2026年小张申论系统课",quark:''},
+  {cat:'国省考980',name:"【055】2026年四川事业单位系统班【FB】",quark:''},
+  {cat:'公考名师',name:"【053】2026年花生十三行测事业单位联考A类套题冲刺班",quark:''},
+  {cat:'公考名师',name:"【052】2026年花生十三&飞扬事业单位联考A类套题冲刺班",quark:''},
+  {cat:'事业单位',name:"【05】2026年广东事业单位统考【CG】",quark:''},
+  {cat:'事业单位',name:"【047】2026年事业单位综C超大杯刷题营（理论+刷题）【CG】",quark:''},
+  {cat:'事业单位',name:"【045】2026年相丽君综应A金卷预测班",quark:''},
+  {cat:'事业单位',name:"【044】2026年事考套卷实战班（15套卷）&冲刺点睛【综C】【CG】",quark:''},
+  {cat:'事业单位',name:"【043】2026年事考套卷实战班（15套卷）&冲刺点睛【综B】【CG】",quark:''},
+  {cat:'事业单位',name:"【042】2026年事考套卷实战班（15套卷）&冲刺点睛【综A】【CG】",quark:''},
+  {cat:'其他',name:"【04】2026年每月时政【FB】",quark:''},
+  {cat:'事业单位',name:"【04】2026年广东事业编统考公基系统课【李卜&李铁】",quark:''},
+  {cat:'国省考980',name:"【03】2026年江苏事业单位系统班（综合知识和能力素质）【FB】",quark:''},
+  {cat:'事业单位',name:"【028】2026年事业单位综应A类超大杯【CG】",quark:''},
+  {cat:'事业单位',name:"【027】2026年事业单位综应A类夸夸刷【CG】",quark:''},
+  {cat:'事业单位',name:"【026】2026年事业单位综应A类理论实战班【CG】",quark:''},
+  {cat:'其他',name:"【01】2026年时政讲练班【CG】",quark:''},
+  {cat:'国省考980',name:"2026国考(★980)",quark:''},
+  {cat:'最新',name:"2027国考980",quark:''},
+  {cat:'公考名师',name:"（2023，2025）灰兔数量",quark:''},
+  {cat:'最新',name:"【06】2027上岸村天琦申论高分的规则",quark:''},
+  {cat:'事业单位',name:"2026京佳河南三支一扶模考卷",quark:''},
+  {cat:'最新',name:"【政治理论】2027超哥国省考政治理论刷题课",quark:''},
+  {cat:'最新',name:"【02】2027年波波公专",quark:''},
+  {cat:'最新',name:"【01】2027年国省考季袁东申论方法实战班",quark:''},
+  {cat:'最新',name:"2027国省考大懒猫言语理论课",quark:''},
+  {cat:'公考名师',name:"申论-忠政",quark:''},
+  {cat:'最新',name:"2027超哥政治理论时政热点小锦囊",quark:''},
+  {cat:'其他',name:"【002】2026小黑全年时政",quark:''},
+  {cat:'最新',name:"【2027唐宋算经速算思维课】",quark:''},
+  {cat:'公考名师',name:"数量-林凡",quark:''},
+  {cat:'赠送教辅',name:"班会笔记",quark:''},
+  {cat:'最新',name:"【01】2027年母志文公专",quark:''},
+  {cat:'最新',name:"2027山东省考系统班",quark:''},
+  {cat:'最新',name:"2027多省联考系统班",quark:''},
+  {cat:'最新',name:"【001】2027国省事考小黑政治理论常识全家桶",quark:''},
+  {cat:'最新',name:"【02】2027袁东大作文专项班",quark:''},
+  {cat:'事业单位',name:"【02】2026凯叔河南三支一扶公基时政198刷题课",quark:''},
+  {cat:'最新',name:"2027江苏省考系统班",quark:''},
+  {cat:'事业单位',name:"广东三支一扶",quark:''},
+  {cat:'赠送教辅',name:"高照速算",quark:''},
+  {cat:'最新',name:"2027年超格事业单位综应A类理论实战班",quark:''},
+  {cat:'赠送教辅',name:"笔记",quark:''},
+  {cat:'最新',name:"小p2027年笔记",quark:''},
+  {cat:'其他',name:"【时政】2026李铁全年时政",quark:''},
+  {cat:'公考名师',name:"判断推理-章何",quark:''},
+  {cat:'最新',name:"【03】2027年白宁公安联考公专",quark:''},
+  {cat:'最新',name:"【04】2027年白宁国省考公专",quark:''},
+  {cat:'最新',name:"2027郭熙言语高分“十二技”",quark:''},
+  {cat:'其他',name:"上岸村",quark:''},
+  {cat:'事业单位',name:"2026河南特岗冲刺",quark:''},
+  {cat:'事业单位',name:"26河北特岗冲刺",quark:''},
+  {cat:'历年真题',name:"2026河南省乡村振兴协理员笔试真题及答案（网友回忆版）",quark:''},
+  {cat:'最新',name:"27义恒老师图推思维导图",quark:''},
+  {cat:'最新',name:"27考季行测2800题",quark:''},
+  {cat:'赠送教辅',name:"行测各科目复盘表",quark:''},
+  {cat:'赠送教辅',name:"程意老师｜判断推理六大题型&思维导图",quark:''},
+  {cat:'最新',name:"2027超格鹤峰常识判断磨耳朵",quark:''},
+  {cat:'最新',name:"2027年超格国省考行测+申论全家桶课程（实战桶）",quark:''},
+  {cat:'其他',name:"2026年千君时政月月谈",quark:''},
+  {cat:'最新',name:"【01】2027小P公考国省考数资判系统班",quark:''},
+  {cat:'最新',name:"2027王永恒资料分析三合一理论体系课",quark:''},
+  {cat:'其他',name:"【04】四海拾伊",quark:''},
+  {cat:'最新',name:"2027考季大懒猫言语刷刷刷直播课",quark:''},
+  {cat:'最新',name:"2027年唐宋算经-九章算术一阶段·数量夯基",quark:''},
+  {cat:'最新',name:"【01】2027年国省考相丽君申论解题思维趣学营",quark:''},
+  {cat:'事业单位',name:"2026凯叔河南三支一扶线下10套模考卷",quark:''},
+  {cat:'最新',name:"【02】2027花生十三600题讲解",quark:''},
+  {cat:'最新',name:"2027年国省考CG行测+申论全家桶（精讲桶）",quark:''},
+  {cat:'公考名师',name:"言语-张弓",quark:''},
+  {cat:'最新',name:"2027国省考季花生十三飞扬系统班",quark:''},
+  {cat:'最新',name:"2027公考",quark:''},
+
+  // ===== 2026/06/30 新增207门 =====
+  {cat:'公考名师',name:"B站公考小马哥申论刷题合集（各省份均有）",quark:''},
+  {cat:'公考名师',name:"忠政3.16  省考热点册+范文集",quark:''},
+  {cat:'公考名师',name:"【30】事业单位联考A类历年真题及解析",quark:''},
+  {cat:'公考名师',name:"上岸村申论集结号",quark:''},
+  {cat:'赠送教辅',name:"上岸村申论规范词学习手册",quark:''},
+  {cat:'历年真题',name:"1、全！国省【半月谈  白鹭】申论真题100讲",quark:''},
+  {cat:'公考名师',name:"【319】刘正超省考申论基础课",quark:''},
+  {cat:'公考名师',name:"【051】刘文超数量关系蒙题大法",quark:''},
+  {cat:'其他',name:"【089】李铁公基系统课",quark:''},
+  {cat:'历年真题',name:"【088】李铁常识真题刷题课",quark:''},
+  ,
+  {cat:'公考名师',name:"江牧云【申论】2024国省考带练刷题课",quark:''},
+  {cat:'公考名师',name:"【数资】花生十三数量关系1200题 资料分析1200题",quark:''},
+  {cat:'公考名师',name:"【011】郭熙言语必做100题",quark:''},
+  {cat:'公考名师',name:"公考小马哥申论系统课（全国通用）",quark:''},
+  {cat:'公考名师',name:"4、半月谈白鹭申论60天上岸计划",quark:''},
+  {cat:'公考名师',name:"【申论】半月谈白鹭老师带你学申论热点",quark:''},
+  {cat:'其他',name:"5、半月谈白鹭24作文课",quark:''},
+  ,
+  {cat:'公考名师',name:"【31】半月谈2024联考A类押题【职测+综应各5套】",quark:''},
+  ,
+  {cat:'公考名师',name:"【115】2024站长申论半年班",quark:''},
+  {cat:'公考名师',name:"【229】2024袁东省考申论领跑营方法精讲班",quark:''},
+  {cat:'公考名师',name:"【120】2024袁东申论领跑营方法精讲班",quark:''},
+  {cat:'公考名师',name:"【122】2024袁东申论大作文(1)",quark:''},
+  {cat:'公考名师',name:"【196】2024袁东申论冲刺预测班",quark:''},
+  {cat:'历年真题',name:"【098】2024行测真题套题刷题班【齐麟、葛欣、胡小胡、千君】",quark:''},
+  {cat:'历年真题',name:"【105】2024行测真题课【齐麟数资、葛欣言语、胡小胡判断】",quark:''},
+  {cat:'公考名师',name:"【193】2024王鹍省考套卷刷题班(2)",quark:''},
+  {cat:'公考名师',name:"【193】2024王鹍省考套卷刷题班(1)",quark:''},
+  {cat:'公考名师',name:"【193】2024王鹍省考套卷刷题班",quark:''},
+  {cat:'公考名师',name:"【078】2024王鹍申论重难点：材料的概括与处理",quark:''},
+  {cat:'公考名师',name:"【227】2024四海飞扬申论写作考前YA题课【综合+执法】 ",quark:''},
+  {cat:'事业单位',name:"【30】2024事业单位花生十三职测套题冲刺班(1)",quark:''},
+  {cat:'事业单位',name:"【30】2024事业单位花生十三职测套题冲刺班",quark:''},
+  {cat:'事业单位',name:"【12】2024事业单位公基【全国版】【CG】",quark:''},
+  {cat:'事业单位',name:"【31】2024事业单位飞扬综应A类套题冲刺班",quark:''},
+  {cat:'公考名师',name:"【42】2024事业编联考绝密考前押题卷",quark:''},
+  {cat:'公考名师',name:"【244】2024省联考行测套题刷题班【齐麟&葛欣&胡小胡&千君】",quark:''},
+  {cat:'公考名师',name:"【281】2024省考飞扬申论行政执法专项班",quark:''},
+  {cat:'公考名师',name:"【119】2024忠政申论理论课【上岸村】",quark:''},
+  {cat:'公考名师',name:"2024上岸村司马常识核导弹",quark:''},
+  {cat:'公考名师',name:"2024上岸村省考批改班",quark:''},
+  {cat:'公考名师',name:"2024上岸村国考申论批改班",quark:''},
+  {cat:'公考名师',name:"【160】2024人须在事上磨申论",quark:''},
+  {cat:'公考名师',name:"【16】2024全国事业单位联考考前密卷",quark:''},
+  {cat:'公考名师',name:"【097】2024齐麟行测高分计划2班【6.6开课】",quark:''},
+  {cat:'公考名师',name:"【096】2024齐麟行测高分计划1班【4.11开课】",quark:''},
+  {cat:'公考名师',name:"【243】2024培优计划：郭熙言语专项全家桶",quark:''},
+  {cat:'事业单位',name:"【62】2024年袁东事业单位综应冲刺课",quark:''},
+  {cat:'公考名师',name:"【283】2024年袁东省考申论领跑营大作文终极冲刺班",quark:''},
+  {cat:'公考名师',name:"【275】2024年袁东联考申论套题实战班",quark:''},
+  {cat:'事业单位',name:"【073】2024年相丽君综应B类一课通【相丽君】",quark:''},
+  {cat:'公考名师',name:"【279】2024年王军涛多省联考常识考前突击冲刺",quark:''},
+  {cat:'事业单位',name:"【35】2024年唐棣江苏事业单位申论",quark:''},
+  {cat:'事业单位',name:"【27】2024年四川事业单位综合知识【FB】",quark:''},
+  {cat:'公考名师',name:"【39】2024年事业单位联考综应热点范文36篇",quark:''},
+  {cat:'公考名师',name:"【282】2024年省联考刘大师申论真题精讲提升班",quark:''},
+  {cat:'公考名师',name:"2024年省考花生十三考前冲刺套题卷",quark:''},
+  {cat:'公考名师',name:"【309】2024年省考半月谈押题课",quark:''},
+  {cat:'公考名师',name:"【40】2024年全国事业单位联考封闭进阶卷",quark:''},
+  {cat:'公考名师',name:"【38】2024年全国事业单位联考（考前密卷）",quark:''},
+  {cat:'公考名师',name:"2024年判断推理【实战理论】行测理论课一公考罗飞",quark:''},
+  {cat:'公考名师',name:"【316】2024年缦云申论系统理论一课通",quark:''},
+  {cat:'公考名师',name:"【270】2024年龙飞省联考图推刷题冲刺班",quark:''},
+  {cat:'其他',name:"【074】2024年李铁公基系统课【重点梳理版】",quark:''},
+  {cat:'其他',name:"【075】2024年李铁公基系统课【巨详细版】",quark:''},
+  {cat:'公考名师',name:"【268】2024年花生十三上半年省考行测套题冲刺班",quark:''},
+  {cat:'公考名师',name:"【317】2024年国省考橙啦公考",quark:''},
+  {cat:'公考名师',name:"【171】2024年国考钩不了沉言语理解",quark:''},
+  {cat:'公考名师',name:"【172】2024年国考钩不了沉逻辑判断",quark:''},
+  {cat:'公考名师',name:"【173】2024年国考钩不了沉大作文",quark:''},
+  {cat:'事业单位',name:"【69】2024年广东事业单位：公基+职测【FB】",quark:''},
+  {cat:'公考名师',name:"【259】2024年高照资料分析超大杯【省考&事业单位】",quark:''},
+  {cat:'公考名师',name:"【295】2024年高照数资冲刺预测【省考+事业单位】",quark:''},
+  {cat:'公考名师',name:"【267】2024年飞扬上半年省考申论套题冲刺班",quark:''},
+  ,
+  {cat:'国省考980',name:"【081】2024年笨鸟广东事业单位统考行测系统班",quark:''},
+  {cat:'国省考980',name:"【02】2024某笔全国事业单位公基系统班(1)",quark:''},
+  {cat:'公考名师',name:"【132】2024龙飞图推原创题目刷题班【7.5日开课】",quark:''},
+  {cat:'其他',name:"【221】2024龙飞数字推理精品班",quark:''},
+  {cat:'公考名师',name:"【133】2024龙飞平面图推筑基班",quark:''},
+  {cat:'公考名师',name:"【130】2024龙飞逻辑判断单项班",quark:''},
+  {cat:'公考名师',name:"【131】2024龙飞定义判断刷题班【06.03开课】",quark:''},
+  {cat:'公考名师',name:"【090】2024李铁公务员常识系统课",quark:''},
+  {cat:'公考名师',name:"【016】2024李梦圆申论方法精讲",quark:''},
+  {cat:'公考名师',name:"【113】2024李卜常识&王小晨申论类比刷题课",quark:''},
+  {cat:'公考名师',name:"【170】2024江牧云申论全题型技巧拆解带练班",quark:''},
+  {cat:'事业单位',name:"【169】2024江牧云公考、事考高频申论规范词",quark:''},
+  {cat:'公考名师',name:"【35】2024华图联考事业A类密卷",quark:''},
+  {cat:'国省考980',name:"【136】2024花生十三行测系统班＋刷题班",quark:''},
+  {cat:'公考名师',name:"【140】2024花生十三行测套题冲刺班【二期】",quark:''},
+  {cat:'其他',name:"【138】2024花生十三套题冲刺班【一期】",quark:''},
+  {cat:'公考名师',name:"【046】2024国省考顾斐【公考全科抢分营】(309课时全)_（适用于24国省考，23事业单位）",quark:''},
+  {cat:'国省考980',name:"【077】2024国省考笔试系统班【王鹍老师行测申论】",quark:''},
+  {cat:'公考名师',name:"【161】2024国考申论真题刷题提升班【人须在事上磨】",quark:''},
+  {cat:'公考名师',name:"【047】2024国考顾斐行测疯狂刷题班",quark:''},
+  ,
+  {cat:'公考名师',name:"【181】2024国考大宝小宝言语精品冲刺十套卷",quark:''},
+  {cat:'公考名师',name:"【087】2024国考大宝小宝为民为公言语精品冲刺刷题班",quark:''},
+  {cat:'公考名师',name:"【159】2024国考半月谈押题课",quark:''},
+  {cat:'公考名师',name:"【157】2024国考半月谈抄出申论80+",quark:''},
+  {cat:'公考名师',name:"【245】2024国考半月谈60天上岸计划",quark:''},
+  {cat:'公考名师',name:"【045】2024顾斐行测申论公考笔试抢分营(最新版)",quark:''},
+  {cat:'事业单位',name:"【21】2024公考相丽君A类综应系统金卷班",quark:''},
+  {cat:'国省考980',name:"2024公基系统班全国版-24年3月开课",quark:''},
+  {cat:'公考名师',name:"【236】2024高照资料分析题型夸夸刷",quark:''},
+  {cat:'公考名师',name:"【197】2024高照数资冲刺预测",quark:''},
+  {cat:'公考名师',name:"【178】2024高照数量关系超大杯",quark:''},
+  {cat:'其他',name:"【125】2024高照超大杯资料刷题营【16天100篇】",quark:''},
+  {cat:'事业单位',name:"【28】2024粉笔江苏事业单位统考模考卷7套",quark:''},
+  {cat:'赠送教辅',name:"【15】2024粉笔公基背诵手册+思维导图",quark:''},
+  {cat:'国省考980',name:"【135】2024飞扬申论系统班＋刷题班",quark:''},
+  {cat:'公考名师',name:"【137】2024飞扬申论套题冲刺班【一期】",quark:''},
+  {cat:'公考名师',name:"【139】2024飞扬申论套题冲刺班【二期】",quark:''},
+  {cat:'公考名师',name:"【179】2024飞扬申论国考行政执法专项班",quark:''},
+  {cat:'赠送教辅',name:"【241】2024第32期15天速算训练营【四海】",quark:''},
+  {cat:'公考名师',name:"【017】2024单淑玲申论",quark:''},
+  {cat:'赠送教辅',name:"8、2024半月谈五色申论范文笔记",quark:''},
+  {cat:'公考名师',name:"9、半月谈2024年省考申论大作文押题范文16篇",quark:''},
+  {cat:'公考名师',name:"7、2024半月谈三色申论金句卡片",quark:''},
+  {cat:'公考名师',name:"【158】2024半月谈白鹭谈申论80分绝技",quark:''},
+  {cat:'赠送教辅',name:"02半月谈｜白鹭老师押题范文5篇",quark:''},
+  {cat:'公考名师',name:"【080】2024阿里木江李威猛行测刷题课",quark:''},
+  {cat:'公考名师',name:"2、【白鹭】24年谈申论80分绝技",quark:''},
+  {cat:'公考名师',name:"【121】2024 袁东申论领跑营刷题提升班",quark:''},
+  {cat:'公考名师',name:"【236】2024 高照数量关系拿分稳稳班理论精讲+专项训练",quark:''},
+  {cat:'公考名师',name:"【124】2024 高照数量关系理论精讲+专项训练",quark:''},
+  {cat:'国省考980',name:"【02】2024某笔全国事业单位公基系统班",quark:''},
+  ,
+  {cat:'公考名师',name:"【40】2023半月谈白鹭申论100题【全】",quark:''},
+  ,
+  {cat:'公考名师',name:"【102】刘文超资料分析+数量关系刷题课",quark:''},
+  {cat:'赠送教辅',name:"【申论】申论时评（含三色笔记规范词等）",quark:''},
+  {cat:'公考名师',name:"【申论】江牧云热点正反拆-讲解及大作文冲刺课",quark:''},
+  {cat:'赠送教辅',name:"【申论】2024江牧云300 高频规范词",quark:''},
+  {cat:'公考名师',name:"【常识蒙题技巧合集】（陈怀安红领巾李铁秦明丹丹顾斐文莉）",quark:''},
+  ,
+  ,
+  {cat:'其他',name:"【22】刘文超蒙题大法（最新期）",quark:''},
+  ,
+  {cat:'其他',name:"【21】刘文超刷题课",quark:''},
+  {cat:'其他',name:"【20】刘文超系统课",quark:''},
+  {cat:'公考名师',name:"【19】宋复法申论思维训练教程70讲",quark:''},
+  ,
+  ,
+  ,
+  ,
+  {cat:'公考名师',name:"【125】资料分析【实战理论】行测天花板系列课程--公考罗飞 _ 公考罗飞",quark:''},
+  {cat:'公考名师',name:"【125-1】2024年资料分析【百套成公】行测套题刷题课—公考罗飞 _ 公考罗飞",quark:''},
+  ,
+  ,
+  ,
+  ,
+  {cat:'公考名师',name:"【011】灰兔极简数量【适用：24省考&25国考】",quark:''},
+  {cat:'历年真题',name:"【01】李铁公基12000题刷题课（近五年最新公基真题）",quark:''},
+  {cat:'公考名师',name:"【00】B站王长明申论精讲班",quark:''},
+  {cat:'公考名师',name:"【001】2025年国考郭熙言语理解(1)",quark:''},
+  {cat:'公考名师',name:"【46】【行测申论】2025年中公国省考理论实战班",quark:''},
+  ,
+  {cat:'赠送教辅',name:"【33-1】【数资】2025最新版高照速算直播课完整全套",quark:''},
+  {cat:'赠送教辅',name:"【33-1】【高照】2025最新版速算直播课完整全套",quark:''},
+  {cat:'公考名师',name:"【23】2025年顾斐国考行测疯狂刷题班",quark:''},
+  {cat:'公考名师',name:"【15】2025年国考程诺申论专项班",quark:''},
+  {cat:'公考名师',name:"【14】2025年国考齐麟行测高分计划1班",quark:''},
+  {cat:'公考名师',name:"【08】2025年江苏启禾行测申论理论课",quark:''},
+  {cat:'事业单位',name:"【069】2025年李铁河南518事考20天刷题班",quark:''},
+  {cat:'事业单位',name:"【068】2025年小鹿江苏事业单位申论",quark:''},
+  {cat:'国省考980',name:"【063】2025年小黑公基系统班",quark:''},
+  {cat:'事业单位',name:"【062】2025年江苏事业单位考前押题班-4套卷【FB】",quark:''},
+  {cat:'事业单位',name:"【058】2025申艺江苏事业单位申论",quark:''},
+  {cat:'国省考980',name:"【054】2025年马克公基常识系统班",quark:''},
+  {cat:'事业单位',name:"【051】2025年天琦事业单位综A套卷刷题冲刺班【上岸村】",quark:''},
+  {cat:'公考名师',name:"【047】2025年大懒猫国考言语理论课",quark:''},
+  {cat:'国省考980',name:"【046】2025年广东事业单位系统班【上岸村】",quark:''},
+  {cat:'公考名师',name:"【045】2025年龙飞平面图推筑基班",quark:''},
+  {cat:'公考名师',name:"【042】2025年丹丹329事业单位联考套题冲刺",quark:''},
+  {cat:'公考名师',name:"【041】2025年7节课搞定国考常识【半月谈】",quark:''},
+  {cat:'国省考980',name:"【039】2025年林英福建公基系统班",quark:''},
+  {cat:'公考名师',name:"【039】2025年程诺申论强化刷题课",quark:''},
+  {cat:'公考名师',name:"【037】2025年站长申论基础班",quark:''},
+  {cat:'事业单位',name:"【036】2025上半年花生十三职测A类套题冲刺班",quark:''},
+  {cat:'公考名师',name:"【036】2025年上岸村判断推理30技",quark:''},
+
+  // ===== 国省考980 =====
+  {cat:'最新',name:"2027国考980",quark:''},
+  {cat:'国省考980',name:"2026国考(★980)",quark:''},
+  {cat:'国省考980',name:"2026年上岸村国省考行测申论一卡通",quark:''},
+  {cat:'国省考980',name:"2026年为民公考刘大师申论系统班",quark:''},
+  {cat:'国省考980',name:"2026年初心行测领跑营系统班【六合一】",quark:''},
+  {cat:'国省考980',name:"2026年千寻申论系统课",quark:''},
+  {cat:'国省考980',name:"2026年厂长资料分析全家桶",quark:''},
+  {cat:'国省考980',name:"2026年国省事三考大姨夫三合一全家桶",quark:''},
+  {cat:'国省考980',name:"2026年国考过了暖冬笔试系统班",quark:''},
+  {cat:'国省考980',name:"2026年国考陈八十行测全程无忧学",quark:''},
+  {cat:'国省考980',name:"2026年多省联考系统班",quark:''},
+  {cat:'国省考980',name:"2026年小P公考数资判系统班",quark:''},
+  {cat:'国省考980',name:"2026年小张申论系统课【第22期】",quark:''},
+  {cat:'国省考980',name:"2026年广东省考公专系统班",quark:''},
+  {cat:'国省考980',name:"2026年广东省考申论理论课【登科七月】",quark:''},
+  {cat:'国省考980',name:"2026年广东省考行政执法全家桶（25行政执法升级补充版）【笨鸟】",quark:''},
+  {cat:'国省考980',name:"2026年江苏省考980系统班",quark:''},
+  {cat:'国省考980',name:"2026年申论系统课：手把手教你零基础到高分【未雨】",quark:''},
+  {cat:'国省考980',name:"2026年省考大山判断推理理论刷题班",quark:''},
+  {cat:'国省考980',name:"2026年省考大懒猫言语拔高刷题营",quark:''},
+  {cat:'国省考980',name:"2026年省考松林言语理解理论刷题班",quark:''},
+  {cat:'国省考980',name:"2026年省考老贾数量关系理论刷题班",quark:''},
+  {cat:'国省考980',name:"2026年省考老贾资料分析理论刷题班",quark:''},
+  {cat:'国省考980',name:"2026年省考行测申论超大杯刷题营【CG】",quark:''},
+  {cat:'国省考980',name:"2026年省考袁东申论领跑营理论刷题班",quark:''},
+  {cat:'国省考980',name:"2026年省考过了暖冬行测申论全程班",quark:''},
+  {cat:'国省考980',name:"2026年省考龙飞判断试题精讲定义判断",quark:''},
+  {cat:'国省考980',name:"2026年省考龙飞判断试题精讲平面图推",quark:''},
+  {cat:'国省考980',name:"2026年花生十三飞扬笔试系统班",quark:''},
+  {cat:'国省考980',name:"2026年行测王山东分王行测理论系统班",quark:''},
+  {cat:'国省考980',name:"2026年袁东申论领跑营套题实战班",quark:''},
+  {cat:'国省考980',name:"2026年贺冲申论系统课",quark:''},
+  {cat:'国省考980',name:"2026年飞扬申论笔试系统班",quark:''},
+  {cat:'国省考980',name:"2026省考(★980)",quark:''},
+  {cat:'国省考980',name:"2025公考波哥讲行测+文正讲申论系统班",quark:''},
+  {cat:'国省考980',name:"2025四川省考980系统班【FB】",quark:''},
+  {cat:'国省考980',name:"2025国考(★980)",quark:''},
+  {cat:'国省考980',name:"2025山东省考980系统班【FB】",quark:''},
+  {cat:'国省考980',name:"2025年上岸村忠政申论小巨人系统班",quark:''},
+  {cat:'国省考980',name:"2025年丹丹国省考常识全家桶",quark:''},
+  {cat:'国省考980',name:"2025年刘益超山西省考申论系统班",quark:''},
+  {cat:'国省考980',name:"2025年唐棣江苏省考申论系统班",quark:''},
+  {cat:'国省考980',name:"2025年国考阿里木江判断推理系统班",quark:''},
+  {cat:'国省考980',name:"2025年江牧云申论精讲精练全家桶",quark:''},
+  {cat:'国省考980',name:"2025年省考初心行测领跑营系统班",quark:''},
+  {cat:'国省考980',name:"2025年省考小黑政治常识系统班",quark:''},
+  {cat:'国省考980',name:"2025年省考花生十三行测系统班",quark:''},
+  {cat:'国省考980',name:"2025年省考袁东申论领跑营套题实战班",quark:''},
+  {cat:'国省考980',name:"2025年省考袁东申论领跑营理论刷题班",quark:''},
+  {cat:'国省考980',name:"2025年省考飞扬申论系统班",quark:''},
+  {cat:'国省考980',name:"2025年笔航公考六略系统班",quark:''},
+  {cat:'国省考980',name:"2025年罗飞资料分析系统班",quark:''},
+  {cat:'国省考980',name:"2025年苏金朋判断推理系统课",quark:''},
+  {cat:'国省考980',name:"2025年苏金朋数推系统课【比B站新】",quark:''},
+  {cat:'国省考980',name:"2025年袁东申论领跑营套题实战班",quark:''},
+  {cat:'国省考980',name:"2025广东省考980系统班【FB】",quark:''},
+  {cat:'国省考980',name:"2025江苏省考980系统班【FB】",quark:''},
+  {cat:'国省考980',name:"2025浙江省考980系统班【FB】",quark:''},
+  {cat:'国省考980',name:"2025联考省考980系统班【FB】",quark:''},
+  {cat:'国省考980',name:"2024国考(★980)",quark:''},
+  {cat:'国省考980',name:"2024省考(★980)",quark:''},
+  // ===== 最新 =====
+  {cat:'最新',name:"2026年CG套卷实战班（10套卷）+冲刺点睛课程",quark:''},
+  {cat:'公考名师',name:"2026年“玲圆”作文冲刺&热点预测",quark:''},
+  {cat:'公考名师',name:"2026年上岸村36技行测系统冲刺班",quark:''},
+  {cat:'公考名师',name:"2026年上岸村套卷强化班",quark:''},
+  {cat:'公考名师',name:"2026年为民公考国考真题精讲提升冲刺班",quark:''},
+  {cat:'公考名师',name:"2026年国考大懒猫言语魔鬼冲刺营",quark:''},
+  {cat:'公考名师',name:"2026年国考模考解析",quark:''},
+  {cat:'公考名师',name:"2026年国考相丽君申论金卷预测班",quark:''},
+  {cat:'公考名师',name:"2026年国考花生十三冲刺套卷班【一期】",quark:''},
+  {cat:'公考名师',name:"2026年国考花生十三冲刺套卷班【二期】【四海】",quark:''},
+  {cat:'公考名师',name:"2026年国考飞扬申论冲刺套卷班【一期】",quark:''},
+  {cat:'公考名师',name:"2026年国考飞扬申论冲刺套卷班【二期】【四海】",quark:''},
+  {cat:'公考名师',name:"2026年国考飞扬申论考前冲刺课",quark:''},
+  {cat:'公考名师',name:"2026年多省联考大宝小宝言语冲刺绝杀十套卷",quark:''},
+  {cat:'公考名师',name:"2026年多省联考数资常三合一冲刺刷题课【小Y在日记】",quark:''},
+  {cat:'公考名师',name:"2026年多省联考苏金朋行测冲刺总结课",quark:''},
+  {cat:'公考名师',name:"2026年天晓申论套卷刷题课（11套卷）",quark:''},
+  {cat:'公考名师',name:"2026年天晓申论套卷批改班【10期】",quark:''},
+  {cat:'公考名师',name:"2026年小张申论多省联考刷题冲刺班",quark:''},
+  {cat:'公考名师',name:"2026年小马哥申论大作文话题预测及开头结尾模版课",quark:''},
+  {cat:'公考名师',name:"2026年数量关系冲刺课【叽叽喳喳】",quark:''},
+  {cat:'公考名师',name:"2026年江苏省考考前行测模考课【启禾】",quark:''},
+  {cat:'公考名师',name:"2026年王军涛政治常识刷题冲刺班",quark:''},
+  {cat:'公考名师',name:"2026年相丽君省考金卷预测班",quark:''},
+  {cat:'公考名师',name:"2026年省考大懒猫言语冲刺课",quark:''},
+  {cat:'公考名师',name:"2026年省考套卷实战班（10套卷）&冲刺点睛【CG】",quark:''},
+  {cat:'公考名师',name:"2026年省考申论专岗押题课【天琦&杨天明】",quark:''},
+  {cat:'公考名师',name:"2026年省考白鹭申论大决战联考冲刺营",quark:''},
+  {cat:'公考名师',name:"2026年省考相丽君申论补弱冲刺课",quark:''},
+  {cat:'公考名师',name:"2026年省考笔试冲刺加油站【刘文超&小马哥&马克】",quark:''},
+  {cat:'公考名师',name:"2026年省考花生十三行测冲刺套卷班【一期】【四海】",quark:''},
+  {cat:'公考名师',name:"2026年省考花生十三行测冲刺套卷班【二期】【四海】",quark:''},
+  {cat:'公考名师',name:"2026年省考袁东申论大作文专项冲刺班",quark:''},
+  {cat:'公考名师',name:"2026年省考飞扬申论冲刺套卷班【一期】【四海】",quark:''},
+  {cat:'公考名师',name:"2026年省考飞扬申论冲刺套卷班【二期】【四海】",quark:''},
+  {cat:'公考名师',name:"2026年程日升广东省考判断推理终极大预测",quark:''},
+  {cat:'公考名师',name:"2026年袁东申论行政执法卷考前冲刺班",quark:''},
+  {cat:'公考名师',name:"❤️2026国考资料包【模拟&预测&押题】",quark:''},
+  {cat:'公考名师',name:"2025下半年省考模考解析",quark:''},
+  {cat:'公考名师',name:"2025半月谈国考考前冲刺押题课",quark:''},
+  {cat:'公考名师',name:"2025年上岸村司马套卷班",quark:''},
+  {cat:'公考名师',name:"2025年国考相丽君申论金卷预测班",quark:''},
+  {cat:'公考名师',name:"2025年国考花生十三冲刺套题班【一期】",quark:''},
+  {cat:'公考名师',name:"2025年国考花生十三冲刺套题班【二期】",quark:''},
+  {cat:'公考名师',name:"2025年国考飞扬申论冲刺套题班【一期】",quark:''},
+  {cat:'公考名师',name:"2025年国考飞扬申论冲刺套题班【二期】",quark:''},
+  {cat:'公考名师',name:"2025年大宝小宝言语冲刺绝杀十五套卷",quark:''},
+  {cat:'公考名师',name:"2025年省考模考解析",quark:''},
+  {cat:'公考名师',name:"2025年省考相丽君申论金卷班预测班",quark:''},
+  {cat:'公考名师',name:"2025年省考袁东申论领跑营大作文冲刺班",quark:''},
+  {cat:'公考名师',name:"2025年省考齐麟AB行测真题课+冲刺课",quark:''},
+  {cat:'公考名师',name:"2025年省考龙飞图推分析与实战模拟冲刺班",quark:''},
+  {cat:'公考名师',name:"2025年花生十三省考行测套题冲刺班【1期】",quark:''},
+  {cat:'公考名师',name:"2025年花生十三省考行测套题冲刺班【2期】",quark:''},
+  {cat:'公考名师',name:"2025年袁东申论考前冲刺预测班",quark:''},
+  {cat:'公考名师',name:"2025年袁东考前猜蒙题+冲刺",quark:''},
+  {cat:'公考名师',name:"2025年飞扬省考申论套题冲刺班【1期】",quark:''},
+  {cat:'公考名师',name:"2025年飞扬省考申论套题冲刺班【2期】",quark:''},
+  {cat:'公考名师',name:"2025年龙飞图推命题冲刺班",quark:''},
+  {cat:'公考名师',name:"【申论】2025半月谈国考申论16篇押题范文",quark:''},
+  {cat:'公考名师',name:"❤️25国考资料包【模拟&预测&押题】",quark:''},
+  {cat:'公考名师',name:"❤️25省考资料包【模拟&预测&押题】",quark:''},
+  // ===== 公考名师 =====
+  {cat:'公考名师',name:"2026年CG（五合一）行测+申论夸夸刷",quark:''},
+  {cat:'公考名师',name:"2026年CG（五合一）行测+申论超大杯",quark:''},
+  {cat:'公考名师',name:"2026年上岸村王炎数量关系·讲练大满贯",quark:''},
+  {cat:'公考名师',name:"2026年上岸村雨菲言语全新黄金九讲",quark:''},
+  {cat:'公考名师',name:"2026年公考硬算哥资料分析",quark:''},
+  {cat:'公考名师',name:"2026年判断考前必做100题【程永乐&徐夏】",quark:''},
+  {cat:'公考名师',name:"2026年厂长资料数量特训班",quark:''},
+  {cat:'公考名师',name:"2026年叽叽喳喳数量精讲快解50套题",quark:''},
+  {cat:'公考名师',name:"2026年四海拾伊第61期速算训练营【全勤全返】",quark:''},
+  {cat:'公考名师',name:"2026年四海拾伊第62期速算训练营【全勤全返】",quark:''},
+  {cat:'公考名师',name:"2026年四海柳岩逻辑填空必刷300题",quark:''},
+  {cat:'公考名师',name:"2026年国省考小黑《求是》杂志必刷100题",quark:''},
+  {cat:'公考名师',name:"2026年国考&广东省考资料分析必刷1000题",quark:''},
+  {cat:'公考名师',name:"2026年国考&广东省考逻辑判断必刷1000题",quark:''},
+  {cat:'公考名师',name:"2026年国考&广东省考逻辑填空必刷1000题",quark:''},
+  {cat:'公考名师',name:"2026年国考大宝小宝言语刷题答疑班",quark:''},
+  {cat:'公考名师',name:"2026年国考大懒猫言语理解理论课",quark:''},
+  {cat:'公考名师',name:"2026年国考小黑5套金卷【黑五】",quark:''},
+  {cat:'公考名师',name:"2026年国考珂佩申论基础班",quark:''},
+  {cat:'公考名师',name:"2026年国考飞扬申论热点梳理",quark:''},
+  {cat:'公考名师',name:"2026年多省联考大宝小宝言语新春焕新刷题班",quark:''},
+  {cat:'公考名师',name:"2026年大宝小宝言语降维体系课Pro",quark:''},
+  {cat:'公考名师',name:"2026年大懒猫言语专项600题",quark:''},
+  {cat:'公考名师',name:"2026年天晓申论批改班【11期】",quark:''},
+  {cat:'公考名师',name:"2026年天晓申论理论课（新大纲）",quark:''},
+  {cat:'公考名师',name:"2026年宋捏捏资料分析一本通",quark:''},
+  {cat:'公考名师',name:"2026年广东省考行测1：1套题班【跃跃】",quark:''},
+  {cat:'公考名师',name:"2026年广东科推推理考点清单课【科小推车】",quark:''},
+  {cat:'公考名师',name:"2026年张弓言语“十二箭”",quark:''},
+  {cat:'公考名师',name:"2026年拾伊资料分析600题【四海】",quark:''},
+  {cat:'公考名师',name:"2026年李梦娇常识速记口诀88条【11.0版】",quark:''},
+  {cat:'公考名师',name:"2026年毛娃儿数量关系系统刷题课",quark:''},
+  {cat:'公考名师',name:"2026年江牧云申论十全大补抢分课",quark:''},
+  {cat:'公考名师',name:"2026年江牧云申论命题人思维56招",quark:''},
+  {cat:'公考名师',name:"2026年田欣逻辑判断600题刷题精讲班【四海】",quark:''},
+  {cat:'公考名师',name:"2026年白鹭申论扎马步营+易行",quark:''},
+  {cat:'公考名师',name:"2026年白鹭申论点将台实战营",quark:''},
+  {cat:'公考名师',name:"2026年白鹭申论破题阵突破营",quark:''},
+  {cat:'公考名师',name:"2026年相丽君政治素养刷题班",quark:''},
+  {cat:'公考名师',name:"2026年相丽君文章写作训练营",quark:''},
+  {cat:'公考名师',name:"2026年相丽君申论技巧趣学班",quark:''},
+  {cat:'公考名师',name:"2026年省考张弓言语200题",quark:''},
+  {cat:'公考名师',name:"2026年省考忠政申论批改班【88-90期】",quark:''},
+  {cat:'公考名师',name:"2026年省考柳岩逻辑填空1000高频词闭环突破",quark:''},
+  {cat:'公考名师',name:"2026年省考柳岩逻辑填空刷题7天抢分计划",quark:''},
+  {cat:'公考名师',name:"2026年省考行测2000题海海刷【四海】",quark:''},
+  {cat:'公考名师',name:"2026年省考袁东申论套题实战班",quark:''},
+  {cat:'公考名师',name:"2026年省考雨菲言语速解36计",quark:''},
+  {cat:'公考名师',name:"2026年省考飞扬申论分析理解题早课",quark:''},
+  {cat:'公考名师',name:"2026年省考飞扬申论大作文题早课",quark:''},
+  {cat:'公考名师',name:"2026年省考飞扬申论归纳概括题早课",quark:''},
+  {cat:'公考名师',name:"2026年省考飞扬申论提出对策题早课",quark:''},
+  {cat:'公考名师',name:"2026年省考飞扬申论热点梳理",quark:''},
+  {cat:'公考名师',name:"2026年省联考天晓申论作文快速提分章法",quark:''},
+  {cat:'公考名师',name:"2026年省联考天晓申论考前佛脚班",quark:''},
+  {cat:'公考名师',name:"2026年科推专项刷题营【粉刷刷】",quark:''},
+  {cat:'公考名师',name:"2026年章晓铭硬核图推600题【上岸村】",quark:''},
+  {cat:'公考名师',name:"2026年老夫子申论公文素养课",quark:''},
+  {cat:'公考名师',name:"2026年老闻言语百日攻坚",quark:''},
+  {cat:'公考名师',name:"2026年老闻言语高频成语300词",quark:''},
+  {cat:'公考名师',name:"2026年花生十三全科争议题专项解析班",quark:''},
+  {cat:'公考名师',name:"2026年苏金朋判断推理通关班",quark:''},
+  {cat:'公考名师',name:"2026年袁东大作文专项班",quark:''},
+  {cat:'公考名师',name:"2026年袁东申论方法实战班",quark:''},
+  {cat:'公考名师',name:"2026年袁东申论超大杯刷题班",quark:''},
+  {cat:'公考名师',name:"2026年言语考前必做100题【郭熙&安杰】",quark:''},
+  {cat:'公考名师',name:"2026年贺冲申论作文救急手册",quark:''},
+  {cat:'公考名师',name:"2026年资料分析加速度（速算＋理论+专项刷题）【爱打篮球的公考人】",quark:''},
+  {cat:'公考名师',name:"2026年资料是个圆（理论课+刷题课）",quark:''},
+  {cat:'公考名师',name:"2026年超格行测申论（六合一）理论实战班",quark:''},
+  {cat:'公考名师',name:"2026年逻辑不楠判断推理理论课",quark:''},
+  {cat:'公考名师',name:"2026年阿里木江言语基础理论",quark:''},
+  {cat:'公考名师',name:"2026年青菜白玉汤判断推理体系课",quark:''},
+  {cat:'公考名师',name:"2026年顾斐宝藏成语800词精讲",quark:''},
+  {cat:'公考名师',name:"2026年飞扬申论公文题早课",quark:''},
+  {cat:'公考名师',name:"2026年飞扬申论分析理解题",quark:''},
+  {cat:'公考名师',name:"2026年飞扬申论大作文早课",quark:''},
+  {cat:'公考名师',name:"2026年飞扬申论归纳概括题早课",quark:''},
+  {cat:'公考名师',name:"2026年飞扬申论提出对策题早课",quark:''},
+  {cat:'公考名师',name:"2026年飞扬申论综合题早课",quark:''},
+  {cat:'公考名师',name:"2026年高照数字推理460题",quark:''},
+  {cat:'公考名师',name:"2026年鸿哥数量关系旗舰班",quark:''},
+  {cat:'公考名师',name:"2026年龙飞平面图推500题刷题精讲班",quark:''},
+  {cat:'公考名师',name:"2026年龙飞立体图推理论刷题班",quark:''},
+  {cat:'公考名师',name:"2026龙飞平面图形推理筑基先行班",quark:''},
+  {cat:'公考名师',name:"2025年上岸村司马判断秒杀",quark:''},
+  {cat:'公考名师',name:"2025年上岸村司马图推专项",quark:''},
+  {cat:'公考名师',name:"2025年上岸村司马数量秒杀",quark:''},
+  {cat:'公考名师',name:"2025年上岸村司马行测满分提升课",quark:''},
+  {cat:'公考名师',name:"2025年上岸村司马行测理论课",quark:''},
+  {cat:'公考名师',name:"2025年丹丹常识公基专项课",quark:''},
+  {cat:'公考名师',name:"2025年半月谈抄出申论80+【第二季】",quark:''},
+  {cat:'公考名师',name:"2025年国省考上岸村雨菲言语母题研究课",quark:''},
+  {cat:'公考名师',name:"2025年国考明莉申论专项班3班",quark:''},
+  {cat:'公考名师',name:"2025年国考花生十三行测",quark:''},
+  {cat:'公考名师',name:"2025年国考飞扬申论",quark:''},
+  {cat:'公考名师',name:"2025年国考齐麟行测高分计划3班",quark:''},
+  {cat:'公考名师',name:"2025年国考齐麟行测高分计划4班",quark:''},
+  {cat:'公考名师',name:"2025年大宝小宝国考言语精品刷题班",quark:''},
+  {cat:'公考名师',name:"2025年大宝小宝国考言语降维体系课",quark:''},
+  {cat:'公考名师',name:"2025年大宝小宝多省联考言语新春刷题班",quark:''},
+  {cat:'公考名师',name:"2025年广东省考千人飞跃【FB】",quark:''},
+  {cat:'公考名师',name:"2025年明莉申论突击理论刷题班",quark:''},
+  {cat:'公考名师',name:"2025年李卜200题刷遍图推",quark:''},
+  {cat:'公考名师',name:"2025年李卜判断必刷100题",quark:''},
+  {cat:'公考名师',name:"2025年江牧云多省联考15+10申论刷题冲分课",quark:''},
+  {cat:'公考名师',name:"2025年江牧云申论热点规范词",quark:''},
+  {cat:'公考名师',name:"2025年王军涛常识公基（大盘基）系统精讲班",quark:''},
+  {cat:'公考名师',name:"2025年王军涛常识（公基）超大杯刷题营",quark:''},
+  {cat:'公考名师',name:"2025年白鹭申论套题实战演训班",quark:''},
+  {cat:'公考名师',name:"2025年相丽君文章写作高分素材课",quark:''},
+  {cat:'公考名师',name:"2025年相丽君申论政治素养刷题班",quark:''},
+  {cat:'公考名师',name:"2025年省考申论超大杯刷题课【CG五合一】",quark:''},
+  {cat:'公考名师',name:"2025年省考相丽君申论专项补弱课",quark:''},
+  {cat:'公考名师',name:"2025年省考飞扬申论综合题早课",quark:''},
+  {cat:'公考名师',name:"2025年省考飞扬申论考前热点分析",quark:''},
+  {cat:'公考名师',name:"2025年站长申论刷题班",quark:''},
+  {cat:'公考名师',name:"2025年站长申论强化班",quark:''},
+  {cat:'公考名师',name:"2025年站长申论行政执法专项班",quark:''},
+  {cat:'公考名师',name:"2025年老闻言语百日攻坚全程班【二期】",quark:''},
+  {cat:'公考名师',name:"2025年苏金朋数字推理专项课",quark:''},
+  {cat:'公考名师',name:"2025年袁东申论大作文专项班",quark:''},
+  {cat:'公考名师',name:"2025年袁东申论超大杯刷题提升班",quark:''},
+  {cat:'公考名师',name:"2025年金题精炼飞跃班【FB】",quark:''},
+  {cat:'公考名师',name:"2025年钩不了沉言语、逻辑、大作文",quark:''},
+  {cat:'公考名师',name:"2025年阿里木江言语刷题班",quark:''},
+  {cat:'公考名师',name:"2025年阿里木江言语基础班",quark:''},
+  {cat:'公考名师',name:"2025年飞扬申论公文题",quark:''},
+  {cat:'公考名师',name:"2025年飞扬申论大作文题",quark:''},
+  {cat:'公考名师',name:"2025年飞扬申论归纳概括题",quark:''},
+  {cat:'公考名师',name:"2025年飞扬申论执法小题",quark:''},
+  {cat:'公考名师',name:"2025年飞扬申论提出对策题",quark:''},
+  {cat:'公考名师',name:"2025年飞扬申论综合分析",quark:''},
+  {cat:'公考名师',name:"2025年飞扬申论考前写作热点梳理",quark:''},
+  {cat:'公考名师',name:"2025年飞扬申论行政执法类大作文",quark:''},
+  {cat:'公考名师',name:"2025年高照数字推理400题",quark:''},
+  {cat:'公考名师',name:"2025年高照数量关系拿分稳稳班",quark:''},
+  {cat:'公考名师',name:"2025年高照资料分析超大杯刷题营【100篇】",quark:''},
+  {cat:'公考名师',name:"2025年齐麟最新国考联考行测刷题班",quark:''},
+  {cat:'公考名师',name:"2025年龙飞图形推理刷题超长精讲班",quark:''},
+  {cat:'公考名师',name:"2025年龙飞定义500题超长精讲班",quark:''},
+  {cat:'公考名师',name:"2025年龙飞百大图形推理解析精品班",quark:''},
+  {cat:'公考名师',name:"2025年龙飞类比推理300题",quark:''},
+  {cat:'公考名师',name:"2025省考飞扬申论归纳概括题全勤全返",quark:''},
+  {cat:'公考名师',name:"2025高照数量超大杯",quark:''},
+  {cat:'公考名师',name:"2025高照资料分析夸夸刷",quark:''},
+  {cat:'公考名师',name:"26爱打篮球的公考人资料分析加速度（速算＋理论+专项刷题）",quark:''},
+  {cat:'公考名师',name:"上岸村忠政申论批改班【75期】",quark:''},
+  {cat:'公考名师',name:"合并套题版：数量最新五年国省联选（59套）【叽叽喳喳的公考】",quark:''},
+  {cat:'公考名师',name:"花生十三线下绝版课(必看)",quark:''},
+  {cat:'公考名师',name:"速算基础+资料分析系统基础课+70道手把手速算例题 【叽叽喳喳的公考】",quark:''},
+  // ===== 事业单位 =====
+  ,
+  ,
+  ,
+  {cat:'事业单位',name:"2026年省考&事业编雨菲言语冲刺预测班",quark:''},
+  {cat:'事业单位',name:"❤️2024年事业单位【模拟&押题&资料包】",quark:''},
+  {cat:'事业单位',name:"事业单位历年真题（已更新至25年3月）",quark:''},
+  // ===== 时政 =====
+  ,
+  ,
+  ,
+  {cat:'时政',name:"2026年国省考王军涛常识判断理论课",quark:''},
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  {cat:'时政',name:"2026年省考王军涛常识判断理论刷题班",quark:''},
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  {cat:'时政',name:"2025年李梦娇常识判断冲刺4套卷",quark:''},
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  ,
+  // ===== 公考面试 =====
+  {cat:'公考面试',name:"2026年为民公考结构化面试理论基础课【人须在事上磨】",quark:''},
+  {cat:'公考面试',name:"2026年了凡日记面试精讲课",quark:''},
+  {cat:'公考面试',name:"2026年国省考结构化面试基础课【老夏】",quark:''},
+  {cat:'公考面试',name:"2026年国考央选特招面试素养提升课",quark:''},
+  {cat:'公考面试',name:"2026年广东省考面试抢先学【跃跃】",quark:''},
+  {cat:'公考面试',name:"2026年相丽君面试个性化技巧精讲班",quark:''},
+  {cat:'公考面试',name:"2026年税务结构化小组面试基础课【老夏团队】",quark:''},
+  {cat:'公考面试',name:"2026年老夏说公务员面试：从小白到面霸",quark:''},
+  {cat:'公考面试',name:"2026年袁东面试领跑营方法精讲班",quark:''},
+  {cat:'公考面试',name:"2026年超格结构化面试学至考前班",quark:''},
+  {cat:'公考面试',name:"25个结构化面试必背答题母题",quark:''},
+  // ===== 历年真题 =====
+  {cat:'历年真题',name:"【国考&省考】2000-2025国省考真题",quark:''},
+  {cat:'历年真题',name:"合并模块版：数量真题刷题课（800道）【叽叽喳喳的公考】",quark:''},
+  {cat:'历年真题',name:"资料估算拔高9讲+1000道最新五年真题【叽叽喳喳的公考】",quark:''},
+  // ===== 赠送教辅 =====
+  {cat:'赠送教辅',name:"【重要】公考刷题PDF合集",quark:''},
+  // ===== 其他 =====
+  {cat:'其他',name:"2026年四川定向乡镇公务员高端班【JBC】",quark:''},
+  {cat:'其他',name:"2026年国考&广东省考图形推理必刷1000题",quark:''},
+  {cat:'其他',name:"2026年国考&广东省考程日升图形推理600题【跃跃公考】",quark:''},
+  {cat:'其他',name:"2026年数资考前必做100题【邓健&左宏帅】",quark:''},
+  {cat:'其他',name:"2026年理论刷题课【超值6+1】",quark:''},
+];
+
+// ============ RENDER ============
+const CATS = ['最新','国省考980','公考名师','事业单位','三支一扶','时政','公考面试','军队文职','公安专项','教招教资','历年真题','其他','赠送教辅'];
+const CAT_ICONS = {最新:'🆕',国省考980:'📦',公考名师:'👨‍🏫',事业单位:'🏛️',三支一扶:'🌾',时政:'📰',公考面试:'💬',军队文职:'🎖️',公安专项:'👮',教招教资:'📖',历年真题:'📝',其他:'📌',赠送教辅:'🎁'};
+const TAG_MAP = {new:'最新',hot:'热门',free:'免费',update:'更新'};
+
+// Set update date
+document.getElementById('updateDate').textContent = new Date().toISOString().slice(0,10);
+
+// Build tabs
+CATS.forEach(cat => {
+  const btn = document.createElement('button');
+  btn.className = 'tab';
+  btn.dataset.cat = cat;
+  btn.textContent = (CAT_ICONS[cat]||'') + ' ' + cat;
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('search').value = '';
+    renderCourses(cat);
+  });
+  document.getElementById('tabBar').appendChild(btn);
+});
+
+// 从课程名提取年份，用于排序
+	function getYear(n) {
+	  // 匹配 2027、2026 等四位年份
+	  var m = n.match(/20\d{2}/);
+	  if (m) return parseInt(m[0]);
+	  // 匹配独立的 27、26 等两位年份（如"27陈怀安"）
+	  m = n.match(/(?:^|[^\d])(2[7-9])(?:[^\d]|$)/);
+	  if (m) return 2000 + parseInt(m[1]);
+	  m = n.match(/(?:^|[^\d])(2[0-6])(?:[^\d]|$)/);
+	  if (m) return 2000 + parseInt(m[1]);
+	  return 0;
+	}
+
+	function renderCourses(filter) {
+  const container = document.getElementById('content');
+  container.innerHTML = '';
+
+  const catsToShow = (filter === 'all') ? CATS : [filter];
+  let total = 0;
+
+  catsToShow.forEach(cat => {
+    let courses = COURSES.filter(c => c.cat === cat);
+    // 只在"全部"tab按年份降序排列（2027在前）
+    if (filter === 'all') {
+      courses = courses.slice().sort((a, b) => getYear(b.name) - getYear(a.name));
+    }
+    if (courses.length === 0) return;
+    total += courses.length;
+
+    const section = document.createElement('div');
+    section.className = 'section';
+    section.dataset.cat = cat;
+
+    let html = '<div class="section-title">' + (CAT_ICONS[cat]||'') + ' ' + cat;
+    html += '<span style="font-size:12px;color:var(--muted);font-weight:400;">（' + courses.length + '个）</span>';
+    html += '</div>';
+
+    courses.forEach((c, i) => {
+      html += '<div class="course" data-cat="' + cat + '" data-keywords="' + c.name + '">';
+      html += '<span class="course-num">' + String(i+1).padStart(2,'0') + '</span>';
+      html += '<span class="course-name">' + c.name + '</span>';
+      if (c.tag) {
+        html += '<span class="course-tag tag-' + c.tag + '">' + (TAG_MAP[c.tag]||c.tag) + '</span>';
+      }
+      html += '<span class="course-links">';
+      if (c.quark) html += '<a class="link-btn link-quark" href="' + c.quark + '" target="_blank">📥 夸克网盘</a>';
+      html += '</span></div>';
+    });
+
+    section.innerHTML = html;
+    container.appendChild(section);
+  });
+
+  document.getElementById('totalCount').textContent = total;
+}
+
+function filterCourses() {
+  const kw = document.getElementById('search').value.toLowerCase().trim();
+  if (!kw) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelector('[data-cat="all"]').classList.add('active');
+    renderCourses('all');
+    return;
+  }
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  renderCourses('all');
+  // Hide non-matching courses
+  let count = 0;
+  document.querySelectorAll('.course').forEach(el => {
+    const keywords = (el.dataset.keywords || '').toLowerCase();
+    const cat = (el.dataset.cat || '').toLowerCase();
+    if (keywords.includes(kw) || cat.includes(kw)) {
+      el.style.display = '';
+      count++;
+    } else {
+      el.style.display = 'none';
+    }
+  });
+  // Hide empty sections
+  document.querySelectorAll('.section').forEach(sec => {
+    const visible = sec.querySelectorAll('.course[style*="display:"]').length;
+    const total = sec.querySelectorAll('.course').length;
+    if (visible === total) sec.style.display = 'none';
+    else sec.style.display = '';
+  });
+  document.getElementById('totalCount').textContent = count;
+}
+
+function trackClick(cat, type) {
+  console.log('点击：' + cat + ' | ' + type);
+  // 这里以后可以接入统计
+}
+
+// "全部" 按钮绑定事件
+document.querySelector('[data-cat="all"]').addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelector('[data-cat="all"]').classList.add('active');
+    document.getElementById('search').value = '';
+    renderCourses('all');
+  });
+
+// ============ 更新日志 ============
+(function initUpdateLog() {
+  var today = '2026-07-03';
+  document.getElementById('updateDateLabel').textContent = ' · 最近更新：'+today;
+
+  // 7月3日更新的课程
+  var updatedCourses = [
+    {name:'2027超格璐璐政治理论碎碎念（磨耳朵）',type:'🆕 新增'},
+    {name:'2027国省考季花生十三飞扬系统班',type:'🔄 刷新'},
+    {name:'2027国考刘义恒图推以练代背',type:'🔄 刷新'},
+    {name:'2027超格综应A类实战桶',type:'🔄 刷新'},
+    {name:'2027超格鹤峰常识判断磨耳朵',type:'🔄 刷新'},
+    {name:'27陈怀安行测圣经资料分析系统课',type:'🔄 刷新'},
+    {name:'2026李铁河南三支一扶全家桶',type:'🔄 刷新'},
+    {name:'📝 笔记更新：四海资料分析+刘义恒复盘+申论笔记',type:'📝 笔记'},
+  ];
+
+  var tableRows = '';
+  for (var i = 0; i < updatedCourses.length; i++) {
+    var c = updatedCourses[i];
+    var typeColor = c.type.indexOf('新增')>=0 ? '#059669' : '#2563eb';
+    tableRows += '<tr><td style=\"padding:5px 8px;border-bottom:1px solid #f3f4f6;font-size:11px;color:#9ca3af;\">'+(i+1)+'</td><td style=\"padding:5px 8px;border-bottom:1px solid #f3f4f6;font-size:13px;\">'+c.name+'</td><td style=\"padding:5px 8px;border-bottom:1px solid #f3f4f6;font-size:11px;color:'+typeColor+';font-weight:600;\">'+c.type+'</td></tr>';
+  }
+
+  document.getElementById('updateContent').innerHTML =
+    '<div style=\"margin-bottom:12px;border-left:3px solid #e74c3c;padding-left:10px;\">'+
+    '<b>📅 2026-07-03</b> <span style=\"color:#6b7280;font-size:12px;\">新增1门+刷新6门+笔记更新</span>'+
+    '</div>'+
+    '<table style=\"width:100%;border-collapse:collapse;margin-bottom:12px;\">'+
+    '<thead><tr style=\"background:#fef3c7;\"><th style=\"padding:6px 8px;text-align:left;font-size:11px;\">#</th><th style=\"padding:6px 8px;text-align:left;font-size:11px;\">课程名称</th><th style=\"padding:6px 8px;text-align:left;font-size:11px;\">类型</th></tr></thead>'+
+    '<tbody>'+tableRows+'</tbody>'+
+    '</table>'+
+    '<div style=\"margin-bottom:10px;border-left:3px solid #e5e7eb;padding-left:10px;\">'+
+    '<b>📅 2026-07-02</b> <span style=\"color:#6b7280;font-size:12px;\">新增147门永久链接（事业单位/三支一扶/公安/教辅等）</span>'+
+    '</div>'+
+    '<div style=\"margin-bottom:10px;border-left:3px solid #e5e7eb;padding-left:10px;\">'+
+    '<b>📅 2026-07-02</b> <span style=\"color:#6b7280;font-size:12px;\">刷新18门+新增3门</span>'+
+    '</div>'+
+    '<div style=\"margin-bottom:10px;border-left:3px solid #e5e7eb;padding-left:10px;\">'+
+    '<b>📅 2026-06-30</b> <span style=\"color:#6b7280;font-size:12px;\">207门课程上线+品牌升级为上岸码头</span>'+
+    '</div>';
+})();
+
+renderCourses('all');
+</script>
+
+<!-- 侧边联系栏（桌面端） -->
+<div class="side-contact">
+  <div class="sc-title">🏖️ 上岸码头</div>
+  <div class="sc-desc">需要课程资料？<br>告诉我，帮你找到上传</div>
+  <a class="sc-btn" id="sideQqBtn" href="#" onclick="var s=document.getElementById('sideQqCopy');if(s.style.display==='block'){s.style.display='none';this.textContent='🐧 QQ群加入'}else{s.style.display='block';this.textContent='🐧 QQ群：563208874'};return false">🐧 QQ群加入</a>
+  <div id="sideQqCopy" style="display:none;margin-bottom:6px;cursor:pointer;background:#fef3c7;border-radius:12px;padding:6px;font-size:13px;font-weight:700;color:#d97706;" onclick="navigator.clipboard.writeText('563208874');this.textContent='✅ 已复制！';setTimeout(()=>{this.textContent='563208874（点击复制）'},1500)">563208874（点击复制）</div>
+  <div class="sc-tip" style="font-size:10px;">加群获取最新更新</div>
+</div>
+
+<!-- 底部联系栏（手机端） -->
+<div class="mobile-contact">
+  <span>🏖️ 上岸码头</span>
+  <a class="sc-btn" id="mbQqBtn" href="#" onclick="var s=document.getElementById('mbQqCopy');if(s.style.display==='block'){s.style.display='none';this.textContent='🐧 QQ群'}else{s.style.display='block';this.textContent='🐧 563208874'};return false">🐧 QQ群</a>
+  <div id="mbQqCopy" style="display:none;position:fixed;bottom:60px;left:50%;transform:translateX(-50%);background:#fef3c7;border-radius:20px;padding:8px 16px;font-size:14px;font-weight:700;color:#d97706;cursor:pointer;z-index:1000;box-shadow:0 4px 12px rgba(0,0,0,0.15);" onclick="navigator.clipboard.writeText('563208874');this.textContent='✅ 已复制！';setTimeout(()=>{this.style.display='none'},1500)">563208874（点击复制）</div>
+</div>
+
+</body>
+</html>
