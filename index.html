@@ -134,9 +134,9 @@ body { background:var(--bg); color:var(--text); font-family:-apple-system,"Micro
         &#128197; 更新日历
         <span style="font-size:11px;color:var(--muted);font-weight:400;">点击展开/收起</span>
         <span style="font-size:11px;color:#d97706;margin-left:auto;">最近更新：2026-07-07</span>
-        <span id="calArrow" style="color:var(--muted);">&#9660;</span>
+        <span id="calArrow" style="color:var(--muted);">&#9654;</span>
       </div>
-      <div id="calBody"></div>
+      <div id="calBody" style="display:none"></div>
     </div>
 
 <div class="top-bar">
@@ -388,7 +388,7 @@ renderCourses('all');
   var html = "";
   for (var i = 0; i < days.length; i++) {
     var d = days[i];
-    html += "<div class=\"day latest open\">";
+    html += "<div class=\"day\">";
     html += "<div class=\"day-header\" onclick=\"this.parentElement.classList.toggle(&#39;open&#39;)\">";
     html += "<div><span class=\"day-title\">" + d.title + "</span>";
     html += "<span class=\"day-summary\"> · " + d.summary + "</span></div>";
