@@ -1,0 +1,13 @@
+{
+  "name": "panbox-lite",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local netdisk workflow helper for authorized Quark links.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PanBox Lite</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <h1>PanBox Lite</h1>
+        <p>本地批量转存、单独分享、导出链接</p>
+      </div>
+      <div class="status-pill" id="runtimeStatus">本地运行</div>
+    </header>
+
+    <section class="safety">
+      <strong>账号安全保护</strong>
+      <span>默认演练模式不会转存、不会分享；正式任务只创建目录、转存文件、生成分享链接，不做删除、移动、重命名。</span>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>账号管理</h2>
+          <button class="ghost" id="refreshBtn" type="button">刷新</button>
+        </div>
+
+        <label>当前账号</label>
+        <select id="accountSelect" class="hidden"></select>
+        <div class="account-list" id="accountList"></div>
+        <div class="account-actions">
+          <button class="secondary" id="testAccountBtn" type="button">测试当前账号</button>
+          <button class="danger-ghost" id="deleteAccountBtn" type="button">删除本地账号</button>
+        </div>
+        <div class="rename-row">
+          <input id="renameAccountInput" placeholder="给当前账号取名，例如：我的夸克主盘">
+          <button class="secondary" id="renameAccountBtn" type="button">重命名</button>
+        </div>
+
+        <label>扫码添加账号</label>
+        <div class="provider-grid">
+          <button class="provider active" type="button" data-drive="quark">夸克</button>
+          <button class="provider" type="button" data-drive="baidu">百度</button>
+          <button class="provider" type="button" data-drive="ali">阿里</button>
+          <button class="provider" type="button" data-drive="xunlei">迅雷</button>
+        </div>
+        <div class="scan-actions hidden" id="scanActions">
+          <input id="scanAccountName" placeholder="账号名称">
+          <button class="secondary" id="finishScanBtn" type="button">保存扫码账号</button>
+          <button class="danger-ghost" id="cancelScanBtn" type="button">取消</button>
+        </div>
+        <div class="hint" id="scanHint">点上面的网盘按钮，会打开独立扫码窗口。</div>
+
+        <details class="manual-box">
+          <summary>手动添加 Cookie</summary>
+          <label>网盘</label>
+          <select id="manualDriveType">
+            <option value="quark">夸克网盘</option>
+            <option value="baidu">百度网盘</option>
+            <option value="ali">阿里云盘</option>
+            <option value="xunlei">迅雷云盘</option>
+          </select>
+          <label>账号名称</label>
+          <input id="accountName" placeholder="例如：夸克主号">
+          <label>Cookie</label>
+          <textarea id="accountCookie" rows="4" placeholder="本工具只保存在本机 data 目录"></textarea>
+          <div class="row">
+            <button id="addAccountBtn" type="button">保存账号</button>
+          </div>
+        </details>
+        <div class="hint" id="accountHint">账号凭据只保存在本机。</div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h2>保存和分享</h2>
+          <span class="mini" id="linkCount">0 个链接</span>
+        </div>
+
+        <label>别人分享的网盘链接</label>
+        <textarea id="linksText" rows="11" placeholder="一行一个夸克分享链接，也可以直接粘一整段文本"></textarea>
+
+        <div class="split">
+          <div>
+            <label>保存目录名</label>
+            <input id="targetFolderName">
+          </div>
+          <div>
+            <label>每步间隔</label>
+            <select id="delayMs">
+              <option value="3000">3 秒</option>
+              <option value="5000">5 秒</option>
+              <option value="8000">8 秒</option>
+              <option value="12000">12 秒</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="action-cards">
+          <button class="action-card" id="dryRunBtn" type="button">
+            <b>先演练</b>
+            <span>只看能识别出哪些文件</span>
+          </button>
+          <button class="action-card save" id="saveOnlyBtn" type="button">
+            <b>保存到我网盘</b>
+            <span>转存到本次新建目录</span>
+          </button>
+          <button class="action-card primary" id="saveShareBtn" type="button">
+            <b>保存并分享链接</b>
+            <span>每个文件生成单独链接</span>
+          </button>
+        </div>
+
+        <div class="checks compact">
+          <label class="check">
+            <input id="confirmLive" type="checkbox">
+            <span>正式执行前确认，只操作本次新建目录</span>
+          </label>
+        </div>
+
+        <div class="row">
+          <button id="previewBtn" class="secondary" type="button">识别链接</button>
+          <button id="stopBtn" class="danger-ghost" type="button">停止任务</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel wide">
+      <div class="panel-head">
+        <div>
+          <h2>我的网盘内容</h2>
+          <p class="panel-note" id="drivePathText">保存位置：根目录</p>
+        </div>
+        <div class="drive-tools">
+          <button class="secondary" id="loadDriveBtn" type="button">查看网盘</button>
+          <button class="ghost" id="selectTargetBtn" type="button">设为保存位置</button>
+          <button id="shareSelectedBtn" type="button">分享选中内容</button>
+          <button class="danger-ghost" id="deleteSelectedBtn" type="button">删除选中</button>
+        </div>
+      </div>
+      <div class="folder-create">
+        <input id="newFolderName" placeholder="新文件夹名称">
+        <button id="createFolderBtn" type="button">创建文件夹</button>
+      </div>
+      <div class="drive-breadcrumb" id="driveBreadcrumb"></div>
+      <div class="selected-bar">
+        <span id="selectedLine">已选 0 项</span>
+        <button class="secondary small-btn" id="selectAllBtn" type="button">全选</button>
+        <button class="ghost small-btn" id="clearSelectedBtn" type="button">取消全选</button>
+      </div>
+      <div class="drive-list" id="driveList">
+        <div class="empty">选择夸克账号后，点击“查看网盘”</div>
+      </div>
+    </section>
+
+    <section class="panel wide">
+      <div class="panel-head">
+        <h2>进度</h2>
+        <div class="result-actions">
+          <button class="secondary" id="copyAllBtn" type="button">复制全部链接</button>
+          <button id="makeNoticeBtn" type="button">生成文案</button>
+          <button class="secondary" id="copyNoticeBtn" type="button">复制文案</button>
+          <a id="exportLink" class="export hidden" href="#" download>下载结果</a>
+        </div>
+      </div>
+      <textarea id="noticeText" class="notice-box" rows="12" placeholder="生成后的群公告文案会出现在这里"></textarea>
+      <div class="meters">
+        <div><b id="totalLinks">0</b><span>链接</span></div>
+        <div><b id="previewed">0</b><span>预览</span></div>
+        <div><b id="savedLinks">0</b><span>转存</span></div>
+        <div><b id="shared">0</b><span>分享</span></div>
+        <div><b id="failed">0</b><span>失败</span></div>
+      </div>
+
+      <div class="log" id="logBox"></div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>文件名</th>
+            <th>保存</th>
+            <th>分享</th>
+            <th>链接</th>
+            <th>错误</th>
+          </tr>
+        </thead>
+        <tbody id="resultRows">
+          <tr><td colspan="5" class="empty">还没有任务结果</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -133,7 +133,7 @@ body { background:var(--bg); color:var(--text); font-family:-apple-system,"Micro
       <div class="section-title" style="cursor:pointer" onclick="var c=document.getElementById('calBody');var a=document.getElementById('calArrow');c.style.display=c.style.display==='none'?'block':'none';a.innerHTML=c.style.display==='none'?'&#9654;':'&#9660;'">
         &#128197; 更新日历
         <span style="font-size:11px;color:var(--muted);font-weight:400;">点击展开/收起</span>
-        <span style="font-size:11px;color:#d97706;margin-left:auto;">最近更新：2026-07-07</span>
+        <span style="font-size:11px;color:#d97706;margin-left:auto;">最近更新：2026-07-08</span>
         <span id="calArrow" style="color:var(--muted);">&#9654;</span>
       </div>
       <div id="calBody" style="display:none"></div>
@@ -367,7 +367,25 @@ renderCourses('all');
 // ============ 填充更新日历 ============
 (function fillCalendar() {
   var days = [
-    {date:"2026-07-07", title:"7月7日", summary:"🔄 更新 13 门 + 🆕 新增 2 门", courses:[
+    {date:"2026-07-08", title:"7月8日", summary:"🆕 新增 2 门 + 🔄 更新 12 门", courses:[
+      {name:"2027超格夸夸刷 — 讲义&思维导图", type:"🆕 新增", link:"https://pan.quark.cn/s/2f292a1f6a7b"},
+      {name:"2027超格璐璐政治理论碎碎念（磨耳朵）", type:"🆕 新增", link:"https://pan.quark.cn/s/3b67274283d7"},
+      {name:"花生十三飞扬系统班 — 言语02+政治理论13+资料讲义", type:"🔄 更新", link:"https://pan.quark.cn/s/96195bae2f2b"},
+      {name:"刘义恒图推以练代背 — 11讲", type:"🔄 更新", link:"https://pan.quark.cn/s/62fa45ac486a"},
+      {name:"王炎数量关系大满贯 — 03讲", type:"🔄 更新", link:"https://pan.quark.cn/s/6ff81d3007e1"},
+      {name:"雨菲言语带背800词 — 02讲", type:"🔄 更新", link:"https://pan.quark.cn/s/2b9c3c6a7282"},
+      {name:"陈怀安资料分析系统课 — 05讲", type:"🔄 更新", link:"https://pan.quark.cn/s/211558db531a"},
+      {name:"李铁河南三支一扶全家桶 — 报纸理解17+时政梳理33", type:"🔄 更新", link:"https://pan.quark.cn/s/dd39ef5d328e"},
+      {name:"相丽君申论解题思维趣学营 — 08-09讲", type:"🔄 更新", link:"https://pan.quark.cn/s/373967f981dd"},
+      {name:"小黑全年时政 — 农业农村现代化十五五", type:"🔄 更新", link:"https://pan.quark.cn/s/d6735b07945c"},
+      {name:"袁东大作文专项班 — 06-07讲", type:"🔄 更新", link:"https://pan.quark.cn/s/19ac7c26c2cc"},
+      {name:"上岸村行测&申论全家桶 — 判断推理何聘26-27讲", type:"🔄 更新", link:"https://pan.quark.cn/s/6d091a9edd15"},
+      {name:"超哥国省考政治理论刷题课 — 28节", type:"🔄 更新", link:"https://pan.quark.cn/s/a626fbaa8b95"},
+      {name:"2027国考980系统班", type:"🔄 更新", link:"https://pan.quark.cn/s/905ad7538987"}
+    ]},
+    {date:"2026-07-07", title:"7月7日", summary:"🆕 新增 2 门 + 🔄 更新 13 门", courses:[
+      {name:"上岸村林凡资料分析筑基11层", type:"🆕 新增", link:"https://pan.quark.cn/s/5142f7699c6c"},
+      {name:"凯叔河南三支一扶考前冲刺5套卷", type:"🆕 新增", link:"https://pan.quark.cn/s/54d8c3bd4b84"},
       {name:"花生十三飞扬系统班 — 更言语01", type:"🔄 更新", link:"https://pan.quark.cn/s/077c6dbd17df"},
       {name:"2027国考980系统班", type:"🔄 更新", link:"https://pan.quark.cn/s/13255933de20"},
       {name:"多省联考系统班 — 25-30讲", type:"🔄 更新", link:"https://pan.quark.cn/s/8aa57ae46553"},
@@ -380,11 +398,10 @@ renderCourses('all');
       {name:"花生十三600题讲解 — 29-32套", type:"🔄 更新", link:"https://pan.quark.cn/s/8c7c326602bf"},
       {name:"大懒猫言语刷刷刷直播课 — 12讲", type:"🔄 更新", link:"https://pan.quark.cn/s/e164ce342783"},
       {name:"白宁公安联考公专 — 21-22讲", type:"🔄 更新", link:"https://pan.quark.cn/s/0da7550d95d6"},
-      {name:"上岸村林凡资料分析筑基11层", type:"🆕 新增", link:"https://pan.quark.cn/s/5142f7699c6c"},
-      {name:"王炎数量关系大满贯 — 02讲", type:"🔄 更新", link:"https://pan.quark.cn/s/d383bd9a6a6d"},
-      {name:"凯叔河南三支一扶考前冲刺5套卷", type:"🆕 新增", link:"https://pan.quark.cn/s/54d8c3bd4b84"}
+      {name:"王炎数量关系大满贯 — 02讲", type:"🔄 更新", link:"https://pan.quark.cn/s/d383bd9a6a6d"}
     ]}
   ];
+
   var html = "";
   for (var i = 0; i < days.length; i++) {
     var d = days[i];

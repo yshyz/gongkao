@@ -1,0 +1,4 @@
+panbox-lite/data/*
+!panbox-lite/data/.gitkeep
+panbox-lite/exports/*
+!panbox-lite/exports/.gitkeep
