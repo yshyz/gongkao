@@ -240,7 +240,7 @@ async function appendJobHistory(job) {
 function extractLinks(text) {
   const seen = new Set();
   const links = [];
-  const regex = /(https?:\/\/[^\s"'<>，。；；、]+)/g;
+  const regex = /(https?:\/\/[^\s"'<>，。；；、\]\)]+)/g;
   for (const match of text.matchAll(regex)) {
     const url = match[1].replace(/[)\]}]+$/, "");
     if (!seen.has(url)) {
@@ -263,29 +263,61 @@ function extractQuarkLinks(text) {
   return { links, ignored };
 }
 
+function splitSourceBlocks(text) {
+  const blocks = [];
+  let current = [];
+  for (const line of String(text || "").split(/\r?\n/)) {
+    if (/^\s*📮/.test(line) && current.some((item) => item.trim())) {
+      blocks.push(current.join("\n"));
+      current = [line];
+    } else {
+      current.push(line);
+    }
+  }
+  if (current.some((item) => item.trim())) blocks.push(current.join("\n"));
+  return blocks.length ? blocks : [String(text || "")];
+}
+
+function classifySourceBlock(block, fallback = "update") {
+  const text = String(block || "");
+  const markerLines = text.split(/\r?\n/).map((line) =>
+    line
+      .trim()
+      .replace(/^[^\u4e00-\u9fa5A-Za-z0-9]+/, "")
+      .trim(),
+  );
+  if (
+    /【\s*(新增|新加|增)\s*】|新增|新加|🆕/.test(text) ||
+    markerLines.some((line) => /^(新增|新加|增)(?:$|[\s:：,，;；【\[\(（])/.test(line))
+  ) {
+    return "new";
+  }
+  if (
+    /【\s*(更新|更)\s*】|更新|🔄/.test(text) ||
+    markerLines.some((line) => /^(更新|更)/.test(line))
+  ) {
+    return "update";
+  }
+  return fallback;
+}
+
 function extractQuarkEntries(text) {
   const entries = [];
   const ignored = [];
   const seen = new Set();
   let currentType = "update";
-  const tokenPattern = /(新增|新加|🆕|更新|🔄)|(https?:\/\/[^\s"'<>，。；；、]+)/g;
-  for (const match of String(text || "").matchAll(tokenPattern)) {
-    const marker = match[1];
-    const rawUrl = match[2];
-    if (marker) {
-      currentType = /新增|新加|🆕/.test(marker) ? "new" : "update";
-      continue;
+  for (const block of splitSourceBlocks(text)) {
+    currentType = classifySourceBlock(block, currentType);
+    for (const url of extractLinks(block)) {
+      if (seen.has(url)) continue;
+      seen.add(url);
+      const parsed = parseQuarkShare(url);
+      if (!parsed.pwdId) {
+        ignored.push(url);
+        continue;
+      }
+      entries.push({ url, kind: currentType });
     }
-    if (!rawUrl) continue;
-    const url = rawUrl.replace(/[)\]}]+$/, "");
-    if (seen.has(url)) continue;
-    seen.add(url);
-    const parsed = parseQuarkShare(url);
-    if (!parsed.pwdId) {
-      ignored.push(url);
-      continue;
-    }
-    entries.push({ url, kind: currentType });
   }
   return { entries, ignored, links: entries.map((entry) => entry.url) };
 }

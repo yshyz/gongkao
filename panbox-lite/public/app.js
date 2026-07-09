@@ -192,7 +192,7 @@ function renderJob(job) {
   rows.forEach((row) => {
     if (row.shareUrl && !state.resultTypes.has(row.shareUrl)) {
       const name = row.name || "";
-      state.resultTypes.set(row.shareUrl, row.kind || (/新增|新加|新课|🆕/i.test(name) ? "new" : "update"));
+      state.resultTypes.set(row.shareUrl, row.kind || (/(^|[\s:：,，;；【\[])(新增|新加|增|新课|🆕)(?=$|[\s:：,，;；】\]])/i.test(name) ? "new" : "update"));
     }
   });
   const tbody = $("resultRows");
@@ -535,7 +535,7 @@ function makeNoticeText() {
     parts.push(news.join("\n"));
     parts.push("");
   }
-  parts.push("  🌐 网站更新：新增「📅 更新日历」板块");
+  parts.push("  🌐 网站更新");
   parts.push("  🔗 https://yshyz.github.io/gongkao/");
   return parts.join("\n");
 }
