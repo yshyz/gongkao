@@ -135,3 +135,11 @@
 
 【粘贴 PanBox 生成的今日公告】
 ```
+## 默认 AI 工具约定
+- 本仓库已接入 `VoltAgent/awesome-design-md` 和 `obra/superpowers`：
+  - `tools/awesome-design-md`
+  - `tools/superpowers`
+- 根目录 `DESIGN.md` 是从 `tools/awesome-design-md/design-md/notion/DESIGN.md` 复制出的默认设计基线。
+- 后续新做页面、管理台、内容台、网盘工具界面时，默认先读取 `DESIGN.md`，按它控制视觉风格、信息密度、间距和组件气质。
+- 后续做开发任务时，默认参考 Superpowers 的规划、调试、验证、收尾方法。
+- 除非用户明确要求换风格或跳过流程，Codex 在本项目中应始终参考 `DESIGN.md` 和 Superpowers。
