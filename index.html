@@ -133,7 +133,7 @@ body { background:var(--bg); color:var(--text); font-family:-apple-system,"Micro
       <div class="section-title" style="cursor:pointer" onclick="var c=document.getElementById('calBody');var a=document.getElementById('calArrow');c.style.display=c.style.display==='none'?'block':'none';a.innerHTML=c.style.display==='none'?'&#9654;':'&#9660;'">
         &#128197; 更新日历
         <span style="font-size:11px;color:var(--muted);font-weight:400;">点击展开/收起</span>
-        <span style="font-size:11px;color:#d97706;margin-left:auto;">最近更新：2026-07-10</span>
+        <span id="calendarLastUpdate" style="font-size:11px;color:#d97706;margin-left:auto;">最近更新：--</span>
         <span id="calArrow" style="color:var(--muted);">&#9654;</span>
       </div>
       <div id="calBody" style="display:none"></div>
@@ -367,6 +367,21 @@ renderCourses('all');
 // ============ 填充更新日历 ============
 (function fillCalendar() {
   var days = [
+    {date:"2026-07-11", title:"7月11日", summary:"🆕 新增 0 门 + 🔄 更新 13 门", courses:[
+      {name:"2027年超格国省考行测+申论全家桶课程（实战桶） — 更更伯洁常识08-09） / 更周泰然&小胖丫申论10-11）", type:"🔄 更新", link:"https://pan.quark.cn/s/239e5be5fe47"},
+      {name:"【01】2027小P公考国省考数资判系统班 — 更资料刷题01-03&刷题册讲义", type:"🔄 更新", link:"https://pan.quark.cn/s/26a170c85ad3"},
+      {name:"雨菲言语·27言语带背800词 — 更新05讲", type:"🔄 更新", link:"https://pan.quark.cn/s/9f22e0c809d1"},
+      {name:"2027年王炎数量关系大满贯 — 更新08-09节", type:"🔄 更新", link:"https://pan.quark.cn/s/2f3d7abb1ff9"},
+      {name:"2027考季大懒猫言语刷刷刷直播课 — 更第14讲", type:"🔄 更新", link:"https://pan.quark.cn/s/078dead1bb57"},
+      {name:"2027年唐宋算经-九章算术一阶段·数量夯基 — 更新15-18讲", type:"🔄 更新", link:"https://pan.quark.cn/s/2c46f846a283"},
+      {name:"【政治理论】2027超哥国省考政治理论刷题课 — 更新29-求是刷题", type:"🔄 更新", link:"https://pan.quark.cn/s/3a13a856670d"},
+      {name:"【02】2027花生十三600题讲解 — 更数量关系600题39-40套）", type:"🔄 更新", link:"https://pan.quark.cn/s/d3e19b12931d"},
+      {name:"【01】27陈怀安行测圣经资料分析系统课 — 更0707&0709直播答疑", type:"🔄 更新", link:"https://pan.quark.cn/s/8cc29d93a071"},
+      {name:"2026广东三支一扶佛脚手册 — 更新视频", type:"🔄 更新", link:"https://pan.quark.cn/s/58ac7c1b9c8d"},
+      {name:"鹤峰常识判断磨耳朵 — 更新20-21讲", type:"🔄 更新", link:"https://pan.quark.cn/s/0841cbc2acb1"},
+      {name:"2027国考超格刘义恒以练代背 — 更14讲）", type:"🔄 更新", link:"https://pan.quark.cn/s/7995b707afa7"},
+      {name:"花生十三｜27年言语理解思维导图", type:"🔄 更新", link:"https://pan.quark.cn/s/1c634687edb2"}
+    ]},
         {date:"2026-07-10", title:"7月10日", summary:"🆕 新增 1 门 + 🔄 更新 15 门", courses:[
       {name:"2026广东三支一扶佛脚手册", type:"🆕 新增", link:"https://pan.quark.cn/s/d2a5cc0276e2"},
       {name:"【01】2027国省考季花生十三飞扬系统班 — 更言语04&作业&速通课&政治理论15 / 政治背诵清单&言语课件&申论素材", type:"🔄 更新", link:"https://pan.quark.cn/s/2de6ff8ef66f"},
@@ -461,6 +476,12 @@ renderCourses('all');
   }
   var calBody = document.getElementById("calBody");
   if (calBody) calBody.innerHTML = html;
+  var latest = days[0];
+  var latestText = latest ? latest.date : "--";
+  var lastUpdateEl = document.getElementById("calendarLastUpdate");
+  if (lastUpdateEl) lastUpdateEl.textContent = "最近更新：" + latestText;
+  var updateDateEl = document.getElementById("updateDate");
+  if (updateDateEl) updateDateEl.textContent = latestText;
 })();
 
 </script>
