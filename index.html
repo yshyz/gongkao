@@ -327,6 +327,8 @@ function filterCourses() {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelector('[data-cat="all"]').classList.add('active');
     renderCourses('all');
+    var oldSection = document.getElementById('updateSearchSection');
+    if (oldSection) oldSection.remove();
     return;
   }
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -350,7 +352,62 @@ function filterCourses() {
     if (visible === total) sec.style.display = 'none';
     else sec.style.display = '';
   });
+  count += renderUpdateSearchResults(kw);
   document.getElementById('totalCount').textContent = count;
+}
+
+function getUpdateSearchMatches(kw) {
+  var matches = [];
+  var days = window.UPDATE_DAYS || [];
+  for (var i = 0; i < days.length; i++) {
+    var day = days[i];
+    for (var j = 0; j < day.courses.length; j++) {
+      var course = day.courses[j];
+      var text = [course.name, course.type, day.title, day.date, day.summary].join(' ').toLowerCase();
+      if (text.indexOf(kw) >= 0) {
+        matches.push({
+          date: day.date,
+          title: day.title,
+          name: course.name,
+          type: course.type,
+          link: course.link
+        });
+      }
+    }
+  }
+  return matches;
+}
+
+function renderUpdateSearchResults(kw) {
+  var container = document.getElementById('courseContainer');
+  var oldSection = document.getElementById('updateSearchSection');
+  if (oldSection) oldSection.remove();
+  if (!kw) return 0;
+  var matches = getUpdateSearchMatches(kw);
+  if (!matches.length) return 0;
+
+  var section = document.createElement('div');
+  section.className = 'section';
+  section.id = 'updateSearchSection';
+  var html = '<div class="section-title">📅 每日更新命中';
+  html += '<span style="font-size:12px;color:var(--muted);font-weight:400;">（' + matches.length + '个）</span>';
+  html += '</div>';
+
+  for (var i = 0; i < matches.length; i++) {
+    var item = matches[i];
+    html += '<div class="course">';
+    html += '<span class="course-num">' + String(i + 1).padStart(2, '0') + '</span>';
+    html += '<span class="course-name">' + item.name + '</span>';
+    html += '<span class="course-tag tag-update">' + item.title + '</span>';
+    if (item.type) html += '<span class="course-tag tag-update">' + item.type + '</span>';
+    html += '<span class="course-links">';
+    if (item.link) html += '<a class="link-btn link-quark" href="' + item.link + '" target="_blank">点击转存</a>';
+    html += '</span></div>';
+  }
+
+  section.innerHTML = html;
+  container.prepend(section);
+  return matches.length;
 }
 
 function trackClick(cat, type) {
@@ -372,7 +429,20 @@ renderCourses('all');
 
 // ============ 填充更新日历 ============
 (function fillCalendar() {
-  var days = [
+  window.UPDATE_DAYS = [
+    {date:"2026-07-15", title:"7月15日更新", summary:"🆕 新增 0 门 + 🔄 更新 11 门", courses:[
+      {name:"01】2027国省考季花生十三飞扬系统班 — 更言语6＆政治理论19", type:"🔄 更新", link:"https://pan.quark.cn/s/5848e455acea"},
+      {name:"2027超格行测+申论夸夸刷 — 更冰哥＆李崇立申论01讲&班会 / 更刘义恒图推01讲 / 更判断推理01", type:"🔄 更新", link:"https://pan.quark.cn/s/1cdfc99c7691"},
+      {name:"2027行测申论360全程班 — 更新刘文超-数量06讲", type:"🔄 更新", link:"https://pan.quark.cn/s/297077e64a70"},
+      {name:"2027年王炎数量关系大满贯 — 更新15节", type:"🔄 更新", link:"https://pan.quark.cn/s/eb5b9d9a7771"},
+      {name:"雨菲言语·27言语带背800词 — 更新08讲", type:"🔄 更新", link:"https://pan.quark.cn/s/e80678fd02ac"},
+      {name:"001】2027国省事考小黑政治理论常识全家桶 — 更常识笔记15-21&思维导图", type:"🔄 更新", link:"https://pan.quark.cn/s/74f5c123dcd2"},
+      {name:"2027上岸村王永恒 — 更新05讲", type:"🔄 更新", link:"https://pan.quark.cn/s/1f0a24fe39c8"},
+      {name:"01】27陈怀安行测圣经 — 更7.14直播答疑", type:"🔄 更新", link:"https://pan.quark.cn/s/4b438e1e08d1"},
+      {name:"刘义恒、图推夸夸刷笔记", type:"🔄 更新", link:"https://pan.quark.cn/s/ba99b6bccced"},
+      {name:"03】2027江苏省考系统班 — 更新第二阶段", type:"🔄 更新", link:"https://pan.quark.cn/s/8cf1eb786970"},
+      {name:"2027年超格国省考行测+申论全家桶课程（实战桶） — 更伯洁常识10-11 / 更热忱判断14-16 / 更周泰然&小胖丫申论13", type:"🔄 更新", link:"https://pan.quark.cn/s/3b18ae5d00ea"}
+    ]},
     {date:"2026-07-14", title:"7月14日", summary:"🆕 新增 0 门 + 🔄 更新 9 门", courses:[
       {name:"【01】2027国省考季花生十三飞扬系统班 — 更言语理解作业05&速通课05&政治18）", type:"🔄 更新", link:"https://pan.quark.cn/s/c549a2e94096"},
       {name:"2027超哥政治理论时政热点小锦囊 — 更庆祝建D105周年大会&国家科学技术奖励大会", type:"🔄 更新", link:"https://pan.quark.cn/s/b1674678a778"},
@@ -491,6 +561,7 @@ renderCourses('all');
       {name:"王炎数量关系大满贯 — 02讲", type:"🔄 更新", link:"https://pan.quark.cn/s/d383bd9a6a6d"}
     ]}
   ];
+  var days = window.UPDATE_DAYS;
 
   var html = "";
   for (var i = 0; i < days.length; i++) {
