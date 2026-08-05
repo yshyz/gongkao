@@ -3,80 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>公考补给站 - 2027新课与2026合集</title>
+<title>公考补给站 - 网盘目录导航</title>
 <style>
 :root {
-  --bg: #f5f6fa;
-  --card: #fff;
-  --text: #1a1a2e;
-  --muted: #6b7280;
-  --accent: #e74c3c;
-  --blue: #2980b9;
-  --green: #27ae60;
-  --border: #e5e7eb;
+  --bg: #f5f6fa; --card: #fff; --text: #1a1a2e; --muted: #6b7280;
+  --accent: #e74c3c; --blue: #2980b9; --green: #27ae60; --border: #e5e7eb;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body { background:var(--bg); color:var(--text); font-family:-apple-system,"Microsoft YaHei",sans-serif; line-height:1.6; }
 .container { max-width:900px; margin:0 auto; padding:16px; }
 
-/* Header */
 .header { background:linear-gradient(135deg,#1a1a2e,#16213e); color:#fff; text-align:center; padding:32px 20px; border-radius:16px; margin-bottom:16px; }
 .header h1 { font-size:30px; margin-bottom:6px; letter-spacing:2px; }
 .header .sub { font-size:13px; opacity:0.7; }
-.header .badge { display:inline-block; background:var(--accent); padding:4px 14px; border-radius:20px; font-size:12px; font-weight:700; margin-top:8px; animation:pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+.header .badge { display:inline-block; background:var(--accent); padding:4px 14px; border-radius:20px; font-size:12px; font-weight:700; margin-top:8px; }
+.header .badge.green { background:var(--green); margin-left:8px; }
 
-/* Search + Stats */
 .top-bar { display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap; }
 .search-box { flex:1; min-width:200px; padding:10px 14px; border:2px solid var(--border); border-radius:10px; font-size:14px; outline:none; transition:.2s; background:var(--card); }
 .search-box:focus { border-color:var(--accent); }
 .stat { display:flex; align-items:center; gap:4px; padding:8px 14px; background:var(--card); border-radius:10px; font-size:12px; color:var(--muted); border:1px solid var(--border); }
 .stat b { color:var(--accent); }
-.maintenance-notice { background:linear-gradient(135deg,#fff7ed,#fee2e2); border:1px solid #fed7aa; border-left:5px solid var(--accent); border-radius:12px; padding:14px 16px; margin-bottom:14px; color:#7c2d12; }
-.maintenance-notice strong { display:block; font-size:15px; margin-bottom:3px; color:#c2410c; }
-.maintenance-notice span { font-size:13px; color:#9a3412; }
 
-/* Tabs */
 .tabs { display:flex; gap:6px; margin-bottom:14px; overflow-x:auto; padding-bottom:4px; }
 .tab { padding:8px 14px; border-radius:20px; font-size:13px; font-weight:600; white-space:nowrap; cursor:pointer; border:1px solid var(--border); background:var(--card); color:var(--muted); transition:.2s; }
 .tab.active { background:var(--accent); color:#fff; border-color:var(--accent); }
 .tab:hover:not(.active) { border-color:#9ca3af; }
 
-/* Section */
 .section { background:var(--card); border-radius:12px; padding:18px; margin-bottom:12px; border:1px solid var(--border); }
-.section-title { font-size:16px; font-weight:700; margin-bottom:4px; display:flex; align-items:center; gap:6px; }
-.section-sub { font-size:12px; color:var(--muted); margin-bottom:12px; }
+.section-title { font-size:16px; font-weight:700; margin-bottom:8px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.section-title .sec-name { font-size:15px; font-weight:700; }
+.section-title .folder-link { font-size:12px; font-weight:400; }
 
-/* Course Item */
-.course { display:flex; align-items:center; padding:10px 12px; border-bottom:1px solid #f3f4f6; gap:10px; transition:.2s; border-radius:6px; flex-wrap:wrap; }
+/* 折叠容器：根目录用 details，分区用 details */
+details.root-details, details.sec-details { border:none; }
+details.root-details > summary, details.sec-details > summary { list-style:none; cursor:pointer; user-select:none; }
+details.root-details > summary::-webkit-details-marker, details.sec-details > summary::-webkit-details-marker { display:none; }
+details.root-details > summary::before, details.sec-details > summary::before { content:"▶"; display:inline-block; margin-right:6px; font-size:11px; color:var(--muted); transition:transform .2s; }
+details[open].root-details > summary::before, details[open].sec-details > summary::before { transform:rotate(90deg); }
+details.sec-details > summary { padding:6px 8px; border-radius:8px; }
+details.sec-details > summary:hover { background:#f9fafb; }
+.sec-body { margin-top:2px; }
+
+.course { display:flex; align-items:center; padding:10px 12px; border-bottom:1px solid #f3f4f6; gap:10px; transition:.2s; border-radius:6px; flex-wrap:wrap; margin-left:0; }
 .course:hover { background:#f9fafb; }
 .course:last-child { border-bottom:none; }
-.course-num { font-size:11px; color:var(--muted); min-width:36px; }
 .course-name { flex:1; min-width:180px; font-size:14px; font-weight:500; }
-.course-tag { font-size:10px; padding:2px 8px; border-radius:10px; font-weight:600; white-space:nowrap; }
-.tag-new { background:#fee2e2; color:#dc2626; }
-.tag-hot { background:#fef3c7; color:#d97706; }
-.tag-free { background:#d1fae5; color:#059669; }
-.tag-update { background:#dbeafe; color:#2563eb; }
-
 .course-links { display:flex; gap:6px; flex-wrap:wrap; }
 .link-btn { display:inline-block; padding:4px 12px; border-radius:6px; font-size:12px; font-weight:600; text-decoration:none; transition:.2s; white-space:nowrap; }
 .link-quark { background:#fff7ed; color:#ea580c; border:1px solid #fed7aa; }
 .link-quark:hover { background:#fed7aa; }
+.link-folder { background:#eef2ff; color:#4f46e5; border:1px solid #c7d2fe; }
+.link-folder:hover { background:#e0e7ff; }
+.link-pending { background:#f3f4f6; color:#9ca3af; border:1px dashed #d1d5db; }
 
-/* Footer */
+.folder-root { margin-bottom:8px; font-size:14px; font-weight:700; color:var(--text); display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.folder-root summary { list-style:none; cursor:pointer; user-select:none; }
+.folder-root summary::-webkit-details-marker { display:none; }
+.folder-root summary::before { content:"▶"; display:inline-block; margin-right:6px; font-size:11px; color:var(--muted); transition:transform .2s; }
+details[open] .folder-root summary::before { transform:rotate(90deg); }
+.root-body { margin-top:6px; padding-left:4px; border-left:2px solid #f3f4f6; }
+
+.empty-msg { text-align:center; color:var(--muted); padding:30px; font-size:14px; }
+.hidden { display:none; }
+
 .footer { text-align:center; padding:20px; margin-top:8px; }
 .footer .cta { display:inline-block; background:var(--accent); color:#fff; padding:10px 28px; border-radius:24px; font-weight:700; text-decoration:none; margin:8px; font-size:14px; }
 .footer .tip { color:var(--muted); font-size:12px; margin-top:10px; }
 
-/* Collapse */
-.collapse-btn { cursor:pointer; color:var(--blue); font-size:12px; float:right; }
-.collapse-btn:hover { text-decoration:underline; }
-
-.hidden { display:none; }
-.empty-msg { text-align:center; color:var(--muted); padding:30px; font-size:14px; }
-
-/* 侧边联系栏 */
 .side-contact { position:fixed; right:16px; top:50%; transform:translateY(-50%); z-index:999; width:160px; background:var(--card); border-radius:16px; box-shadow:0 8px 30px rgba(0,0,0,0.15); padding:18px 14px; text-align:center; border:2px solid #fee2e2; }
 .side-contact .sc-title { font-size:13px; font-weight:700; color:#dc2626; margin-bottom:6px; }
 .side-contact .sc-desc { font-size:11px; color:var(--muted); margin-bottom:12px; line-height:1.5; }
@@ -92,19 +86,6 @@ body { background:var(--bg); color:var(--text); font-family:-apple-system,"Micro
 .mobile-contact .sc-btn { background:linear-gradient(135deg,#e74c3c,#f97316); color:#fff; padding:8px 18px; border-radius:20px; font-size:13px; font-weight:700; text-decoration:none; border:none; cursor:pointer; }
 .mobile-contact span { font-size:12px; color:#dc2626; font-weight:600; }
 
-
-/* 更新日历 */
-.day { border:1px solid var(--border); border-radius:10px; margin-bottom:8px; overflow:hidden; }
-.day-header { padding:12px 16px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; background:var(--card); }
-.day-header:hover { background:#f9fafb; }
-.day-header .day-title { font-size:14px; font-weight:600; }
-.day-header .day-summary { font-size:12px; color:var(--muted); }
-.day-header .arrow { color:var(--muted); font-size:12px; transition:transform .2s; }
-.day.open .arrow { transform:rotate(90deg); }
-.day.latest .day-header { border-left:3px solid var(--accent); background:#fff5f5; }
-.day-body { display:none; padding:0 16px 12px; }
-.day.open .day-body { display:block; }
-
 @media (max-width:500px) {
   .course { flex-direction:column; align-items:flex-start; gap:6px; }
   .course-links { justify-content:flex-start; }
@@ -117,36 +98,17 @@ body { background:var(--bg); color:var(--text); font-family:-apple-system,"Micro
 
 <div class="header">
   <h1>📚 公考补给站</h1>
-  <p class="sub">2027新课优先更新 · 2026历史合集保留</p>
-  <span class="badge">🔄 已整理 60 个最新入口</span>
-  <span class="badge" style="background:#27ae60;margin-left:8px;">🐧 加群获取更新</span>
+  <p class="sub">网盘目录导航 · 全部资料分享链接</p>
+  <span class="badge">📦 已收录 611 个资料入口</span>
+  <span class="badge green">🐧 加群获取更新</span>
 </div>
-
-<div class="maintenance-notice">
-  <strong>📚 资料每日更新中</strong>
-  <span>2027新课 + 2026合集 + 总合集 已全面更新。</span>
-</div>
-
-
-<!-- 更新日历 -->
-    <div class="section" id="updateCalendar" style="background:linear-gradient(135deg,#fffbeb,#fff7ed);border:2px solid #fde68a;">
-      <div class="section-title" style="cursor:pointer" onclick="var c=document.getElementById('calBody');var a=document.getElementById('calArrow');c.style.display=c.style.display==='none'?'block':'none';a.innerHTML=c.style.display==='none'?'&#9654;':'&#9660;'">
-        &#128197; 更新日历
-        <span style="font-size:11px;color:var(--muted);font-weight:400;">点击展开/收起</span>
-        <span id="calendarLastUpdate" style="font-size:11px;color:#d97706;margin-left:auto;">最近更新：--</span>
-        <span id="calArrow" style="color:var(--muted);">&#9654;</span>
-      </div>
-      <div id="calBody" style="display:none"></div>
-    </div>
 
 <div class="top-bar">
-  <input class="search-box" id="search" placeholder="🔍 搜索课程名称、老师、机构...（如：花生十三、李铁、FB、CG）" oninput="filterCourses()">
-  <span class="stat">共 <b id="totalCount">0</b> 个课程 | 更新于 <span id="updateDate">--</span></span>
+  <input class="search-box" id="search" placeholder="🔍 搜索文件夹或课程名...（如：粉笔、花生十三、事业单位、时政）" oninput="filterCourses()">
+  <span class="stat">共 <b id="totalCount">0</b> 个资料入口</span>
 </div>
 
-<div class="tabs" id="tabBar">
-  <button class="tab active" data-cat="all">全部</button>
-</div>
+<div class="tabs" id="tabBar"></div>
 
 <div id="content"></div>
 
@@ -170,158 +132,2922 @@ body { background:var(--bg); color:var(--text); font-family:-apple-system,"Micro
 </div>
 
 <script>
-// ============ 数据区：在这里编辑你的链接 ============
-// 格式：{cat, name, quark} — 夸克链接替换成你自己的推广链接
-
-const COURSES = [
-  {cat:"2027新课",year:2027,name:"2027上岸村天琦申论大作文技巧课",quark:"https://pan.quark.cn/s/b6f07ced5d59",tag:"new"},
-  {cat:"2027新课",year:2027,name:"2027年FB行测高阶难题精刷540题",quark:"https://pan.quark.cn/s/c9df98240f2c",tag:"new"},
-  {cat:"2027新课",year:2027,name:"2027年政治理论素养课-跟着杨攀老师学《求是》",quark:"https://pan.quark.cn/s/0aae3c42dee1",tag:"new"},
-  {cat:"2027新课",year:2027,name:"花生十三｜27年言语1000词笔记",quark:"https://pan.quark.cn/s/13d1e87d3ae1",tag:"new"},
-  {cat:"2027新课",year:2027,name:"2027伯洁的常识判断",quark:"https://pan.quark.cn/s/96f8b9066950",tag:"new"},
-  {cat:"2027新课",year:2027,name:"2027年FB千词计划：1000词精讲训练营",quark:"https://pan.quark.cn/s/0929d7efaeb6",tag:"new"},
-  {cat:"2027新课",year:2027,name:"2027刘义恒图推大拖把",quark:"https://pan.quark.cn/s/1a795ec4532d",tag:"new"},
-  {cat:"2027新课",year:2027,name:"2027年事考超格综A夸夸刷刷题营",quark:"https://pan.quark.cn/s/b58deb38a0fa",tag:"new"},
-  {cat:"2027新课",year:2027,name:"2027上岸村行测专项提升讲义",quark:"https://pan.quark.cn/s/a6df7302fff4",tag:"new"},
-  {cat:"2027新课",year:2027,name:"2027年国省考上岸村天琦申论26真题带练",quark:"https://pan.quark.cn/s/4a789bd32d0e",tag:"new"},
-  {cat:"2027新课",year:2027,name:"2027超格国考行测+申论实战桶阶段二酷酷",quark:"https://pan.quark.cn/s/b100b31501f6",tag:"new"},
-  {cat:"2027新课",year:2027,name:"2027年军队文职",quark:"https://pan.quark.cn/s/cf97535860ef",tag:"new"},
-  {cat:"2026合集",year:2026,name:"花生十三｜高频成语1000词记忆版",quark:"https://pan.quark.cn/s/47c0f04e8e0c",tag:"new"},
-  {cat:"2027新课",year:2027,name:"2027年刘义恒图推夸夸刷复盘笔记更03讲",quark:"https://pan.quark.cn/s/4774633eb768",tag:"new"},
-  {cat:"2026合集",year:2026,name:"2026年人民日报时评精析（彩色版）",quark:"https://pan.quark.cn/s/83ac670648a1",tag:"new"},
-  {cat:"2027新课",year:2027,name:"2027柴玉玲综应B类系统理论课",quark:"https://pan.quark.cn/s/b9dea1c49f39",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【05】2027年桐哥讲公专全程班",quark:"https://pan.quark.cn/s/398ba0ae9e0c",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【06】2027年张薇公专理论课【上岸村】",quark:"https://pan.quark.cn/s/f53a8dd38d1a",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【01】2027粉笔1280",quark:"https://pan.quark.cn/s/9b8b591c33d5",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【04】2027小黑",quark:"https://pan.quark.cn/s/6d32d76959d8",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【03】2027超格（高照）",quark:"https://pan.quark.cn/s/43b5a2b6bcfc",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【08】2027大懒猫",quark:"https://pan.quark.cn/s/99e24a4264cc",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【06】2027袁东",quark:"https://pan.quark.cn/s/e712d1de2e55",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【05】2027上岸村",quark:"https://pan.quark.cn/s/5cc1f5d61c18",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【16】2027天琦",quark:"https://pan.quark.cn/s/c83e7371afcf",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【10】2027超哥政治理论",quark:"https://pan.quark.cn/s/37e623fc6188",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【14】2027陈怀安",quark:"https://pan.quark.cn/s/009c7023c610",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【99】2027公安招聘",quark:"https://pan.quark.cn/s/d51c12c3355b",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【25】2027Kiwi申论",quark:"https://pan.quark.cn/s/5aeec041953e",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【24】2027海绵公考",quark:"https://pan.quark.cn/s/dd0e50748335",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【23】2027朱曦",quark:"https://pan.quark.cn/s/b13408cc6e75",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【22】2027星光公考",quark:"https://pan.quark.cn/s/eafd6af7da1b",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【21】2027李焕",quark:"https://pan.quark.cn/s/934969126be8",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【20】2027薛睿",quark:"https://pan.quark.cn/s/ba1a25d6802b",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【19】2027王炎",quark:"https://pan.quark.cn/s/178faa69d57a",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【18】2027齐麟",quark:"https://pan.quark.cn/s/7d0273b16329",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【17】2027王永恒",quark:"https://pan.quark.cn/s/57bd64830fc4",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【15】2027半月谈",quark:"https://pan.quark.cn/s/ba3e23e8d8de",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【13】2027牟立志",quark:"https://pan.quark.cn/s/ee604c4cc789",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【12】2027相丽君",quark:"https://pan.quark.cn/s/14e4171963e1",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【11】2027雨菲",quark:"https://pan.quark.cn/s/9ad60a31bdfa",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【09】2027小P公考",quark:"https://pan.quark.cn/s/a344b3105bb8",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【07】2027郭熙",quark:"https://pan.quark.cn/s/cfedda224020",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【02】2027四海（花生十三）",quark:"https://pan.quark.cn/s/eaeb31a71dd7",tag:"new"},
-  {cat:"2027新课",year:2027,name:"【00】2027公基系统班",quark:"https://pan.quark.cn/s/869eac9bea51",tag:"new"},
-  {cat:"2026合集",year:2026,name:"花生十三",quark:"https://pan.quark.cn/s/21d73dad72bd",tag:"update"},
-  {cat:"2026合集",year:2026,name:"郭熙合集",quark:"https://pan.quark.cn/s/88f1e3810190",tag:"update"},
-  {cat:"2026合集",year:2026,name:"大宝小宝",quark:"https://pan.quark.cn/s/0a59f44119b6",tag:"update"},
-  {cat:"2026合集",year:2026,name:"超格【高照】",quark:"https://pan.quark.cn/s/43b5a2b6bcfc",tag:"update"},
-  {cat:"2026合集",year:2026,name:"白鹭",quark:"https://pan.quark.cn/s/54aed1117a5f",tag:"update"},
-  {cat:"2026合集",year:2026,name:"2026张弓言语合集",quark:"https://pan.quark.cn/s/1e4fdf73c71f",tag:"update"},
-  {cat:"2026合集",year:2026,name:"2026年事业单位课程",quark:"https://pan.quark.cn/s/4c645160acc8",tag:"update"},
-  {cat:"2026合集",year:2026,name:"2026公考名师",quark:"https://pan.quark.cn/s/8e0f1ae8934e",tag:"update"},
-  {cat:"2026合集",year:2026,name:"2026国考资料(附带岗位表）",quark:"https://pan.quark.cn/s/152c800fbd84",tag:"update"},
-  {cat:"2026合集",year:2026,name:"【名师资料分析速算技巧】",quark:"https://pan.quark.cn/s/a344fcc19fc2",tag:"update"},
-  {cat:"2026合集",year:2026,name:"真题",quark:"https://pan.quark.cn/s/eb37832733b4",tag:"update"},
-  {cat:"2026合集",year:2026,name:"雨菲（上岸村）",quark:"https://pan.quark.cn/s/0d8e6a7f15ff",tag:"update"},
-  {cat:"2026合集",year:2026,name:"袁东",quark:"https://pan.quark.cn/s/9529bc0d9858",tag:"update"},
-  {cat:"2026合集",year:2026,name:"小p公考",quark:"https://pan.quark.cn/s/a04c4fc2b794",tag:"update"},
-  {cat:"2026合集",year:2026,name:"相丽君",quark:"https://pan.quark.cn/s/e9d613f75215",tag:"update"},
-  {cat:"2026合集",year:2026,name:"小黑政治理论",quark:"https://pan.quark.cn/s/0365afa8d294",tag:"update"},
-  {cat:"2026合集",year:2026,name:"天晓合集",quark:"https://pan.quark.cn/s/9bc06d28a880",tag:"update"},
-  {cat:"2026合集",year:2026,name:"聂佳",quark:"https://pan.quark.cn/s/6d4c23e68b2f",tag:"update"},
-  {cat:"2026合集",year:2026,name:"面试课程",quark:"https://pan.quark.cn/s/99766311d9e0",tag:"update"},
-  {cat:"2026合集",year:2026,name:"刘义恒",quark:"https://pan.quark.cn/s/983e76fff286",tag:"update"},
-  {cat:"2026合集",year:2026,name:"李梦娇合集",quark:"https://pan.quark.cn/s/b4951aaa1e24",tag:"update"},
-  {cat:"2026合集",year:2026,name:"龙飞图推",quark:"https://pan.quark.cn/s/cc45da465d6b",tag:"update"},
-  {cat:"2026合集",year:2026,name:"粉笔980",quark:"https://pan.quark.cn/s/942683d93c01",tag:"update"},
-  {cat:"2026合集",year:2026,name:"【32】各省份三支一扶资料",quark:"https://pan.quark.cn/s/8ac05888e52f",tag:"update"},
-  {cat:"2026合集",year:2026,name:"2026年事业单位课程",quark:"https://pan.quark.cn/s/4c645160acc8",tag:"update"},
-  {cat:"2026合集",year:2026,name:"2025年三支一扶",quark:"https://pan.quark.cn/s/712f7618614b",tag:"update"},
-  {cat:"总合集",year:2027,name:"📚 公考补给站总合集",quark:"https://pan.quark.cn/s/b4806c6eca79",tag:"new"}
+const COURSE_TREE = [
+ {
+  "root": "2027公考",
+  "rootLink": "https://pan.quark.cn/s/16966d187a07",
+  "sections": [
+   {
+    "name": "【00】2026年人民日报晨读系列",
+    "link": "https://pan.quark.cn/s/3bf0edb7fd19",
+    "items": [
+     {
+      "name": "【00】2026年人民日报时评精析",
+      "link": "https://pan.quark.cn/s/541ebf6ecdb8"
+     },
+     {
+      "name": "【01】2026年人民日报每日晨读（逐字稿+押题范文）",
+      "link": "https://pan.quark.cn/s/db4e19d8811b"
+     },
+     {
+      "name": "【02】2026年人民日报每日晨读（笔记+思维导图版）",
+      "link": "https://pan.quark.cn/s/e3d8c2aa8240"
+     }
+    ]
+   },
+   {
+    "name": "【01】2027粉笔1280",
+    "link": "https://pan.quark.cn/s/70343da75f12",
+    "items": [
+     {
+      "name": "【00】2027国考笔试系统班",
+      "link": "https://pan.quark.cn/s/0ce654194132"
+     },
+     {
+      "name": "【01】2027多省联考系统班",
+      "link": "https://pan.quark.cn/s/eb6aa0fc33bd"
+     },
+     {
+      "name": "【02】2027山东省考系统班",
+      "link": "https://pan.quark.cn/s/b457f8ba3562"
+     },
+     {
+      "name": "【03】2027江苏省考系统班",
+      "link": "https://pan.quark.cn/s/7edd96be366b"
+     },
+     {
+      "name": "【04】2027广东省考系统班",
+      "link": "https://pan.quark.cn/s/7216e9adac5e"
+     },
+     {
+      "name": "【05】2027行测5000题",
+      "link": "https://pan.quark.cn/s/a35cdfbc38fd"
+     },
+     {
+      "name": "【06】2027年粉刷刷合集",
+      "link": "https://pan.quark.cn/s/47153eae3ba4"
+     },
+     {
+      "name": "【07】2027年【超值7+1】理论刷题课",
+      "link": "https://pan.quark.cn/s/8383427bf4b0"
+     },
+     {
+      "name": "【08】2027考季行测2800题",
+      "link": "https://pan.quark.cn/s/ea2936c0be33"
+     },
+     {
+      "name": "【09】2026年每月时政【FB】",
+      "link": "https://pan.quark.cn/s/0d408e0bc50e"
+     },
+     {
+      "name": "【10】2027国考&省考行测模考大赛",
+      "link": "https://pan.quark.cn/s/b6a792930491"
+     },
+     {
+      "name": "【11】2027年FB千词计划：1000词精讲训练营",
+      "link": "https://pan.quark.cn/s/e818f89e3862"
+     },
+     {
+      "name": "【12】2027年FB行测高阶难题精刷（540题）",
+      "link": "https://pan.quark.cn/s/6f3dbf6d0988"
+     }
+    ]
+   },
+   {
+    "name": "【02】2027四海（花生十三）",
+    "link": "https://pan.quark.cn/s/0a253f189e55",
+    "items": [
+     {
+      "name": "【01】2027国省考季花生十三飞扬系统班",
+      "link": "https://pan.quark.cn/s/8a29467d2f0a"
+     },
+     {
+      "name": "【02】2027花生十三600题讲解",
+      "link": "https://pan.quark.cn/s/9e45f3e1c9fd"
+     },
+     {
+      "name": "【03】四海冯泽全年时政课",
+      "link": "https://pan.quark.cn/s/b9a1f3ddd809"
+     },
+     {
+      "name": "【04】四海拾伊",
+      "link": "https://pan.quark.cn/s/08382a777d84"
+     },
+     {
+      "name": "【2026】花生十三2026合集",
+      "link": "https://pan.quark.cn/s/ff05dd0e91a3"
+     }
+    ]
+   },
+   {
+    "name": "【03】2027超格（高照）",
+    "link": "https://pan.quark.cn/s/cf36b14d277e",
+    "items": [
+     {
+      "name": "2027超格行测+申论酷酷刷",
+      "link": "https://pan.quark.cn/s/118e69ddddbd"
+     },
+     {
+      "name": "2027超格行测+申论夸夸刷",
+      "link": "https://pan.quark.cn/s/8169232dd8a3"
+     },
+     {
+      "name": "2027超格综应A类（实战桶）",
+      "link": "https://pan.quark.cn/s/d7b23c6c5f7a"
+     },
+     {
+      "name": "2027年超格国省考行测+申论全家桶课程（实战桶）",
+      "link": "https://pan.quark.cn/s/5d4da2b00787"
+     },
+     {
+      "name": "2027年超格事业单位综应A类（精讲桶）",
+      "link": "https://pan.quark.cn/s/91123b5671b1"
+     },
+     {
+      "name": "2027年国省考CG行测+申论全家桶（精讲桶）",
+      "link": "https://pan.quark.cn/s/1aeb6da61cdc"
+     }
+    ]
+   },
+   {
+    "name": "【04】2027小黑",
+    "link": "https://pan.quark.cn/s/556946c1c260",
+    "items": [
+     {
+      "name": "【000】2026事业编三支·小黑公基考前冲刺班",
+      "link": "https://pan.quark.cn/s/3a173d9a9966"
+     },
+     {
+      "name": "【001】2027国省事考小黑政治理论常识全家桶",
+      "link": "https://pan.quark.cn/s/02c023c3d6db"
+     },
+     {
+      "name": "【002】2026小黑全年时政",
+      "link": "https://pan.quark.cn/s/898e4d23bc92"
+     }
+    ]
+   },
+   {
+    "name": "【05】2027上岸村",
+    "link": "https://pan.quark.cn/s/fb17373e120d",
+    "items": [
+     {
+      "name": "2027年国省考上岸村天琦申论26真题带练课",
+      "link": "https://pan.quark.cn/s/d967cadfbc03"
+     },
+     {
+      "name": "2027上岸村全家桶理论讲义",
+      "link": "https://pan.quark.cn/s/578d890d26a9"
+     },
+     {
+      "name": "2027上岸村专项提升【二阶段】",
+      "link": "https://pan.quark.cn/s/5537e553a35b"
+     },
+     {
+      "name": "判断推理-章何",
+      "link": "https://pan.quark.cn/s/c00110fe1c68"
+     },
+     {
+      "name": "申论-忠政",
+      "link": "https://pan.quark.cn/s/f19b6d5c2436"
+     },
+     {
+      "name": "数量-林凡",
+      "link": "https://pan.quark.cn/s/b5d48193bc1a"
+     },
+     {
+      "name": "言语-张弓",
+      "link": "https://pan.quark.cn/s/64b77eb63b9e"
+     },
+     {
+      "name": "资料分析-唐宋",
+      "link": "https://pan.quark.cn/s/c8de17fb88c4"
+     }
+    ]
+   },
+   {
+    "name": "【06】2027袁东",
+    "link": "https://pan.quark.cn/s/61f8fff152c9",
+    "items": [
+     {
+      "name": "【01】2027年国省考季袁东申论方法实战班",
+      "link": "https://pan.quark.cn/s/8b5332c6cb13"
+     },
+     {
+      "name": "【02】2027袁东大作文专项班",
+      "link": "https://pan.quark.cn/s/4938ab8b7852"
+     }
+    ]
+   },
+   {
+    "name": "【07】2027郭熙",
+    "link": "https://pan.quark.cn/s/4e7c540115c5",
+    "items": [
+     {
+      "name": "2027郭熙言语高分“十二技”",
+      "link": "https://pan.quark.cn/s/8e9d5cc3b8c9"
+     }
+    ]
+   },
+   {
+    "name": "【08】2027大懒猫",
+    "link": "https://pan.quark.cn/s/8fef9350f283",
+    "items": [
+     {
+      "name": "【01】2027大懒猫言语刷刷刷直播课",
+      "link": "https://pan.quark.cn/s/096f1939f99e"
+     },
+     {
+      "name": "【02】2027国省考大懒猫言语理论课",
+      "link": "https://pan.quark.cn/s/d0643ecd195f"
+     },
+     {
+      "name": "【03】2027国考大懒猫言语刷题课一期",
+      "link": "https://pan.quark.cn/s/25cf95bbbf83"
+     }
+    ]
+   },
+   {
+    "name": "【09】2027小P公考",
+    "link": "https://pan.quark.cn/s/9257af30bd43",
+    "items": [
+     {
+      "name": "【01】2027小P公考国省考数资判系统班",
+      "link": "https://pan.quark.cn/s/b7b07908be72"
+     }
+    ]
+   },
+   {
+    "name": "【10】2027超哥政治理论",
+    "link": "https://pan.quark.cn/s/7e73785445cb",
+    "items": [
+     {
+      "name": "【时政】2026超格时政讲练班",
+      "link": "https://pan.quark.cn/s/557a51130160"
+     },
+     {
+      "name": "【时政】2027超哥事业编三支考前时政最后50题",
+      "link": "https://pan.quark.cn/s/decc98835648"
+     },
+     {
+      "name": "【政治理论】2027超哥国省考政治理论刷题课",
+      "link": "https://pan.quark.cn/s/dadfaad4ef09"
+     },
+     {
+      "name": "2027超哥政治理论时政热点小锦囊",
+      "link": "https://pan.quark.cn/s/7c670c435cab"
+     }
+    ]
+   },
+   {
+    "name": "【11】2027雨菲",
+    "link": "https://pan.quark.cn/s/8f5e7089f3ca",
+    "items": [
+     {
+      "name": "2027雨菲言语选词填空大满贯",
+      "link": "https://pan.quark.cn/s/ea75ee5921e6"
+     },
+     {
+      "name": "雨菲言语·27言语带背800词",
+      "link": "https://pan.quark.cn/s/b4b7d58f773f"
+     }
+    ]
+   },
+   {
+    "name": "【12】2027相丽君",
+    "link": "https://pan.quark.cn/s/3c8f6a6c51b4",
+    "items": [
+     {
+      "name": "【01】2027年国省考相丽君申论解题思维趣学营",
+      "link": "https://pan.quark.cn/s/e45927585b5e"
+     }
+    ]
+   },
+   {
+    "name": "【13】2027牟立志",
+    "link": "https://pan.quark.cn/s/f69fd9ca16fc",
+    "items": [
+     {
+      "name": "【03】2027牟立志公益课-数资夜生活",
+      "link": "https://pan.quark.cn/s/3bd3356b8e07"
+     }
+    ]
+   },
+   {
+    "name": "【14】2027陈怀安",
+    "link": "https://pan.quark.cn/s/dd7b5499f135",
+    "items": [
+     {
+      "name": "【01】2027陈怀安行测圣经-资料分析",
+      "link": "https://pan.quark.cn/s/57e8b410b480"
+     },
+     {
+      "name": "【02】2027陈怀安行测圣经-判断推理",
+      "link": "https://pan.quark.cn/s/e6bc77a6681b"
+     }
+    ]
+   },
+   {
+    "name": "【15】2027半月谈",
+    "link": "https://pan.quark.cn/s/4dc517916424",
+    "items": [
+     {
+      "name": "2026半月谈抄出申论80+第三季",
+      "link": "https://pan.quark.cn/s/b8c472051af2"
+     }
+    ]
+   },
+   {
+    "name": "【16】2027天琦",
+    "link": "https://pan.quark.cn/s/8fac4e819870",
+    "items": [
+     {
+      "name": "【06】2027上岸村天琦申论高分的规则",
+      "link": "https://pan.quark.cn/s/6bb9ee4c2e7d"
+     }
+    ]
+   },
+   {
+    "name": "【17】2027王永恒",
+    "link": "https://pan.quark.cn/s/e88bfd9283f0",
+    "items": [
+     {
+      "name": "2027上岸村王永恒资料分析母题研究",
+      "link": "https://pan.quark.cn/s/6be637fa4ea9"
+     },
+     {
+      "name": "2027王永恒资料分析三合一理论体系课",
+      "link": "https://pan.quark.cn/s/dd85047eda22"
+     }
+    ]
+   },
+   {
+    "name": "【18】2027齐麟",
+    "link": "https://pan.quark.cn/s/6f3093c1eb86",
+    "items": [
+     {
+      "name": "齐麟刷题组合集",
+      "link": "https://pan.quark.cn/s/981e22a6386c"
+     }
+    ]
+   },
+   {
+    "name": "【19】2027王炎",
+    "link": "https://pan.quark.cn/s/f8d35ab1c957",
+    "items": [
+     {
+      "name": "2027年王炎数量关系大满贯",
+      "link": "https://pan.quark.cn/s/2dabae34b8d0"
+     }
+    ]
+   },
+   {
+    "name": "【20】2027薛睿",
+    "link": "https://pan.quark.cn/s/5304a19afd3f",
+    "items": [
+     {
+      "name": "【027】2027年公考薛睿一拖五系统课（实战应用指南）",
+      "link": "https://pan.quark.cn/s/b411c1c157f0"
+     },
+     {
+      "name": "【028】2027年公考薛睿图形推理24诀",
+      "link": "https://pan.quark.cn/s/2523fe5909fe"
+     },
+     {
+      "name": "【029】2027年公考薛睿逻辑判断系统课",
+      "link": "https://pan.quark.cn/s/bd90739d2bac"
+     }
+    ]
+   },
+   {
+    "name": "【21】2027李焕",
+    "link": "https://pan.quark.cn/s/88d88625f2f7",
+    "items": []
+   },
+   {
+    "name": "【22】2027星光公考",
+    "link": "https://pan.quark.cn/s/bf7edc8abd82",
+    "items": [
+     {
+      "name": "2027年星光公考国省考行测申论五合一提分系统班",
+      "link": "https://pan.quark.cn/s/38a951065db8"
+     }
+    ]
+   },
+   {
+    "name": "【23】2027朱曦",
+    "link": "https://pan.quark.cn/s/7803e928123c",
+    "items": [
+     {
+      "name": "【031】2027年公考朱曦数量关系系统课",
+      "link": "https://pan.quark.cn/s/d5083bf84a13"
+     }
+    ]
+   },
+   {
+    "name": "【24】2027海绵公考",
+    "link": "https://pan.quark.cn/s/0e71cbd10585",
+    "items": [
+     {
+      "name": "【030】2027年公考船长申论系统精讲班",
+      "link": "https://pan.quark.cn/s/7e8038e77a65"
+     },
+     {
+      "name": "【032】2027年公考李焕论证逻辑系统课",
+      "link": "https://pan.quark.cn/s/4a4dfc832a81"
+     },
+     {
+      "name": "【033】2027年公考孙江媛推理逻辑系统课",
+      "link": "https://pan.quark.cn/s/961de95df455"
+     },
+     {
+      "name": "【034】2027年公考楚香凝资料分析系统课",
+      "link": "https://pan.quark.cn/s/84e6243d448f"
+     },
+     {
+      "name": "【035】2027年公考韩超图形推理系统课",
+      "link": "https://pan.quark.cn/s/6afa6f86efc2"
+     },
+     {
+      "name": "【036】2027年公考刘亚男政治理论系统课",
+      "link": "https://pan.quark.cn/s/fc4e1ce585c3"
+     }
+    ]
+   },
+   {
+    "name": "【25】2027Kiwi申论",
+    "link": "https://pan.quark.cn/s/187d78c26c8a",
+    "items": [
+     {
+      "name": "【09】2027kiwi申论全程班",
+      "link": "https://pan.quark.cn/s/60b06e479044"
+     }
+    ]
+   },
+   {
+    "name": "【26】2027小马哥",
+    "link": "https://pan.quark.cn/s/84d670844a63",
+    "items": [
+     {
+      "name": "2027行测申论360全程班",
+      "link": "https://pan.quark.cn/s/c9f4afe827c5"
+     }
+    ]
+   },
+   {
+    "name": "【27】2027苏金鹏",
+    "link": "https://pan.quark.cn/s/725550b8b77d",
+    "items": [
+     {
+      "name": "【01】2027苏金朋判断推理系统课（图推逻辑类比定义）",
+      "link": "https://pan.quark.cn/s/52ace22dfafa"
+     }
+    ]
+   },
+   {
+    "name": "【28】2027站长",
+    "link": "https://pan.quark.cn/s/990dc2f2aacb",
+    "items": [
+     {
+      "name": "【01】2027站长申论基础班",
+      "link": "https://pan.quark.cn/s/76f1776ca5b0"
+     }
+    ]
+   },
+   {
+    "name": "【29】2027瞪哥",
+    "link": "https://pan.quark.cn/s/50a1e7e88925",
+    "items": [
+     {
+      "name": "【01】2027瞪哥院长私人定制上岸班",
+      "link": "https://pan.quark.cn/s/3a0a763b0319"
+     }
+    ]
+   },
+   {
+    "name": "【98】2027公基系统班",
+    "link": "https://pan.quark.cn/s/b75a1565f00c",
+    "items": [
+     {
+      "name": "第二阶段-导图梳理（4.24开课）",
+      "link": "https://pan.quark.cn/s/df980caf8a22"
+     },
+     {
+      "name": "第三阶段-套卷实战",
+      "link": "https://pan.quark.cn/s/6f3518488b0c"
+     },
+     {
+      "name": "第四阶段-考前冲刺",
+      "link": "https://pan.quark.cn/s/a0ef2239f33c"
+     },
+     {
+      "name": "第一阶段-理论讲练",
+      "link": "https://pan.quark.cn/s/03a220aed0f4"
+     }
+    ]
+   },
+   {
+    "name": "【99】2027公安招聘",
+    "link": "https://pan.quark.cn/s/0467bdd6b690",
+    "items": [
+     {
+      "name": "【01】2027年母志文公专",
+      "link": "https://pan.quark.cn/s/84149462a8f1"
+     },
+     {
+      "name": "【02】2027年波波公专",
+      "link": "https://pan.quark.cn/s/a615cbd5d96b"
+     },
+     {
+      "name": "【03】2027年白宁公安联考公专",
+      "link": "https://pan.quark.cn/s/61156c4e7fea"
+     },
+     {
+      "name": "【04】2027年白宁国省考公专",
+      "link": "https://pan.quark.cn/s/4f9b69f300ef"
+     },
+     {
+      "name": "【05】2027年桐哥讲公专全程班",
+      "link": "https://pan.quark.cn/s/c3887ede70cd"
+     },
+     {
+      "name": "【06】2027年张薇公专理论课【上岸村】",
+      "link": "https://pan.quark.cn/s/ea10e4e7435b"
+     }
+    ]
+   },
+   {
+    "name": "2027天晓综合...统理论课",
+    "link": "https://pan.quark.cn/s/1054b890f9c9",
+    "items": []
+   }
+  ]
+ },
+ {
+  "root": "2026公考",
+  "rootLink": "https://pan.quark.cn/s/69a02a148b4d",
+  "sections": [
+   {
+    "name": "【32】各省份三支一扶资料",
+    "link": "https://pan.quark.cn/s/44c63ce7b493",
+    "items": [
+     {
+      "name": "2025湖南三支一扶",
+      "link": "https://pan.quark.cn/s/95e40925e590"
+     },
+     {
+      "name": "安徽三支一扶",
+      "link": "https://pan.quark.cn/s/dc3e01e65e2d"
+     },
+     {
+      "name": "重庆三支一扶",
+      "link": "https://pan.quark.cn/s/a84526f43625"
+     },
+     {
+      "name": "甘肃三支一扶",
+      "link": "https://pan.quark.cn/s/fafa9f6292dc"
+     },
+     {
+      "name": "广东三支一扶",
+      "link": "https://pan.quark.cn/s/3c6788850680"
+     },
+     {
+      "name": "广西三支一扶",
+      "link": "https://pan.quark.cn/s/f1e135246dd0"
+     },
+     {
+      "name": "贵州三支一扶",
+      "link": "https://pan.quark.cn/s/244eaf367bdc"
+     },
+     {
+      "name": "海南三支一扶",
+      "link": "https://pan.quark.cn/s/3edb0a8b1471"
+     },
+     {
+      "name": "河北三支一扶",
+      "link": "https://pan.quark.cn/s/2fd640da8c30"
+     },
+     {
+      "name": "河南三支一扶",
+      "link": "https://pan.quark.cn/s/2fd342b0e695"
+     },
+     {
+      "name": "黑龙江三支一扶",
+      "link": "https://pan.quark.cn/s/bbedf9d2b550"
+     },
+     {
+      "name": "湖北三支一扶",
+      "link": "https://pan.quark.cn/s/5365ee5b7d4d"
+     },
+     {
+      "name": "吉林三支一扶",
+      "link": "https://pan.quark.cn/s/3a7fb3c9399d"
+     },
+     {
+      "name": "江苏三支一扶",
+      "link": "https://pan.quark.cn/s/3d2b8431cc30"
+     },
+     {
+      "name": "江西三支一扶",
+      "link": "https://pan.quark.cn/s/95479673c65c"
+     },
+     {
+      "name": "辽宁三支一扶",
+      "link": "https://pan.quark.cn/s/0c358817ed9d"
+     },
+     {
+      "name": "内蒙古三支一扶",
+      "link": "https://pan.quark.cn/s/8ce5f5ac6aa8"
+     },
+     {
+      "name": "宁夏三支一扶",
+      "link": "https://pan.quark.cn/s/312feeb823e7"
+     },
+     {
+      "name": "青海三支一扶",
+      "link": "https://pan.quark.cn/s/c2ba37b4bdf3"
+     },
+     {
+      "name": "山东三支一扶",
+      "link": "https://pan.quark.cn/s/daba28af6d66"
+     },
+     {
+      "name": "山西三支一扶",
+      "link": "https://pan.quark.cn/s/81b6cec0ab5d"
+     },
+     {
+      "name": "四川三支一扶",
+      "link": "https://pan.quark.cn/s/dd9070b86111"
+     },
+     {
+      "name": "天津三支一扶",
+      "link": "https://pan.quark.cn/s/94e577b60c27"
+     },
+     {
+      "name": "新疆兵团三支一扶",
+      "link": "https://pan.quark.cn/s/ae4356eb6080"
+     },
+     {
+      "name": "云南三支一扶",
+      "link": "https://pan.quark.cn/s/f4a9112fb46b"
+     },
+     {
+      "name": "浙江三支一扶",
+      "link": "https://pan.quark.cn/s/da7e6d84386d"
+     }
+    ]
+   },
+   {
+    "name": "【名师资料分析速算技巧】",
+    "link": "https://pan.quark.cn/s/83d7d884fca1",
+    "items": [
+     {
+      "name": "【高照资料分析速算】",
+      "link": "https://pan.quark.cn/s/17ab459ad1b5"
+     },
+     {
+      "name": "【郭某某资料分析速算】",
+      "link": "https://pan.quark.cn/s/1c3852e45471"
+     },
+     {
+      "name": "【菓小柠（云飞扬）资料分析速算】",
+      "link": "https://pan.quark.cn/s/4ac0fd343ffb"
+     },
+     {
+      "name": "【狐狸归墟速算】",
+      "link": "https://pan.quark.cn/s/315161cc895a"
+     },
+     {
+      "name": "【花生十三资料分析速算】",
+      "link": "https://pan.quark.cn/s/641d6f496a6a"
+     },
+     {
+      "name": "【篮球哥资料分析速算】",
+      "link": "https://pan.quark.cn/s/121935865727"
+     },
+     {
+      "name": "【牟立志｜老牟深算之速算大练兵课程】",
+      "link": "https://pan.quark.cn/s/6f580e2c2069"
+     },
+     {
+      "name": "【王永恒资料分析速算技巧18式】",
+      "link": "https://pan.quark.cn/s/e77af9c54b70"
+     },
+     {
+      "name": "【网友红领巾资料分析速算】",
+      "link": "https://pan.quark.cn/s/881a308f0027"
+     },
+     {
+      "name": "【岳飞资料分析速算】",
+      "link": "https://pan.quark.cn/s/06f9a0f69ab2"
+     }
+    ]
+   },
+   {
+    "name": "0、2026国考资料(附带岗位表）",
+    "link": "https://pan.quark.cn/s/bf89f91e9bde",
+    "items": [
+     {
+      "name": "【01】2026年国考岗位表",
+      "link": "https://pan.quark.cn/s/75fb41158156"
+     },
+     {
+      "name": "【03】2025国考相关资料（职位表、专业参考目录等）",
+      "link": "https://pan.quark.cn/s/11728e898ef2"
+     },
+     {
+      "name": "【03】近七年国考进面分数线",
+      "link": "https://pan.quark.cn/s/2aafde78fde6"
+     },
+     {
+      "name": "【04】2026国考模拟卷",
+      "link": "https://pan.quark.cn/s/9bac1c01d564"
+     },
+     {
+      "name": "【05】2015-2025国考真题直接打印版！（fb版）",
+      "link": "https://pan.quark.cn/s/73a8cd1e0631"
+     },
+     {
+      "name": "【06】2026年国考进面名单",
+      "link": "https://pan.quark.cn/s/87fa282b42be"
+     },
+     {
+      "name": "【07】2026年国考补录职位表及进面分数线",
+      "link": "https://pan.quark.cn/s/fa5abc774203"
+     }
+    ]
+   },
+   {
+    "name": "2025年三支一扶",
+    "link": "https://pan.quark.cn/s/9eeea96e8a60",
+    "items": [
+     {
+      "name": "【多机构】三支一扶各省省情★★★",
+      "link": "https://pan.quark.cn/s/a63b8d83b6dc"
+     },
+     {
+      "name": "【壹玖职教】2025年河北辛集事业编-三支",
+      "link": "https://pan.quark.cn/s/335162d82d1e"
+     },
+     {
+      "name": "0、2025年4月26日山东三支一扶笔试真题答案",
+      "link": "https://pan.quark.cn/s/e2fa759c4dcb"
+     },
+     {
+      "name": "0、2025年5月广东三支一扶笔试《基本能力测验》真题及答案",
+      "link": "https://pan.quark.cn/s/622a7d7d2e3e"
+     },
+     {
+      "name": "2025安徽三支一扶",
+      "link": "https://pan.quark.cn/s/c0925527dd33"
+     },
+     {
+      "name": "2025重庆三支一扶",
+      "link": "https://pan.quark.cn/s/59b83102f498"
+     },
+     {
+      "name": "2025河南三支一扶",
+      "link": "https://pan.quark.cn/s/68c39c085701"
+     },
+     {
+      "name": "2025年4月26日山西省三支一扶笔试真题及答案（考生回忆版）",
+      "link": "https://pan.quark.cn/s/0b12005c1c88"
+     },
+     {
+      "name": "2025年云南三支一扶真题及答案",
+      "link": "https://pan.quark.cn/s/b08983392960"
+     },
+     {
+      "name": "2025三支一扶（通用版）🌸重要课程🌸",
+      "link": "https://pan.quark.cn/s/39d75bcfa1d0"
+     },
+     {
+      "name": "2025三支一扶公基笔记",
+      "link": "https://pan.quark.cn/s/632d96e4f149"
+     },
+     {
+      "name": "2025山东三支一扶",
+      "link": "https://pan.quark.cn/s/31633c409425"
+     },
+     {
+      "name": "2025山西三支一扶",
+      "link": "https://pan.quark.cn/s/2b263652939e"
+     },
+     {
+      "name": "2025云南三支一扶",
+      "link": "https://pan.quark.cn/s/6b71f35b9c8b"
+     }
+    ]
+   },
+   {
+    "name": "2026公安",
+    "link": "https://pan.quark.cn/s/421ef8398e68",
+    "items": [
+     {
+      "name": "【014】2026年多省联考公安时政【警考通】",
+      "link": "https://pan.quark.cn/s/45325eefb106"
+     },
+     {
+      "name": "【公专】2026白宁公专",
+      "link": "https://pan.quark.cn/s/d77b907f678c"
+     },
+     {
+      "name": "【公专】2026母志文公专",
+      "link": "https://pan.quark.cn/s/127a4cd67bb8"
+     },
+     {
+      "name": "【公专】2026年波波公安专业科目全年课",
+      "link": "https://pan.quark.cn/s/f133619ddf3a"
+     },
+     {
+      "name": "【公专】2026年桐哥讲公专(1)",
+      "link": "https://pan.quark.cn/s/793b5e928eb1"
+     }
+    ]
+   },
+   {
+    "name": "2026公考名师",
+    "link": "https://pan.quark.cn/s/ab2163f1cea1",
+    "items": [
+     {
+      "name": " （87）【言语+申论】2026年国考过了暖冬笔试系统班",
+      "link": "https://pan.quark.cn/s/372eefd4bb74"
+     },
+     {
+      "name": "（110）上岸智路",
+      "link": "https://pan.quark.cn/s/d984e82d6dc4"
+     },
+     {
+      "name": "（114）2026年贺冲申论系统课",
+      "link": "https://pan.quark.cn/s/fc431e31d81a"
+     },
+     {
+      "name": "（125）2026年申论系统课：手把手教你零基础到高分【未雨】",
+      "link": "https://pan.quark.cn/s/b9a9995c044d"
+     },
+     {
+      "name": "（43）四海柳岩",
+      "link": "https://pan.quark.cn/s/99c422c432d0"
+     },
+     {
+      "name": "（89）【申论】2026年国考珂佩申论基础班",
+      "link": "https://pan.quark.cn/s/5d197d112633"
+     },
+     {
+      "name": "【002】2025超G时政讲练班(1)",
+      "link": "https://pan.quark.cn/s/fb7e15659f91"
+     },
+     {
+      "name": "【002】2026年国省事三考大姨夫三合一全家桶",
+      "link": "https://pan.quark.cn/s/4417c01f9617"
+     },
+     {
+      "name": "【008】26青菜白玉汤判断推理体系课",
+      "link": "https://pan.quark.cn/s/899b425436f0"
+     },
+     {
+      "name": "【01】2026年公考隔壁王老师申论系统课：手把手教你零基础到高分【未雨】",
+      "link": "https://pan.quark.cn/s/cb82f5b784a5"
+     },
+     {
+      "name": "【013】【木棉】26广东统考模考卷",
+      "link": "https://pan.quark.cn/s/01777a8dd535"
+     },
+     {
+      "name": "【020】【26全新黄金九讲｜雨菲言语】",
+      "link": "https://pan.quark.cn/s/16795dfb5f1e"
+     },
+     {
+      "name": "【03】【言语】2026年大懒猫言语理解直播刷题",
+      "link": "https://pan.quark.cn/s/370b904b0926"
+     },
+     {
+      "name": "【03】广东公务员考试真题pdf版",
+      "link": "https://pan.quark.cn/s/cd003741b926"
+     },
+     {
+      "name": "【03】广东省考面试资料(1)",
+      "link": "https://pan.quark.cn/s/5dcdf85ffe7c"
+     },
+     {
+      "name": "【04】【面试】2026国考央选特招面试素养提升课",
+      "link": "https://pan.quark.cn/s/24915d484426"
+     },
+     {
+      "name": "【04】2026年国考大懒猫言语魔鬼冲刺营",
+      "link": "https://pan.quark.cn/s/32f809d1b048"
+     },
+     {
+      "name": "【04】2026年国考大懒猫言语魔鬼冲刺营(1)",
+      "link": "https://pan.quark.cn/s/90c52e83c449"
+     },
+     {
+      "name": "【05】【常识】2026年国省考王军涛常识判断理论课",
+      "link": "https://pan.quark.cn/s/ba38f4c2cc90"
+     },
+     {
+      "name": "【05】2026牟立志固若金汤3.0",
+      "link": "https://pan.quark.cn/s/1fcf05d80d8d"
+     },
+     {
+      "name": "【06】2025大懒猫言语魔鬼冲刺营",
+      "link": "https://pan.quark.cn/s/11cfc86c2ae1"
+     },
+     {
+      "name": "【06】2026年省考袁东申论领跑营理论刷题班",
+      "link": "https://pan.quark.cn/s/ba32b98d5ec1"
+     },
+     {
+      "name": "【06】2026省考言语冲刺营大懒猫",
+      "link": "https://pan.quark.cn/s/e99c037c0a0b"
+     },
+     {
+      "name": "【06】2026省考言语冲刺营大懒猫(1)",
+      "link": "https://pan.quark.cn/s/6f3b4c41997f"
+     },
+     {
+      "name": "【07】2026年省考袁东申论大作文专项冲刺班",
+      "link": "https://pan.quark.cn/s/2fcd69b7240f"
+     },
+     {
+      "name": "【07】2026年省考袁东申论大作文专项冲刺班(1)(1)",
+      "link": "https://pan.quark.cn/s/336366baff10"
+     },
+     {
+      "name": "【08】广东行政执法申论（2026版广东省考理论）",
+      "link": "https://pan.quark.cn/s/04414c07214e"
+     },
+     {
+      "name": "【09】固若金汤2.0思维导图",
+      "link": "https://pan.quark.cn/s/52c11473ac1c"
+     },
+     {
+      "name": "【10】2026省考王军涛政治理论考前金题冲刺",
+      "link": "https://pan.quark.cn/s/74252fee39e2"
+     },
+     {
+      "name": "【10】2026省考王军涛政治理论考前金题冲刺(1)",
+      "link": "https://pan.quark.cn/s/5016e3382f08"
+     },
+     {
+      "name": "【11】2026超哥政治理论排坑速练",
+      "link": "https://pan.quark.cn/s/085bc52eb7f7"
+     },
+     {
+      "name": "【121】2026年江苏省考考前行测模考课【启禾】",
+      "link": "https://pan.quark.cn/s/cdd23dcdddc0"
+     },
+     {
+      "name": "【14】四海冯泽全年时政课",
+      "link": "https://pan.quark.cn/s/d098edd7593b"
+     },
+     {
+      "name": "【177】2026年省考超小马笔试冲刺加油站【刘文超&小马哥&马克】",
+      "link": "https://pan.quark.cn/s/22444dd00e1c"
+     },
+     {
+      "name": "【177】2026年省考超小马笔试冲刺加油站【刘文超&小马哥&马克】(1)",
+      "link": "https://pan.quark.cn/s/4e9a5a15095e"
+     },
+     {
+      "name": "【177】2026年省考超小马笔试冲刺加油站【刘文超&小马哥&马克】(2)",
+      "link": "https://pan.quark.cn/s/2172c8790dc0"
+     },
+     {
+      "name": "【178】2026年省考忠政申论批改班【88-90期】",
+      "link": "https://pan.quark.cn/s/2ad04d836321"
+     },
+     {
+      "name": "【187】2026年多省联考数资常三合一冲刺刷题课【小Y在日记】",
+      "link": "https://pan.quark.cn/s/63699579e791"
+     },
+     {
+      "name": "【189】2026年省考初心行测领跑营理论刷题班",
+      "link": "https://pan.quark.cn/s/69795f014ad4"
+     },
+     {
+      "name": "【19】2026牟立志固若金汤3.0",
+      "link": "https://pan.quark.cn/s/8f5deeb9e288"
+     },
+     {
+      "name": "【21】2026一号文件各机构解读&必刷题",
+      "link": "https://pan.quark.cn/s/96ae41e57cae"
+     },
+     {
+      "name": "【21】2026一号文件各机构解读&必刷题(1)",
+      "link": "https://pan.quark.cn/s/e0deed03e0db"
+     },
+     {
+      "name": "【27】2026超哥政治理论冲刺早自习【3月联考版】",
+      "link": "https://pan.quark.cn/s/b4505922d7b0"
+     },
+     {
+      "name": "【常识】2026CG常识判断考题研学课程",
+      "link": "https://pan.quark.cn/s/cc546b6e24ae"
+     },
+     {
+      "name": "【常识】王军涛合集",
+      "link": "https://pan.quark.cn/s/ef6b9888256a"
+     },
+     {
+      "name": "【公基】李铁公基12000题刷题课（近五年最新公基真题）",
+      "link": "https://pan.quark.cn/s/f7eeadd35fbb"
+     },
+     {
+      "name": "【公基常识】2026国省考公基常识专项冲刺课 （丹丹老师主讲）适用：2026国考、省考 2026公考 事业单位",
+      "link": "https://pan.quark.cn/s/eecfd0836911"
+     },
+     {
+      "name": "【广东】2026广东省考申论理论课【登科七月】",
+      "link": "https://pan.quark.cn/s/18d4db239a2b"
+     },
+     {
+      "name": "【广东】2026年广东省考行政执法申论专项【小新公考】",
+      "link": "https://pan.quark.cn/s/ac810d77fe58"
+     },
+     {
+      "name": "【黄艺】2026四轮速算-资料分析全家桶",
+      "link": "https://pan.quark.cn/s/13a6e96a400c"
+     },
+     {
+      "name": "【面试】2026相丽君面试技巧精讲班",
+      "link": "https://pan.quark.cn/s/27477ea1b1a1"
+     },
+     {
+      "name": "【面试】2026新版老夏面试100题修订版",
+      "link": "https://pan.quark.cn/s/1c6e69eeb9d1"
+     },
+     {
+      "name": "【面试】卷心菜面试",
+      "link": "https://pan.quark.cn/s/a793d719e799"
+     },
+     {
+      "name": "【判断】2026年逻辑不楠判断推理理论课(1)",
+      "link": "https://pan.quark.cn/s/aec45e7fbfc8"
+     },
+     {
+      "name": "【判断】2026年苏金鹏图推近5年真题讲解",
+      "link": "https://pan.quark.cn/s/1fe5dcabb969"
+     },
+     {
+      "name": "【判断】2026省考龙飞判断试题精讲平面图推(2)",
+      "link": "https://pan.quark.cn/s/e9ba0b64d089"
+     },
+     {
+      "name": "【判断】2026苏金朋判断推理通关班",
+      "link": "https://pan.quark.cn/s/df1660accb52"
+     },
+     {
+      "name": "【判断】2026章晓铭逻辑22杀（公务员考试、事业编适用)",
+      "link": "https://pan.quark.cn/s/e43f57fe3c92"
+     },
+     {
+      "name": "【申论-系统课】2026小张申论系统课",
+      "link": "https://pan.quark.cn/s/dcc9651c3c60"
+     },
+     {
+      "name": "【申论】2026超好运小bud广东省考申论系统课",
+      "link": "https://pan.quark.cn/s/b1ed5e877c9a"
+     },
+     {
+      "name": "【申论】2026老夫子申论公文素养课(1)",
+      "link": "https://pan.quark.cn/s/3f61e3b3b202"
+     },
+     {
+      "name": "【申论】2026年飞扬申论归纳概括题早课",
+      "link": "https://pan.quark.cn/s/6ff48f5ea255"
+     },
+     {
+      "name": "【申论】2026年飞扬申论早课分析理解题全勤全返",
+      "link": "https://pan.quark.cn/s/b4e09212c1b7"
+     },
+     {
+      "name": "【申论】2026年国考飞扬申论考前冲刺课",
+      "link": "https://pan.quark.cn/s/ecc2f3314d41"
+     },
+     {
+      "name": "【申论】2026年国考珂佩申论基础班",
+      "link": "https://pan.quark.cn/s/83f5a83d49c0"
+     },
+     {
+      "name": "【申论】2026年江牧云申论十全大补抢分课(1)",
+      "link": "https://pan.quark.cn/s/ea7f8b573973"
+     },
+     {
+      "name": "【申论】2026年人须在世上磨(为民公考)申论系统班",
+      "link": "https://pan.quark.cn/s/a25826cbc65e"
+     },
+     {
+      "name": "【申论】2026年人须在世上磨(为民公考)申论系统班(1)",
+      "link": "https://pan.quark.cn/s/b297ad81a2e4"
+     },
+     {
+      "name": "【申论】2026年人须在世上磨(为民公考)申论系统班(4)",
+      "link": "https://pan.quark.cn/s/907aa8ff3189"
+     },
+     {
+      "name": "【申论】2026年省考飞扬申论归纳概括题早课",
+      "link": "https://pan.quark.cn/s/5efcd82446aa"
+     },
+     {
+      "name": "【申论】2026年天晓申论套卷批改班【10期】",
+      "link": "https://pan.quark.cn/s/428b5b835419"
+     },
+     {
+      "name": "【申论】2026小马哥申论大作文预测申论开头结尾",
+      "link": "https://pan.quark.cn/s/be9eeae90ba0"
+     },
+     {
+      "name": "【时政】2025李梦娇半月时政硬核考点【4-6月下半月已更新】",
+      "link": "https://pan.quark.cn/s/f20d7c3fe93d"
+     },
+     {
+      "name": "【时政】2026马克时政梳理",
+      "link": "https://pan.quark.cn/s/35eae5328728"
+     },
+     {
+      "name": "【数量】2026鸿哥数量关系旗舰班",
+      "link": "https://pan.quark.cn/s/d732d54feaeb"
+     },
+     {
+      "name": "【数量】2026鸿哥数量关系旗舰班(1)",
+      "link": "https://pan.quark.cn/s/5285afd48bb2"
+     },
+     {
+      "name": "【数量】2026鸿哥数量关系旗舰班(2)",
+      "link": "https://pan.quark.cn/s/21da6a21b598"
+     },
+     {
+      "name": "【数量】2026毛娃儿数量小白考场极限抢分攻略",
+      "link": "https://pan.quark.cn/s/f289a20b8f76"
+     },
+     {
+      "name": "【数量】2026年上岸村王炎数量关系·讲练大满贯",
+      "link": "https://pan.quark.cn/s/71d8c5b3c73d"
+     },
+     {
+      "name": "【数量】2026忧郁牛牛数量全真模拟刷题课",
+      "link": "https://pan.quark.cn/s/eb664930ca16"
+     },
+     {
+      "name": "【数推】2026年高照数字推理460题",
+      "link": "https://pan.quark.cn/s/ce52877b12d1"
+     },
+     {
+      "name": "【刷题】2026四海拾伊资料分析600题",
+      "link": "https://pan.quark.cn/s/88bcb490bb3f"
+     },
+     {
+      "name": "【刷题课】2026郭熙言语考前必做100题",
+      "link": "https://pan.quark.cn/s/02de1a6cf61e"
+     },
+     {
+      "name": "【刷题课】2026郭熙言语考前必做100题(1)",
+      "link": "https://pan.quark.cn/s/e7587d998177"
+     },
+     {
+      "name": "【宋捏捏】资料分析一本通",
+      "link": "https://pan.quark.cn/s/fbc310e49d4f"
+     },
+     {
+      "name": "【速算】2026牟立志 老牟深算之速算大练兵",
+      "link": "https://pan.quark.cn/s/81f0dc0ce88b"
+     },
+     {
+      "name": "【图推】2026程日升世面最强图形推理600题（适用26国考&广东省考)",
+      "link": "https://pan.quark.cn/s/886dd81812ee"
+     },
+     {
+      "name": "【图推刷题】2026刘义恒图推大拖把题本+答案",
+      "link": "https://pan.quark.cn/s/701f44b47fe0"
+     },
+     {
+      "name": "【行测】2026陈八十行测刷刷刷言语判断刷题",
+      "link": "https://pan.quark.cn/s/997f960eedc5"
+     },
+     {
+      "name": "【行测】2026乘风行测全课程",
+      "link": "https://pan.quark.cn/s/ee736c5d2d59"
+     },
+     {
+      "name": "【行测】2026年初心行测领跑营系统班【六合一】",
+      "link": "https://pan.quark.cn/s/0d824f99b91c"
+     },
+     {
+      "name": "【行测】2026年国省事三考大姨夫三合一全家桶",
+      "link": "https://pan.quark.cn/s/5bc78071f021"
+     },
+     {
+      "name": "【行测】2026小P公考数资判系统班",
+      "link": "https://pan.quark.cn/s/e8789b122dc5"
+     },
+     {
+      "name": "【行测】2026小P公考数资判系统班(2)",
+      "link": "https://pan.quark.cn/s/3cb0dda3182b"
+     },
+     {
+      "name": "【行测】陈怀安行测小课堂",
+      "link": "https://pan.quark.cn/s/21408c65b441"
+     },
+     {
+      "name": "【行测】陈怀安行测小课堂(1)",
+      "link": "https://pan.quark.cn/s/ffc0c94860f1"
+     },
+     {
+      "name": "【行测申论】2026国省考李铁团队线上刷题课",
+      "link": "https://pan.quark.cn/s/1f3e1443c3cd"
+     },
+     {
+      "name": "【行测申论】2026年上岸村国省考行测申论一卡通",
+      "link": "https://pan.quark.cn/s/30ed16f599b6"
+     },
+     {
+      "name": "【行测申论】2026年省考暖冬、严谨行测申论全程班",
+      "link": "https://pan.quark.cn/s/e9098ac14e5a"
+     },
+     {
+      "name": "【行测申论】2026跃跃公考早起刷题计划",
+      "link": "https://pan.quark.cn/s/d0e3e20d14d5"
+     },
+     {
+      "name": "【言语】2026阿里木江言语系统班(1)",
+      "link": "https://pan.quark.cn/s/d873b0e4b5b4"
+     },
+     {
+      "name": "【言语】2026大宝小宝言语降维体系课",
+      "link": "https://pan.quark.cn/s/b8c981221797"
+     },
+     {
+      "name": "【言语】2026大宝小宝言语降维体系课(2)",
+      "link": "https://pan.quark.cn/s/ba2f97886f25"
+     },
+     {
+      "name": "【言语】2026多省联考大宝小宝言语冲刺绝杀十套卷",
+      "link": "https://pan.quark.cn/s/afb63e92d24b"
+     },
+     {
+      "name": "【言语】2026国考大宝小宝言语刷题答疑课",
+      "link": "https://pan.quark.cn/s/f38a3e761829"
+     },
+     {
+      "name": "【言语】2026国考四海柳岩逻辑填空必刷300题",
+      "link": "https://pan.quark.cn/s/2a4ddcd39aa3"
+     },
+     {
+      "name": "【言语】2026国考四海柳岩逻辑填空必刷300题(1)",
+      "link": "https://pan.quark.cn/s/bfd9a192e904"
+     },
+     {
+      "name": "【言语】2026老闻言语百日攻坚全程班",
+      "link": "https://pan.quark.cn/s/f6c12d01dec7"
+     },
+     {
+      "name": "【言语】2026老闻言语高频成语300词(1)",
+      "link": "https://pan.quark.cn/s/2f3767e95995"
+     },
+     {
+      "name": "【言语】2026年晨宇陪你上岸言语大神思维体系课",
+      "link": "https://pan.quark.cn/s/7da3ba3f602b"
+     },
+     {
+      "name": "【言语】2026年晨宇言语理解刷题课",
+      "link": "https://pan.quark.cn/s/e1cfe37ac07d"
+     },
+     {
+      "name": "【言语】2026年大懒猫言语理解直播刷题",
+      "link": "https://pan.quark.cn/s/e525dde17078"
+     },
+     {
+      "name": "【言语】2026年大懒猫言语专项600题",
+      "link": "https://pan.quark.cn/s/7cdeb80405fd"
+     },
+     {
+      "name": "【言语】2026年大懒猫言语专项600题(1)",
+      "link": "https://pan.quark.cn/s/58b986156144"
+     },
+     {
+      "name": "【言语】2026省考大懒猫言语拔高刷题营",
+      "link": "https://pan.quark.cn/s/ca66185a0fa3"
+     },
+     {
+      "name": "【言语】2026雨菲言语百题斩刷题课",
+      "link": "https://pan.quark.cn/s/c3b2f14fac6c"
+     },
+     {
+      "name": "【郑为远】2026_为远讲公考",
+      "link": "https://pan.quark.cn/s/5213009c4406"
+     },
+     {
+      "name": "【政治理论】2026公考大姨夫军涛政治理论系统班",
+      "link": "https://pan.quark.cn/s/2bdbd8f35b9f"
+     },
+     {
+      "name": "【政治理论】2026公考大姨夫军涛政治理论系统班(1)",
+      "link": "https://pan.quark.cn/s/bf22c2ba90f4"
+     },
+     {
+      "name": "【政治理论】2026国省考政治理论《求是》杂志文章解读",
+      "link": "https://pan.quark.cn/s/6b0c19598bbe"
+     },
+     {
+      "name": "【政治理论】2026李铁314多省联考政治理论",
+      "link": "https://pan.quark.cn/s/2fd173ef7d11"
+     },
+     {
+      "name": "【政治理论】2026李铁314多省联考政治理论(1)",
+      "link": "https://pan.quark.cn/s/11dba8708753"
+     },
+     {
+      "name": "【政治理论】2026李铁314多省联考政治理论(2)",
+      "link": "https://pan.quark.cn/s/404e950d6e12"
+     },
+     {
+      "name": "【政治理论】2026年国考李铁政治理论冲刺课",
+      "link": "https://pan.quark.cn/s/bf3c0d44f2b0"
+     },
+     {
+      "name": "【政治理论】2026年杨攀行测政治理论一课通",
+      "link": "https://pan.quark.cn/s/5edc26baad51"
+     },
+     {
+      "name": "【政治理论】2026CG公考政治理论研学课(1)",
+      "link": "https://pan.quark.cn/s/d75db90a5250"
+     },
+     {
+      "name": "【资料】2026牟立志沙场点兵3.0（25年9月）",
+      "link": "https://pan.quark.cn/s/63c8f79e2b34"
+     },
+     {
+      "name": "【资料】2026牟立志沙场点兵3(1).0（25年9月）",
+      "link": "https://pan.quark.cn/s/3a4a17a5ebf7"
+     },
+     {
+      "name": "【资料估算拔高进阶9讲+1000道五年真题无硬算】叽叽喳喳的公考",
+      "link": "https://pan.quark.cn/s/f2125e7f0ecb"
+     },
+     {
+      "name": "【综应A】2026天晓综合应用能力（A类）系统理论课",
+      "link": "https://pan.quark.cn/s/ede04c189d13"
+     },
+     {
+      "name": "00、人民日报（成语积累逻辑填空）",
+      "link": "https://pan.quark.cn/s/dd525604cbbe"
+     },
+     {
+      "name": "18.2026年国省考政治理论冲刺课口诀整理汇总【马克】",
+      "link": "https://pan.quark.cn/s/823d62fc74db"
+     },
+     {
+      "name": "2025草莓熊广东省考申论全程班",
+      "link": "https://pan.quark.cn/s/75d3766b4d70"
+     },
+     {
+      "name": "2025年华图时政备考手册&模拟题",
+      "link": "https://pan.quark.cn/s/7150b426c21d"
+     },
+     {
+      "name": "2026厂长资料分析全家桶",
+      "link": "https://pan.quark.cn/s/ab1f35229aaf"
+     },
+     {
+      "name": "2026厂长资料数量提升班",
+      "link": "https://pan.quark.cn/s/fd84f94bff84"
+     },
+     {
+      "name": "2026超哥联考政治理论专项刷题",
+      "link": "https://pan.quark.cn/s/be86673a1646"
+     },
+     {
+      "name": "2026超哥政治理论背诵手册",
+      "link": "https://pan.quark.cn/s/ef682530be91"
+     },
+     {
+      "name": "2026超格行测+申论（五合一）超大杯刷题营",
+      "link": "https://pan.quark.cn/s/c24a2fb402a7"
+     },
+     {
+      "name": "2026陈八十行测刷刷刷言语判断刷题",
+      "link": "https://pan.quark.cn/s/0bfd75f369f8"
+     },
+     {
+      "name": "2026陈怀安行测考前急救包之《判断一拖五》",
+      "link": "https://pan.quark.cn/s/633d6de15e89"
+     },
+     {
+      "name": "2026程日升广东省考判断推理终极大预测",
+      "link": "https://pan.quark.cn/s/1f3e883ce21f"
+     },
+     {
+      "name": "2026公考备考模板分享",
+      "link": "https://pan.quark.cn/s/712051c627f0"
+     },
+     {
+      "name": "2026考公上岸必刷题本",
+      "link": "https://pan.quark.cn/s/bde7e6776a3f"
+     },
+     {
+      "name": "2026老夏面试必背母题30道",
+      "link": "https://pan.quark.cn/s/5836fcf6dcda"
+     },
+     {
+      "name": "2026牟立志 老牟深算之速算大练兵题本+解析",
+      "link": "https://pan.quark.cn/s/613d72e5cf8d"
+     },
+     {
+      "name": "2026年超哥12月7小联考各省省情时政",
+      "link": "https://pan.quark.cn/s/cf1f6d5f5d23"
+     },
+     {
+      "name": "2026年超格伯洁常识判断",
+      "link": "https://pan.quark.cn/s/89a34580e69b"
+     },
+     {
+      "name": "2026年飞扬全勤全返",
+      "link": "https://pan.quark.cn/s/ae2550b401db"
+     },
+     {
+      "name": "2026年飞扬申论大作文早课",
+      "link": "https://pan.quark.cn/s/d5accf33eae6"
+     },
+     {
+      "name": "2026年广东省考体系重塑课【跃跃公考】",
+      "link": "https://pan.quark.cn/s/5e0c2d627b64"
+     },
+     {
+      "name": "2026年国考封闭进阶卷【第一弹】",
+      "link": "https://pan.quark.cn/s/3cbd624ad8bc"
+     },
+     {
+      "name": "2026年判断名师堂合集",
+      "link": "https://pan.quark.cn/s/38a4e5c6b149"
+     },
+     {
+      "name": "2026年山东事业单位系统班",
+      "link": "https://pan.quark.cn/s/a7cffb9cb21e"
+     },
+     {
+      "name": "2026年上岸村国省考课程",
+      "link": "https://pan.quark.cn/s/70f458e6f427"
+     },
+     {
+      "name": "2026年省考顾斐宝藏800词精讲",
+      "link": "https://pan.quark.cn/s/2b6aae5b5987"
+     },
+     {
+      "name": "2026年省考暖冬、严谨行测申论全程班",
+      "link": "https://pan.quark.cn/s/b4be9ebf9d6d"
+     },
+     {
+      "name": "2026年省联考忧郁牛牛政治理论押题",
+      "link": "https://pan.quark.cn/s/7a91443e5fa5"
+     },
+     {
+      "name": "2026年小P公考数资判断系统班",
+      "link": "https://pan.quark.cn/s/3d848d79c3a5"
+     },
+     {
+      "name": "2026年JBC四川定向乡镇公务员高端班",
+      "link": "https://pan.quark.cn/s/068db8bf476b"
+     },
+     {
+      "name": "2026省考考前押题预测资料包",
+      "link": "https://pan.quark.cn/s/a230ce0a3f2b"
+     },
+     {
+      "name": "2026言语理解千题册【顺序版+乱序版】（全）",
+      "link": "https://pan.quark.cn/s/ab48ba51b45d"
+     },
+     {
+      "name": "2026一号文件预测题&解读【秦明】",
+      "link": "https://pan.quark.cn/s/eb5b6fc4ae42"
+     },
+     {
+      "name": "2026忧郁牛牛考前冲刺押题全家桶（国考+小联考）",
+      "link": "https://pan.quark.cn/s/7b8d20dadde1"
+     },
+     {
+      "name": "2026站长刷题班",
+      "link": "https://pan.quark.cn/s/f22a14ccae69"
+     },
+     {
+      "name": "26国省考数量关系题本+答案（共66页） 【26新版】",
+      "link": "https://pan.quark.cn/s/3d59d179f34c"
+     },
+     {
+      "name": "26国省考言语理解题本+答案（共161页） 【26新版】",
+      "link": "https://pan.quark.cn/s/cbbe260b034f"
+     },
+     {
+      "name": "26王炎·数量关系200题(1)",
+      "link": "https://pan.quark.cn/s/9b726cef59bd"
+     },
+     {
+      "name": "大大重要讲话【内容及试题】",
+      "link": "https://pan.quark.cn/s/5c1135306702"
+     },
+     {
+      "name": "二十届四中全会",
+      "link": "https://pan.quark.cn/s/2f98ab66bb3b"
+     },
+     {
+      "name": "花生十三丨26资料分析思维导图背诵默写笔记",
+      "link": "https://pan.quark.cn/s/7987f4772ee3"
+     },
+     {
+      "name": "花生十三线下绝版课(必看)",
+      "link": "https://pan.quark.cn/s/45005a35b2dd"
+     },
+     {
+      "name": "璐璐丨十五五规划浓缩3页纸",
+      "link": "https://pan.quark.cn/s/4ae516563f5b"
+     },
+     {
+      "name": "每天10分钟申论80分",
+      "link": "https://pan.quark.cn/s/57fc26479279"
+     },
+     {
+      "name": "人民日报每日精读（笔记+思维导图版）(1)",
+      "link": "https://pan.quark.cn/s/91b565accbac"
+     },
+     {
+      "name": "三色笔记",
+      "link": "https://pan.quark.cn/s/1405e88a2fcd"
+     },
+     {
+      "name": "上岸经验帖",
+      "link": "https://pan.quark.cn/s/6ee332df3d61"
+     },
+     {
+      "name": "时政是条线（小Y在日记）",
+      "link": "https://pan.quark.cn/s/9da6515bb56e"
+     },
+     {
+      "name": "网友红领巾X陈怀安行测经验贴",
+      "link": "https://pan.quark.cn/s/a1fa3441a17f"
+     },
+     {
+      "name": "笑与君歌十二笙",
+      "link": "https://pan.quark.cn/s/bdadd983d198"
+     },
+     {
+      "name": "行测25000题【26新版】",
+      "link": "https://pan.quark.cn/s/8e77de360512"
+     }
+    ]
+   },
+   {
+    "name": "2026国考",
+    "link": "https://pan.quark.cn/s/e0f26cb06054",
+    "items": [
+     {
+      "name": "【刷题】齐麟数资刷题组（2023-2026）",
+      "link": "https://pan.quark.cn/s/fe5daec69807"
+     },
+     {
+      "name": "【刷题】欣说言语刷题集（2023-2026）",
+      "link": "https://pan.quark.cn/s/84d4e218e2f6"
+     },
+     {
+      "name": "2026年国考玖捌零系X统班",
+      "link": "https://pan.quark.cn/s/bcc671b7410a"
+     },
+     {
+      "name": "行测5000题【2025年1月版次】（2026版）",
+      "link": "https://pan.quark.cn/s/5ebb4b8b1efa"
+     }
+    ]
+   },
+   {
+    "name": "2026年事业单位课程",
+    "link": "https://pan.quark.cn/s/779127e22222",
+    "items": [
+     {
+      "name": "【001】李铁公基12000题刷题课（近五年最新公基真题）",
+      "link": "https://pan.quark.cn/s/c7512949c5f6"
+     },
+     {
+      "name": "【002】2026年笨鸟深圳事业单位统考专项班",
+      "link": "https://pan.quark.cn/s/298c834fd127"
+     },
+     {
+      "name": "【003】2026年江苏事业单位系统班（综合知识和能力素质）",
+      "link": "https://pan.quark.cn/s/51e24514fbde"
+     },
+     {
+      "name": "【004】2026年广东事业编统考公基系统课【李卜&李铁】",
+      "link": "https://pan.quark.cn/s/c212e6c02de5"
+     },
+     {
+      "name": "【005】2026年超格广东事业单位统考笔试全家桶",
+      "link": "https://pan.quark.cn/s/70dff7156923"
+     },
+     {
+      "name": "【006】2026年山东事业单位系统班",
+      "link": "https://pan.quark.cn/s/d09201afeec0"
+     },
+     {
+      "name": "【007】2026年CG全国通用事业单位职测",
+      "link": "https://pan.quark.cn/s/2bb753994cf5"
+     },
+     {
+      "name": "【008】2026年CG全国通用事业单位职测（快学版）",
+      "link": "https://pan.quark.cn/s/7dccb09cab25"
+     },
+     {
+      "name": "【009】2026年CG职测（六合一）理论实战班",
+      "link": "https://pan.quark.cn/s/38f82c4fbd0a"
+     },
+     {
+      "name": "【010】2026年CG职测（五合一）夸夸刷",
+      "link": "https://pan.quark.cn/s/02737ba1135a"
+     },
+     {
+      "name": "【011】2026年CG职测（五合一）超大杯",
+      "link": "https://pan.quark.cn/s/125cc62d4e53"
+     },
+     {
+      "name": "【012】2026年CG事考职测超大杯刷题营",
+      "link": "https://pan.quark.cn/s/ff96501ba623"
+     },
+     {
+      "name": "【013】2026年白天事业编公基常识【上岸智路】",
+      "link": "https://pan.quark.cn/s/73e18cf22c57"
+     },
+     {
+      "name": "【014】2026年白天事业编真题解析【上岸智路】",
+      "link": "https://pan.quark.cn/s/f5e017b7d213"
+     },
+     {
+      "name": "【015】2026年事业编考试联考A类【汇总】",
+      "link": "https://pan.quark.cn/s/e1f213f75ad3"
+     },
+     {
+      "name": "【016】2026年事业编考试联考B类【汇总】",
+      "link": "https://pan.quark.cn/s/174803089567"
+     },
+     {
+      "name": "【017】2026年事业编考试联考C类【汇总】",
+      "link": "https://pan.quark.cn/s/afa9d0d9be09"
+     },
+     {
+      "name": "【018】2026年事业编考试联考D类【汇总】",
+      "link": "https://pan.quark.cn/s/b4efdf727f18"
+     },
+     {
+      "name": "【019】2026年事业编考试联考E类【汇总】",
+      "link": "https://pan.quark.cn/s/b075681629f2"
+     },
+     {
+      "name": "【020】2026年笨鸟广东事业单位统考政治常识全家桶",
+      "link": "https://pan.quark.cn/s/600bf7846d5c"
+     },
+     {
+      "name": "【021】2026年山东事业单位王小晨综应技巧能力&刷题强化课",
+      "link": "https://pan.quark.cn/s/d3526c96a00e"
+     },
+     {
+      "name": "【022】2026年粉笔四川事业单位系统班",
+      "link": "https://pan.quark.cn/s/f49eebc968b4"
+     },
+     {
+      "name": "【023】2026年JBC四川事业单位省属联考高端班",
+      "link": "https://pan.quark.cn/s/477e4e975dcf"
+     },
+     {
+      "name": "【024】2026年考拉四川事业单位致胜班",
+      "link": "https://pan.quark.cn/s/39d65c7e0cc3"
+     },
+     {
+      "name": "【025】2026福建事业单位林英公基麒麟计划3.0",
+      "link": "https://pan.quark.cn/s/471015193852"
+     },
+     {
+      "name": "680系统班",
+      "link": "https://pan.quark.cn/s/1126246e87d3"
+     }
+    ]
+   },
+   {
+    "name": "2026张弓言语合集",
+    "link": "https://pan.quark.cn/s/2f9541ecbdfd",
+    "items": [
+     {
+      "name": "2026国考第1期3节张弓刷题课（全）",
+      "link": "https://pan.quark.cn/s/a993d274b5d9"
+     },
+     {
+      "name": "2026国考第4期9节张弓言语理论（全）",
+      "link": "https://pan.quark.cn/s/246c43b559b3"
+     },
+     {
+      "name": "2026国考言语热门话题大预测【倪涵&李玟冰&夏雨&姜然&张弓】",
+      "link": "https://pan.quark.cn/s/287a6861b8c5"
+     },
+     {
+      "name": "2026言语提速必杀技【刘柏衡&张弓】",
+      "link": "https://pan.quark.cn/s/725ae377dfd6"
+     },
+     {
+      "name": "2026张弓言语十二箭【上岸村】",
+      "link": "https://pan.quark.cn/s/2352477bab3f"
+     },
+     {
+      "name": "26上岸村·张弓言语200题复盘笔记（官方版本）(1)",
+      "link": "https://pan.quark.cn/s/468114e837ea"
+     },
+     {
+      "name": "26上岸村张弓·言语200题(1)",
+      "link": "https://pan.quark.cn/s/535fdcd3cf9c"
+     },
+     {
+      "name": "张弓旧课（含模考解析）",
+      "link": "https://pan.quark.cn/s/bd9c35805fc5"
+     }
+    ]
+   },
+   {
+    "name": "白鹭",
+    "link": "https://pan.quark.cn/s/7e81ad7c0055",
+    "items": [
+     {
+      "name": "【1】2026白鹭申论扎马步+易行",
+      "link": "https://pan.quark.cn/s/0ad50391ad90"
+     },
+     {
+      "name": "【181】2026年省考白鹭申论大决战联考冲刺营",
+      "link": "https://pan.quark.cn/s/65e5f3fb46fc"
+     },
+     {
+      "name": "【2】2026白鹭申论破题阵突破营",
+      "link": "https://pan.quark.cn/s/98d11e3d84a7"
+     },
+     {
+      "name": "【3】2026白鹭申论点将台实战营",
+      "link": "https://pan.quark.cn/s/2573b947192c"
+     },
+     {
+      "name": "【99】白鹭历年课程",
+      "link": "https://pan.quark.cn/s/d4af3cf99094"
+     }
+    ]
+   },
+   {
+    "name": "超格【高照】",
+    "link": "https://pan.quark.cn/s/1493d9c03f95",
+    "items": [
+     {
+      "name": "【00】高照速算",
+      "link": "https://pan.quark.cn/s/3717430f90ae"
+     },
+     {
+      "name": "【01】2026年行测+申论（六合一）理论实战班",
+      "link": "https://pan.quark.cn/s/c22024c3cb24"
+     },
+     {
+      "name": "【02】2026年CG（五合一）行测+申论夸夸刷",
+      "link": "https://pan.quark.cn/s/9e62ba6eaf86"
+     },
+     {
+      "name": "【03】2026年CG（五合一）行测+申论超大杯",
+      "link": "https://pan.quark.cn/s/10b1837cd1d7"
+     },
+     {
+      "name": "【04】2026年国考套卷实战班（10套卷）+冲刺点睛课程",
+      "link": "https://pan.quark.cn/s/6fbddb04cdd1"
+     },
+     {
+      "name": "【05】2026年省考行测申论（六合一）超大杯刷题营",
+      "link": "https://pan.quark.cn/s/d7f95c763c93"
+     },
+     {
+      "name": "【06】2026年省考CG套卷实战班&冲刺点睛课",
+      "link": "https://pan.quark.cn/s/e49cbb10b087"
+     },
+     {
+      "name": "【超格】2026年高照数字推理460题",
+      "link": "https://pan.quark.cn/s/e91c596a10f8"
+     },
+     {
+      "name": "【图推】2026刘义恒图形推理700题",
+      "link": "https://pan.quark.cn/s/a5c97e29bcab"
+     },
+     {
+      "name": "2026年超格全家桶笔记",
+      "link": "https://pan.quark.cn/s/d9585183780e"
+     }
+    ]
+   },
+   {
+    "name": "大宝小宝",
+    "link": "https://pan.quark.cn/s/2a11b0e16b77",
+    "items": [
+     {
+      "name": "【182】2026年多省联考大宝小宝言语新春焕新刷题班",
+      "link": "https://pan.quark.cn/s/ce209ff17923"
+     },
+     {
+      "name": "【183】2026年多省联考大宝小宝言语冲刺绝杀十套卷",
+      "link": "https://pan.quark.cn/s/6e0d83d1e9c4"
+     },
+     {
+      "name": "【183】2026年多省联考大宝小宝言语冲刺绝杀十套卷(1)",
+      "link": "https://pan.quark.cn/s/7d20502144f7"
+     }
+    ]
+   },
+   {
+    "name": "粉笔980",
+    "link": "https://pan.quark.cn/s/3a5a5b32c619",
+    "items": [
+     {
+      "name": "【00】2026FB国考配套29册图书电子版",
+      "link": "https://pan.quark.cn/s/32e30295d83f"
+     },
+     {
+      "name": "2025年单独命题省份省考",
+      "link": "https://pan.quark.cn/s/1d2722947283"
+     },
+     {
+      "name": "2025事业单位联考ABCDE类系统班",
+      "link": "https://pan.quark.cn/s/0428a96b9223"
+     },
+     {
+      "name": "2026粉笔每月时政",
+      "link": "https://pan.quark.cn/s/8f4271be0abc"
+     },
+     {
+      "name": "2026国考终极押题密卷【FB】",
+      "link": "https://pan.quark.cn/s/41f77564a3f0"
+     },
+     {
+      "name": "2026年【超值7+1】理论刷题课",
+      "link": "https://pan.quark.cn/s/86e2cd310133"
+     },
+     {
+      "name": "2026年多省联考系统班",
+      "link": "https://pan.quark.cn/s/e699d8cfd1db"
+     },
+     {
+      "name": "2026年粉笔多省联考980系统班",
+      "link": "https://pan.quark.cn/s/f1bb5380b56e"
+     },
+     {
+      "name": "2026年粉刷刷合集",
+      "link": "https://pan.quark.cn/s/764d0556cd3b"
+     },
+     {
+      "name": "2026年广东省考系统班",
+      "link": "https://pan.quark.cn/s/836a050dc9da"
+     },
+     {
+      "name": "2026年江苏省考980系统班",
+      "link": "https://pan.quark.cn/s/9787ea5ca8aa"
+     },
+     {
+      "name": "2026年考前必做100题",
+      "link": "https://pan.quark.cn/s/270a91f4db8f"
+     },
+     {
+      "name": "2026年名师堂合集",
+      "link": "https://pan.quark.cn/s/f85409841e38"
+     },
+     {
+      "name": "2026年FB国考系统班",
+      "link": "https://pan.quark.cn/s/103ea657d6e6"
+     },
+     {
+      "name": "2026山东省考980系统班",
+      "link": "https://pan.quark.cn/s/fd42028e2501"
+     },
+     {
+      "name": "2026申论100题",
+      "link": "https://pan.quark.cn/s/37e97b94ddfd"
+     },
+     {
+      "name": "行测25000题【26新版】",
+      "link": "https://pan.quark.cn/s/69fb99391988"
+     },
+     {
+      "name": "行测5000题",
+      "link": "https://pan.quark.cn/s/8e36efe1655e"
+     }
+    ]
+   },
+   {
+    "name": "郭熙合集",
+    "link": "https://pan.quark.cn/s/984d015b21ca",
+    "items": [
+     {
+      "name": "【01】2026言语-郭熙",
+      "link": "https://pan.quark.cn/s/d5d109f547e6"
+     },
+     {
+      "name": "【02】郭熙笔记",
+      "link": "https://pan.quark.cn/s/1f491bfd8bd5"
+     },
+     {
+      "name": "【03】2025版郭熙言语必刷100题(2025版)",
+      "link": "https://pan.quark.cn/s/3eaad87acc2d"
+     },
+     {
+      "name": "【04】【基础课】2025国考郭熙言语理解",
+      "link": "https://pan.quark.cn/s/973cb61f40e0"
+     },
+     {
+      "name": "【05】郭熙言语上分总动员",
+      "link": "https://pan.quark.cn/s/5357c3e1e067"
+     },
+     {
+      "name": "【06】郭熙言语必做100题笔记+讲义",
+      "link": "https://pan.quark.cn/s/18ed5776f722"
+     },
+     {
+      "name": "【07】【刷题课】郭熙言语100题",
+      "link": "https://pan.quark.cn/s/d4984db19945"
+     },
+     {
+      "name": "【08】【刷题课】郭熙言语上分总动员：金题精刷攻略",
+      "link": "https://pan.quark.cn/s/63983be7f0f7"
+     },
+     {
+      "name": "【09】【刷题课】培优计划：郭熙言语专项全家桶",
+      "link": "https://pan.quark.cn/s/e5c9167529c6"
+     },
+     {
+      "name": "【10】2024培优计划：郭熙言语专项全家桶",
+      "link": "https://pan.quark.cn/s/6d4a6d259848"
+     },
+     {
+      "name": "【11】2024郭熙言语必做100题（笔记+讲义+视频）",
+      "link": "https://pan.quark.cn/s/4c55d1b11d60"
+     },
+     {
+      "name": "【12】【刷题课】2026郭熙言语考前必做100题",
+      "link": "https://pan.quark.cn/s/dc81b88ab8d3"
+     },
+     {
+      "name": "【13】2026郭熙多省联考言语考前临门一脚",
+      "link": "https://pan.quark.cn/s/9406b204f8d4"
+     }
+    ]
+   },
+   {
+    "name": "花生十三",
+    "link": "https://pan.quark.cn/s/16f39ac6d297",
+    "items": [
+     {
+      "name": "【01】2026年花生十三飞扬笔试系统班",
+      "link": "https://pan.quark.cn/s/ddf28754240c"
+     },
+     {
+      "name": "【02】2026年花生十三飞扬国考套题班一期",
+      "link": "https://pan.quark.cn/s/2da43b0bffc3"
+     },
+     {
+      "name": "【03】2026年花生十三飞扬国考套题班二期",
+      "link": "https://pan.quark.cn/s/cc39a737e692"
+     },
+     {
+      "name": "【04】2026年省考四海行测2000题海海刷",
+      "link": "https://pan.quark.cn/s/7597b096b1bd"
+     },
+     {
+      "name": "【05】2026年省考花生十三飞扬套题班一期",
+      "link": "https://pan.quark.cn/s/9f62b098c252"
+     },
+     {
+      "name": "【06】2026年省考花生十三飞扬套题班二期",
+      "link": "https://pan.quark.cn/s/8ce5fc4cc5b2"
+     },
+     {
+      "name": "【07】2026年花生十三飞扬事业单位联考A类套题冲刺班",
+      "link": "https://pan.quark.cn/s/b875ab50e595"
+     },
+     {
+      "name": "【判断】2026四海逻辑判断600题刷题精讲班",
+      "link": "https://pan.quark.cn/s/71292355340e"
+     },
+     {
+      "name": "【行测】2026年花生十三全科争议题专项解析班",
+      "link": "https://pan.quark.cn/s/02aa2421e144"
+     },
+     {
+      "name": "花生十三笔记",
+      "link": "https://pan.quark.cn/s/473c24752909"
+     }
+    ]
+   },
+   {
+    "name": "叽叽喳喳",
+    "link": "https://pan.quark.cn/s/4fead2186869",
+    "items": [
+     {
+      "name": "2026数量关系冲刺课【叽叽喳喳的公考】",
+      "link": "https://pan.quark.cn/s/d3e346d29440"
+     },
+     {
+      "name": "合并模块版：数量真题刷题课（800道）【叽叽喳喳的公考】",
+      "link": "https://pan.quark.cn/s/ca62785fc57b"
+     },
+     {
+      "name": "合并套题版：数量最新五年国省联选（59套）【叽叽喳喳的公考】",
+      "link": "https://pan.quark.cn/s/f9fbf6394bb0"
+     },
+     {
+      "name": "数量关系系统理论课【叽叽喳喳的公考】",
+      "link": "https://pan.quark.cn/s/3cf8e168d395"
+     },
+     {
+      "name": "数量精讲快解50套题【叽叽喳喳的公考】",
+      "link": "https://pan.quark.cn/s/e3c613be54d8"
+     },
+     {
+      "name": "资料估算拔高进阶9讲+1000道五年真题无硬算【叽叽喳喳的公考】",
+      "link": "https://pan.quark.cn/s/c46d1825fcd1"
+     }
+    ]
+   },
+   {
+    "name": "李梦娇合集",
+    "link": "https://pan.quark.cn/s/ee1903610584",
+    "items": [
+     {
+      "name": "（最新）2024李梦娇每月时政",
+      "link": "https://pan.quark.cn/s/504e8c17265d"
+     },
+     {
+      "name": "【1】2024李梦娇常识公基精讲班",
+      "link": "https://pan.quark.cn/s/f4e05d8e657a"
+     },
+     {
+      "name": "【10】李梦娇二十大必考点 + 二十大报告预测题",
+      "link": "https://pan.quark.cn/s/228fe6ac7eb7"
+     },
+     {
+      "name": "【2】2024李梦娇、张鑫常识历年真题精讲班",
+      "link": "https://pan.quark.cn/s/9f189b3c7582"
+     },
+     {
+      "name": "【3】李梦娇常识口诀歌",
+      "link": "https://pan.quark.cn/s/1da2c12a8790"
+     },
+     {
+      "name": "【4】李梦娇所有的口诀歌合集（全全全！！）",
+      "link": "https://pan.quark.cn/s/32346a68a8c2"
+     },
+     {
+      "name": "【5】2024李梦娇公基常识九大秒杀绝技",
+      "link": "https://pan.quark.cn/s/322e3cf6b7e1"
+     },
+     {
+      "name": "【6】李梦娇公基3000题",
+      "link": "https://pan.quark.cn/s/32d04f39d838"
+     },
+     {
+      "name": "【7】梦娇《常识速记口诀88条8.0版》",
+      "link": "https://pan.quark.cn/s/5cace9f393fc"
+     },
+     {
+      "name": "【8】梦娇《民法典》专项班",
+      "link": "https://pan.quark.cn/s/20b781206aee"
+     },
+     {
+      "name": "【9】2024李梦娇时政专项班【更新中！】",
+      "link": "https://pan.quark.cn/s/aefd98bbff38"
+     },
+     {
+      "name": "【常识】2026年李梦娇常识速记口诀88条【11.0版】",
+      "link": "https://pan.quark.cn/s/ed2c1047fd53"
+     },
+     {
+      "name": "【常识判断】2025年李梦娇常识判断冲刺4套卷",
+      "link": "https://pan.quark.cn/s/2de9ca0bf30a"
+     },
+     {
+      "name": "【公基】2025年李梦娇公基常识精品班",
+      "link": "https://pan.quark.cn/s/c649cc18e2bd"
+     },
+     {
+      "name": "【时政】2025李梦娇半月时政硬核考点【4-6月下半月已更新】",
+      "link": "https://pan.quark.cn/s/fa49f9d121ee"
+     },
+     {
+      "name": "【政治理论】2025李梦娇政治理论",
+      "link": "https://pan.quark.cn/s/c7fcb96a18a8"
+     },
+     {
+      "name": "【政治理论】2025年李梦娇政治理论冲刺4套卷",
+      "link": "https://pan.quark.cn/s/6a45b0b54651"
+     },
+     {
+      "name": "【政治理论】2026李梦娇《二十届四中全会50问》考前必看",
+      "link": "https://pan.quark.cn/s/cdc8ece0f11f"
+     },
+     {
+      "name": "【政治理论】2026李梦娇政治理论专项班＋时政",
+      "link": "https://pan.quark.cn/s/6c4df148b66d"
+     },
+     {
+      "name": "2024李梦娇常识速记口诀88条【9.0版】",
+      "link": "https://pan.quark.cn/s/43ab3a8cdcc9"
+     },
+     {
+      "name": "2026李梦娇一号文件考点和100题",
+      "link": "https://pan.quark.cn/s/b2c3d8560b9c"
+     },
+     {
+      "name": "李梦娇常识秒杀十二绝技",
+      "link": "https://pan.quark.cn/s/f62dfa62cd92"
+     },
+     {
+      "name": "李梦娇常识知识点精简版",
+      "link": "https://pan.quark.cn/s/20958a259243"
+     }
+    ]
+   },
+   {
+    "name": "刘文超&阿里木江",
+    "link": "https://pan.quark.cn/s/8e3a9bfd7e15",
+    "items": [
+     {
+      "name": "【基础课】2025国考省考笔试全程班（阿里木江&刘文超&李威猛）",
+      "link": "https://pan.quark.cn/s/1ebfff0bb8fa"
+     },
+     {
+      "name": "【数资】刘文超资料分析+数量关系刷题课",
+      "link": "https://pan.quark.cn/s/68f8846db7bf"
+     },
+     {
+      "name": "【刷题课】2025国考省考笔试全程班（阿里木江&刘文超&李威猛）",
+      "link": "https://pan.quark.cn/s/d10571f29c6c"
+     },
+     {
+      "name": "【刷题课】2025年国考疯魔班【刘文超&威猛公考】⭐⭐⭐",
+      "link": "https://pan.quark.cn/s/5164b48fb35a"
+     },
+     {
+      "name": "【言语】2026阿里木江言语系统班",
+      "link": "https://pan.quark.cn/s/d1753d47a3a0"
+     }
+    ]
+   },
+   {
+    "name": "刘义恒",
+    "link": "https://pan.quark.cn/s/c017483924ba",
+    "items": [
+     {
+      "name": "（104）图形推理（刘义恒大神）",
+      "link": "https://pan.quark.cn/s/83734c97d5c3"
+     },
+     {
+      "name": "【20】2026年省考超格套卷实战班（10套卷）+冲刺点睛课程",
+      "link": "https://pan.quark.cn/s/f19704acdfdd"
+     },
+     {
+      "name": "【公考-超大杯】2026省考超格行测申论（六合一）超大杯刷题营",
+      "link": "https://pan.quark.cn/s/07d28607d674"
+     },
+     {
+      "name": "【图推】2026刘义恒图形推理700题",
+      "link": "https://pan.quark.cn/s/decd2625b48a"
+     },
+     {
+      "name": "2026年多省联考刘义恒图推点睛课- 图推猜题大盘点",
+      "link": "https://pan.quark.cn/s/370bbb4d3eca"
+     },
+     {
+      "name": "刘义恒点睛押题【看这个】",
+      "link": "https://pan.quark.cn/s/73117be00fbe"
+     }
+    ]
+   },
+   {
+    "name": "龙飞图推",
+    "link": "https://pan.quark.cn/s/14e1a83b7250",
+    "items": [
+     {
+      "name": "【05】2026省考龙飞判断试题精讲定义判断",
+      "link": "https://pan.quark.cn/s/27414d9ab7d0"
+     },
+     {
+      "name": "【判断】2026龙飞平面图推500题刷题精讲班",
+      "link": "https://pan.quark.cn/s/12a1a34b8e85"
+     },
+     {
+      "name": "【判断】2026龙飞平面图形推理筑基先行班",
+      "link": "https://pan.quark.cn/s/1fea46ca68b9"
+     },
+     {
+      "name": "【判断】2026省考龙飞判断试题精讲平面图推",
+      "link": "https://pan.quark.cn/s/a36848e503e0"
+     },
+     {
+      "name": "2026龙飞立体图推理论刷题班",
+      "link": "https://pan.quark.cn/s/dce22fbcb3fb"
+     }
+    ]
+   },
+   {
+    "name": "毛娃儿",
+    "link": "https://pan.quark.cn/s/92d4ffbde46a",
+    "items": [
+     {
+      "name": "【数量】2025毛娃儿数量关系系统课",
+      "link": "https://pan.quark.cn/s/ba0b7cd5382b"
+     },
+     {
+      "name": "【数量】2025毛娃儿行测数量系统刷题课",
+      "link": "https://pan.quark.cn/s/10b93466d733"
+     },
+     {
+      "name": "【数量】2026毛娃儿数量关系系统刷题课",
+      "link": "https://pan.quark.cn/s/6a97762cfda0"
+     },
+     {
+      "name": "【数量】2026毛娃儿数量小白考场极限抢分攻略",
+      "link": "https://pan.quark.cn/s/8de3798ae478"
+     },
+     {
+      "name": "【资料】2025毛娃儿行测资料系统刷题课",
+      "link": "https://pan.quark.cn/s/f17d25b6e2dd"
+     },
+     {
+      "name": "【资料】2025毛娃儿资料分析系统课",
+      "link": "https://pan.quark.cn/s/7daf2ccb1de8"
+     }
+    ]
+   },
+   {
+    "name": "面试课程",
+    "link": "https://pan.quark.cn/s/6b0aea75e35a",
+    "items": [
+     {
+      "name": "【公安面试】",
+      "link": "https://pan.quark.cn/s/2a9734f04400"
+     },
+     {
+      "name": "【军队文职面试】",
+      "link": "https://pan.quark.cn/s/98da5d5dafd7"
+     },
+     {
+      "name": "【三支一扶面试合集】",
+      "link": "https://pan.quark.cn/s/3fe8582436b2"
+     },
+     {
+      "name": "2026年面试",
+      "link": "https://pan.quark.cn/s/bb1b98b3db55"
+     },
+     {
+      "name": "公考面试资料合集",
+      "link": "https://pan.quark.cn/s/fe5eb53cf74b"
+     },
+     {
+      "name": "公考资料合集2",
+      "link": "https://pan.quark.cn/s/7a2129c31e10"
+     }
+    ]
+   },
+   {
+    "name": "聂佳",
+    "link": "https://pan.quark.cn/s/473d2aa292d0",
+    "items": [
+     {
+      "name": "【2019】2019聂佳判断（最强版本）",
+      "link": "https://pan.quark.cn/s/ae7d7c627b6c"
+     },
+     {
+      "name": "【2022】2022聂佳逻辑判断1拖N",
+      "link": "https://pan.quark.cn/s/366490e68e2e"
+     },
+     {
+      "name": "【2024】2024聂佳类比推理系统精讲课",
+      "link": "https://pan.quark.cn/s/d1e71a62c4a3"
+     },
+     {
+      "name": "【笔记】聂佳判断笔记",
+      "link": "https://pan.quark.cn/s/8f855dd1387e"
+     },
+     {
+      "name": "【题本】聂佳判断推理题本合集",
+      "link": "https://pan.quark.cn/s/75d91ddd6b15"
+     },
+     {
+      "name": "1、2024聂佳削弱题型系统精班",
+      "link": "https://pan.quark.cn/s/350c1c7a99bd"
+     }
+    ]
+   },
+   {
+    "name": "事业单位",
+    "link": "https://pan.quark.cn/s/7dbebc832724",
+    "items": [
+     {
+      "name": "（9）2026年相丽君综应A金卷预测班",
+      "link": "https://pan.quark.cn/s/9f75064ce0ca"
+     },
+     {
+      "name": "【00】陈老司B站版综合应用能力A类基础课",
+      "link": "https://pan.quark.cn/s/4d701423549b"
+     },
+     {
+      "name": "【01】2026广东事业编统考公基&职测系统课【李卜&李铁】(1)",
+      "link": "https://pan.quark.cn/s/42d53f98e0f3"
+     },
+     {
+      "name": "【02】2026年超格广东事业单位统考笔试全家桶",
+      "link": "https://pan.quark.cn/s/f38dab4bd28e"
+     },
+     {
+      "name": "【04】【事业单位-夸夸刷】2026年CG（五合一）行测+综应夸夸刷",
+      "link": "https://pan.quark.cn/s/6df647583319"
+     },
+     {
+      "name": "【051】2026年山东事业单位王小晨综应技巧能力&刷题强化课",
+      "link": "https://pan.quark.cn/s/2b06c9393c48"
+     },
+     {
+      "name": "【11】2026超格全国事业单位全程班D类（职测+综应）(1)",
+      "link": "https://pan.quark.cn/s/0a12b0902799"
+     },
+     {
+      "name": "【13】广东李铁统考公基考前3套题（23~25真题）",
+      "link": "https://pan.quark.cn/s/7d3a61c5a644"
+     },
+     {
+      "name": "【16】2026超格全国通用事业单位职测(1)",
+      "link": "https://pan.quark.cn/s/bff4ea0cc255"
+     },
+     {
+      "name": "【21】2025《综合知识》学霸上岸笔记",
+      "link": "https://pan.quark.cn/s/5a63ad1d8840"
+     },
+     {
+      "name": "【21】2026超格全国事业单位笔试D类综应（快学MINI）系统班",
+      "link": "https://pan.quark.cn/s/5b2d4215f1ea"
+     },
+     {
+      "name": "【22】2026上事业单位联考超格套卷实战班综应A类15套",
+      "link": "https://pan.quark.cn/s/1310ece878d3"
+     },
+     {
+      "name": "【23】2026上事业单位联考超格套卷实战班综应B类15套",
+      "link": "https://pan.quark.cn/s/26152b063fd4"
+     },
+     {
+      "name": "【24】2026上事业单位联考超格套卷实战班综应C类15套(1)",
+      "link": "https://pan.quark.cn/s/7f8a349c46c5"
+     },
+     {
+      "name": "【公基】2025版公基基础学霸笔记 （190页）",
+      "link": "https://pan.quark.cn/s/ae0099e321ce"
+     },
+     {
+      "name": "【公基】2025版公基思维导图420页（上册+下册）",
+      "link": "https://pan.quark.cn/s/ebfdba01c959"
+     },
+     {
+      "name": "【广东】2026广东省情【李铁&李卜】（广东事业编省考选调人才引进）",
+      "link": "https://pan.quark.cn/s/82d8f4dc9d0d"
+     },
+     {
+      "name": "【全国事业单位联考真题ABCDE类（2015-2025）】",
+      "link": "https://pan.quark.cn/s/69b888722231"
+     },
+     {
+      "name": "【事业单位-超大杯】2026超格职测+综应（五合一）超大杯",
+      "link": "https://pan.quark.cn/s/c5929d52b1e8"
+     },
+     {
+      "name": "【事业单位】2026超格职测+综应（六合一）理论实战班",
+      "link": "https://pan.quark.cn/s/12feb258e1f2"
+     },
+     {
+      "name": "【事业单位】2026超格职测+综应（六合一）理论实战班(1)",
+      "link": "https://pan.quark.cn/s/997f984e29b2"
+     },
+     {
+      "name": "【真题】2025事业单位联考【职测】【综应】ABCDE类历年真题",
+      "link": "https://pan.quark.cn/s/4ce78086c825"
+     },
+     {
+      "name": "【综应A】2026年公考小马哥综应A类基础理论课",
+      "link": "https://pan.quark.cn/s/925e4c92d01f"
+     },
+     {
+      "name": "【综应D】2026事业单位明哥综应D类全程班",
+      "link": "https://pan.quark.cn/s/a4c665f4edcf"
+     },
+     {
+      "name": "【z01】2026年CG 山东事业单位冲刺点睛",
+      "link": "https://pan.quark.cn/s/a42101f78a1b"
+     },
+     {
+      "name": "00【每个省份资料】各省份事业单位合集",
+      "link": "https://pan.quark.cn/s/1e1605c6cb66"
+     },
+     {
+      "name": "2025事业单位合集（ABCDE类）",
+      "link": "https://pan.quark.cn/s/319f1f4e6274"
+     },
+     {
+      "name": "2026笨鸟深圳事业单位统考专项班",
+      "link": "https://pan.quark.cn/s/999d9fcf3782"
+     },
+     {
+      "name": "2026超格全国通用事业单位职测",
+      "link": "https://pan.quark.cn/s/e0a305b21d45"
+     },
+     {
+      "name": "2026超格全国通用事业单位职测（快学版）",
+      "link": "https://pan.quark.cn/s/c90cca90efbf"
+     },
+     {
+      "name": "2026超格全国通用事业单位D类综应(中小学)（快学版）",
+      "link": "https://pan.quark.cn/s/c263f1ef1286"
+     },
+     {
+      "name": "2026超格事考综应B类超大杯刷题营",
+      "link": "https://pan.quark.cn/s/23fbe7a369b3"
+     },
+     {
+      "name": "2026超格事考综应C类超大杯刷题营",
+      "link": "https://pan.quark.cn/s/2957aff134c9"
+     },
+     {
+      "name": "2026粉笔联考事业单位A类系统班",
+      "link": "https://pan.quark.cn/s/d0f5f8e0f454"
+     },
+     {
+      "name": "2026联考事业单位B类系统班",
+      "link": "https://pan.quark.cn/s/9e10ff5feedb"
+     },
+     {
+      "name": "2026年联考事业单位C类系统班",
+      "link": "https://pan.quark.cn/s/aa373e866130"
+     },
+     {
+      "name": "2026年联考事业单位D类系统班",
+      "link": "https://pan.quark.cn/s/fb7a17604b89"
+     },
+     {
+      "name": "2026年联考事业单位E类系统班",
+      "link": "https://pan.quark.cn/s/ea0003581f94"
+     },
+     {
+      "name": "2026年山东事业单位系统班",
+      "link": "https://pan.quark.cn/s/0ad443072be7"
+     },
+     {
+      "name": "2026年CG事业单位D类综应+职测",
+      "link": "https://pan.quark.cn/s/52f4f8c5c942"
+     },
+     {
+      "name": "2026事业单位B类职测+综应【XTJ】",
+      "link": "https://pan.quark.cn/s/1693e82b338e"
+     },
+     {
+      "name": "2026综合应用能力（A类）系统理论课 天晓",
+      "link": "https://pan.quark.cn/s/2b7c73f4bc1f"
+     },
+     {
+      "name": "粉笔事业单位网课",
+      "link": "https://pan.quark.cn/s/01dfad29489a"
+     },
+     {
+      "name": "广东小黑事业编公基冲刺2套卷",
+      "link": "https://pan.quark.cn/s/250bd6b7ba68"
+     },
+     {
+      "name": "马克公基笔记",
+      "link": "https://pan.quark.cn/s/9fe9b27b1135"
+     },
+     {
+      "name": "事业单位资料合集",
+      "link": "https://pan.quark.cn/s/a1ba60fa38e1"
+     }
+    ]
+   },
+   {
+    "name": "天晓合集",
+    "link": "https://pan.quark.cn/s/1158252e21bf",
+    "items": [
+     {
+      "name": "【面试】2025天晓公务员事业编结构化面试理论课",
+      "link": "https://pan.quark.cn/s/9e16c7ec7f7d"
+     },
+     {
+      "name": "【申论】2025省考天晓申论专项刷题班",
+      "link": "https://pan.quark.cn/s/9dd61c66a0ae"
+     },
+     {
+      "name": "【申论】2026天晓申论理论课（新大纲）",
+      "link": "https://pan.quark.cn/s/74868f95e9f6"
+     },
+     {
+      "name": "【申论】2026天晓申论套卷刷题课（11套卷）",
+      "link": "https://pan.quark.cn/s/55414f9bd5e4"
+     },
+     {
+      "name": "【申论】2026天晓申论套卷刷题课11节",
+      "link": "https://pan.quark.cn/s/94cc24d62be7"
+     },
+     {
+      "name": "【综应A】2025天晓综A套卷刷题班（11套）",
+      "link": "https://pan.quark.cn/s/a14d2ac775ea"
+     },
+     {
+      "name": "【综应A】2026天晓事业单位综A套卷批改班合集（10-23）",
+      "link": "https://pan.quark.cn/s/76ae3e0c92f0"
+     },
+     {
+      "name": "【综应A】2026天晓综合应用能力（A类）系统理论课",
+      "link": "https://pan.quark.cn/s/7cd7d84604e1"
+     },
+     {
+      "name": "【综应A】天晓事业单位综A佛脚班",
+      "link": "https://pan.quark.cn/s/c99887f6b099"
+     },
+     {
+      "name": "2023上岸村天晓综应A刷题班",
+      "link": "https://pan.quark.cn/s/4cfb03fd4c9f"
+     },
+     {
+      "name": "2024上岸村天晓综应A理论班-渠道二",
+      "link": "https://pan.quark.cn/s/1539a7ab73e4"
+     },
+     {
+      "name": "2024上岸村天晓综应A理论课-渠道一",
+      "link": "https://pan.quark.cn/s/9573cfb2dc67"
+     },
+     {
+      "name": "2026省联考天晓申论考前佛脚班",
+      "link": "https://pan.quark.cn/s/6e1e3327d309"
+     },
+     {
+      "name": "2026省联考天晓申论作文快速提分章法",
+      "link": "https://pan.quark.cn/s/8ec3e0707f88"
+     }
+    ]
+   },
+   {
+    "name": "网友红领巾",
+    "link": "https://pan.quark.cn/s/4be7bd9ff886",
+    "items": [
+     {
+      "name": "【01】红领巾合集",
+      "link": "https://pan.quark.cn/s/f34ee817b4c8"
+     },
+     {
+      "name": "【02】2025【精华完整版题本】网友红领巾大神",
+      "link": "https://pan.quark.cn/s/200835621366"
+     },
+     {
+      "name": "【03】2025年复盘计划",
+      "link": "https://pan.quark.cn/s/d70bb3adeb7c"
+     },
+     {
+      "name": "【04】【笔记】网友红领巾行测知识点整理+题本+做题框架",
+      "link": "https://pan.quark.cn/s/fc3a23ff6316"
+     },
+     {
+      "name": "【05】【面试】网友红领巾面试经验分享",
+      "link": "https://pan.quark.cn/s/44ecedd08d78"
+     },
+     {
+      "name": "【06】【速算】网友红领巾30分钟速算+思维导图",
+      "link": "https://pan.quark.cn/s/78f8801e7c33"
+     },
+     {
+      "name": "【07】【网友红领巾】备考经验",
+      "link": "https://pan.quark.cn/s/2db58d42bdbd"
+     },
+     {
+      "name": "【08】2022-2023多省联考真题复盘",
+      "link": "https://pan.quark.cn/s/b5d5337ef136"
+     },
+     {
+      "name": "【09】2025国考冲刺言语理解临时抱佛脚【2024国考执法卷复盘】",
+      "link": "https://pan.quark.cn/s/67663532351b"
+     },
+     {
+      "name": "【10】红领巾言语跟练",
+      "link": "https://pan.quark.cn/s/d7f32495db59"
+     },
+     {
+      "name": "【11】真题复盘",
+      "link": "https://pan.quark.cn/s/db783a78b377"
+     },
+     {
+      "name": "【12】题本",
+      "link": "https://pan.quark.cn/s/93545f230e20"
+     },
+     {
+      "name": "【13】模考复盘",
+      "link": "https://pan.quark.cn/s/2bfd5034e064"
+     },
+     {
+      "name": "网友红领巾选岗",
+      "link": "https://pan.quark.cn/s/cf1a662913cc"
+     }
+    ]
+   },
+   {
+    "name": "相丽君",
+    "link": "https://pan.quark.cn/s/deff9ae7925a",
+    "items": [
+     {
+      "name": "（1）【申论】2026相丽君申论技巧趣学班",
+      "link": "https://pan.quark.cn/s/db17576cd4dd"
+     },
+     {
+      "name": "（10）2026年省考相丽君申论补弱冲刺课(1)",
+      "link": "https://pan.quark.cn/s/0b9224ac56b2"
+     },
+     {
+      "name": "（11）2026年相丽君事业单位综应B类一课通（三合一）(1)",
+      "link": "https://pan.quark.cn/s/66e7257ff2f6"
+     },
+     {
+      "name": "（2）【申论】2026年相丽君文章写作训练营",
+      "link": "https://pan.quark.cn/s/d7408ef032bf"
+     },
+     {
+      "name": "（3）【申论】2026相丽君申论政治素养刷题班",
+      "link": "https://pan.quark.cn/s/80907c72c66a"
+     },
+     {
+      "name": "（4）2026相丽君下半年事业单位综应预测",
+      "link": "https://pan.quark.cn/s/e9c34a2f4da7"
+     },
+     {
+      "name": "（5）2026相丽君国考申论金卷预测班",
+      "link": "https://pan.quark.cn/s/c24d1c16a4fe"
+     },
+     {
+      "name": "（6）2026相丽君省考申论金卷预测班",
+      "link": "https://pan.quark.cn/s/483d4989fa61"
+     },
+     {
+      "name": "（7）2026年相丽君面试技巧精讲班",
+      "link": "https://pan.quark.cn/s/d0ac9ff08386"
+     },
+     {
+      "name": "（8）【综应A】2026相丽君综应精讲刷题班（A类）",
+      "link": "https://pan.quark.cn/s/3fb9ed67cb86"
+     },
+     {
+      "name": "（9）2026年相丽君综应A金卷预测班",
+      "link": "https://pan.quark.cn/s/2ddd4b026b78"
+     },
+     {
+      "name": "【12】2026年相丽君面试技巧精讲班【第二季】",
+      "link": "https://pan.quark.cn/s/404051579920"
+     }
+    ]
+   },
+   {
+    "name": "小黑政治理论",
+    "link": "https://pan.quark.cn/s/999ef1c96d8e",
+    "items": [
+     {
+      "name": "2026小黑合集",
+      "link": "https://pan.quark.cn/s/58346a093945"
+     },
+     {
+      "name": "省考课在序号18，点进去有个6冲刺课",
+      "link": "https://pan.quark.cn/s/4eed87574b50"
+     }
+    ]
+   },
+   {
+    "name": "小p公考",
+    "link": "https://pan.quark.cn/s/097f51d30675",
+    "items": []
+   },
+   {
+    "name": "小p公考 ",
+    "link": "",
+    "items": [
+     {
+      "name": "【事业单位】2025小P江苏事业单位逻辑判断理论+刷题课",
+      "link": "https://pan.quark.cn/s/200ccc5d6e7f"
+     },
+     {
+      "name": "【事业单位】2025小P江苏事业单位资料分析理论+刷题课",
+      "link": "https://pan.quark.cn/s/85ee6899ea63"
+     },
+     {
+      "name": "【行测】2025小P公考行测（基础班+刷题班）",
+      "link": "https://pan.quark.cn/s/16f5e5fa9a08"
+     },
+     {
+      "name": "【行测】2026小P公考数资判系统班",
+      "link": "https://pan.quark.cn/s/a34a8b8fedd2"
+     },
+     {
+      "name": "【资料】小p资料分析刷题150套",
+      "link": "https://pan.quark.cn/s/f7f92b4c183c"
+     },
+     {
+      "name": "2025小P公考（p神）江苏启禾模考大赛数资复盘",
+      "link": "https://pan.quark.cn/s/3dec2474b71d"
+     }
+    ]
+   },
+   {
+    "name": "雨菲（上岸村）",
+    "link": "https://pan.quark.cn/s/7ced0270668a",
+    "items": [
+     {
+      "name": "【186】2026年省考&事业编雨菲言语冲刺预测班",
+      "link": "https://pan.quark.cn/s/f3f55071b66b"
+     },
+     {
+      "name": "【往年】2025年课程",
+      "link": "https://pan.quark.cn/s/fbf9808b8eb0"
+     },
+     {
+      "name": "2026省考雨菲言语速解36计",
+      "link": "https://pan.quark.cn/s/fa5462bf23af"
+     },
+     {
+      "name": "2026雨菲必备高频成语20组",
+      "link": "https://pan.quark.cn/s/8da2232045e9"
+     },
+     {
+      "name": "2026雨菲言语百题斩刷题课",
+      "link": "https://pan.quark.cn/s/9f001c3af835"
+     },
+     {
+      "name": "2026雨菲言语全新黄金九讲",
+      "link": "https://pan.quark.cn/s/f989675998ff"
+     },
+     {
+      "name": "2026雨菲言语政治素养之密押60题",
+      "link": "https://pan.quark.cn/s/3c1dbcad8a79"
+     }
+    ]
+   },
+   {
+    "name": "袁东",
+    "link": "https://pan.quark.cn/s/e49d1ea7ce19",
+    "items": [
+     {
+      "name": "【003】2026年省考袁东十大话题押题预测范文",
+      "link": "https://pan.quark.cn/s/3b513e5c1355"
+     },
+     {
+      "name": "【01】2026袁东申论方法实战班",
+      "link": "https://pan.quark.cn/s/3bdb53259090"
+     },
+     {
+      "name": "【02】2026年袁东大作文专项班",
+      "link": "https://pan.quark.cn/s/22575fce44c1"
+     },
+     {
+      "name": "【03】2026袁东申论超大杯刷题班",
+      "link": "https://pan.quark.cn/s/844b6b6124d5"
+     },
+     {
+      "name": "【04】2026年袁东申论领跑营套题实战班",
+      "link": "https://pan.quark.cn/s/abc2008969cc"
+     },
+     {
+      "name": "【05】2026年袁东申论领跑营考前冲刺班（含行政执法大作文）",
+      "link": "https://pan.quark.cn/s/e8a165c6fa82"
+     },
+     {
+      "name": "【06省考】2026省考袁东申论领跑营理论刷题班",
+      "link": "https://pan.quark.cn/s/242d452f20ea"
+     },
+     {
+      "name": "【07】2026年省考袁东申论大作文专项冲刺班",
+      "link": "https://pan.quark.cn/s/8313b3e78d0e"
+     },
+     {
+      "name": "【175】2026年省考袁东申论套题实战班",
+      "link": "https://pan.quark.cn/s/93ed8b29bc31"
+     },
+     {
+      "name": "【2026】袁东改写200篇人民日报优秀范文",
+      "link": "https://pan.quark.cn/s/738ce43af8c7"
+     },
+     {
+      "name": "【2026】袁东申论规范词+高分范文",
+      "link": "https://pan.quark.cn/s/13731e98fbb5"
+     },
+     {
+      "name": "【2026】袁东申论十大热点话题素材（万能对策）",
+      "link": "https://pan.quark.cn/s/4cbac87e4c1d"
+     },
+     {
+      "name": "【2026】袁东行政执法终极专项素材",
+      "link": "https://pan.quark.cn/s/57edbff37b8d"
+     },
+     {
+      "name": "【面试】2025年袁东面试领跑营",
+      "link": "https://pan.quark.cn/s/9aba0c5060d7"
+     },
+     {
+      "name": "【面试】2026袁东面试领跑营方法精讲",
+      "link": "https://pan.quark.cn/s/64fb66ae82b3"
+     },
+     {
+      "name": "【往年】2025年袁东资料",
+      "link": "https://pan.quark.cn/s/ab22c03099fc"
+     },
+     {
+      "name": "【综应A】2026袁东事业单位综应A类【方法&刷题&冲刺】",
+      "link": "https://pan.quark.cn/s/da085e836205"
+     },
+     {
+      "name": "2026袁东事业单位综应A类考前急救包(1)",
+      "link": "https://pan.quark.cn/s/8c143db4cb07"
+     },
+     {
+      "name": "2026袁东事业单位综应B类考前急救包",
+      "link": "https://pan.quark.cn/s/3889e907c5ed"
+     }
+    ]
+   },
+   {
+    "name": "真题",
+    "link": "https://pan.quark.cn/s/66f3ebfaa325",
+    "items": [
+     {
+      "name": "公务员真题",
+      "link": "https://pan.quark.cn/s/a7baa0c858ae"
+     }
+    ]
+   }
+  ]
+ }
 ];
 
 // ============ RENDER ============
-const CATS = ['2027新课','2026合集','总合集'];
-const CAT_ICONS = {'2027新课':'🆕','2026合集':'📦','总合集':'📚'};
-const TAG_MAP = {new:'最新',hot:'热门',free:'免费',update:'更新'};
-
-// Set update date
-// date moved to calendar section
+const CAT_ICONS = {};
+COURSE_TREE.forEach(r => { CAT_ICONS[r.root] = r.root.includes("2027") ? "🆕" : "📦"; });
 
 // Build tabs
-CATS.forEach(cat => {
+const tabBar = document.getElementById('tabBar');
+[['all','📚 全部'], ...COURSE_TREE.map(r => [r.root, (CAT_ICONS[r.root]||'') + ' ' + r.root])].forEach(([cat, label]) => {
   const btn = document.createElement('button');
-  btn.className = 'tab';
+  btn.className = 'tab' + (cat === 'all' ? ' active' : '');
   btn.dataset.cat = cat;
-  btn.textContent = (CAT_ICONS[cat]||'') + ' ' + cat;
+  btn.textContent = label;
   btn.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('search').value = '';
     renderCourses(cat);
   });
-  document.getElementById('tabBar').appendChild(btn);
+  tabBar.appendChild(btn);
 });
 
-// 从课程名提取年份，用于排序
-	function getYear(n) {
-	  // 匹配 2027、2026 等四位年份
-	  var m = n.match(/20\d{2}/);
-	  if (m) return parseInt(m[0]);
-	  // 匹配独立的 27、26 等两位年份（如"27陈怀安"）
-	  m = n.match(/(?:^|[^\d])(2[7-9])(?:[^\d]|$)/);
-	  if (m) return 2000 + parseInt(m[1]);
-	  m = n.match(/(?:^|[^\d])(2[0-6])(?:[^\d]|$)/);
-	  if (m) return 2000 + parseInt(m[1]);
-	  return 0;
-	}
+function linkBtn(link, type, label) {
+  if (!link) return '<span class="link-btn link-pending">待补链接</span>';
+  return '<a class="link-btn ' + type + '" href="' + link + '" target="_blank">' + label + '</a>';
+}
 
-	function renderCourses(filter) {
+function renderCourses(filter) {
   const container = document.getElementById('content');
   container.innerHTML = '';
-
-  const catsToShow = (filter === 'all') ? CATS : [filter];
+  const rootsToShow = (filter === 'all') ? COURSE_TREE : COURSE_TREE.filter(r => r.root === filter);
   let total = 0;
 
-  catsToShow.forEach(cat => {
-    let courses = COURSES.filter(c => c.cat === cat);
-    // 只在"全部"tab按年份降序排列（2027在前）
-    if (filter === 'all') {
-      courses = courses.slice().sort((a, b) => getYear(b.name) - getYear(a.name));
-    }
-    if (courses.length === 0) return;
-    total += courses.length;
+  rootsToShow.forEach(root => {
+    if (root.sections.length === 0) return;
 
-    const section = document.createElement('div');
-    section.className = 'section';
-    section.dataset.cat = cat;
+    let html = '<details class="section root-details" data-root="' + root.root + '"' + (filter === 'all' ? '' : ' open') + '>';
+    html += '<summary class="folder-root">';
+    html += (CAT_ICONS[root.root]||'📁') + ' ' + root.root;
+    html += ' <span style="font-size:12px;color:var(--muted);font-weight:400;">（' + root.sections.length + ' 个分区）</span>';
+    if (root.rootLink) html += ' ' + linkBtn(root.rootLink, 'link-folder', '📥 根目录');
+    else html += ' ' + '<span class="link-btn link-pending">📁 待补链接</span>';
+    html += '</summary><div class="root-body">';
 
-    let html = '<div class="section-title">' + (CAT_ICONS[cat]||'') + ' ' + cat;
-    html += '<span style="font-size:12px;color:var(--muted);font-weight:400;">（' + courses.length + '个）</span>';
-    html += '</div>';
+    root.sections.forEach(sec => {
+      html += '<details class="sec-details" data-sec="' + sec.name + '"' + (filter === 'all' ? '' : ' open') + '>';
+      html += '<summary class="section-title">';
+      html += '<span class="sec-name">📁 ' + sec.name + '</span>';
+      if (sec.link) html += ' ' + linkBtn(sec.link, 'link-folder', '📥 文件夹');
+      html += '<span style="font-size:11px;color:var(--muted);font-weight:400;">（' + sec.items.length + '项）</span>';
+      html += '</summary><div class="sec-body">';
 
-    courses.forEach((c, i) => {
-      html += '<div class="course" data-cat="' + cat + '" data-keywords="' + c.name + '">';
-      html += '<span class="course-num">' + String(i+1).padStart(2,'0') + '</span>';
-      html += '<span class="course-name">' + c.name + '</span>';
-      if (c.tag) {
-        html += '<span class="course-tag tag-' + c.tag + '">' + (TAG_MAP[c.tag]||c.tag) + '</span>';
-      }
-      html += '<span class="course-links">';
-      if (c.quark) html += '<a class="link-btn link-quark" href="' + c.quark + '" target="_blank">📥 夸克网盘</a>';
-      html += '</span></div>';
+      sec.items.forEach(item => {
+        html += '<div class="course" data-root="' + root.root + '" data-sec="' + sec.name + '" data-keywords="' + root.root + ' ' + sec.name + ' ' + item.name + '">';
+        html += '<span class="course-name">' + item.name + '</span>';
+        html += '<span class="course-links">';
+        html += linkBtn(item.link, 'link-quark', '📥 夸克网盘');
+        html += '</span></div>';
+      });
+
+      html += '</div></details>';
     });
 
-    section.innerHTML = html;
-    container.appendChild(section);
+    html += '</div></details>';
+    container.insertAdjacentHTML('beforeend', html);
+    total += container.lastElementChild.querySelectorAll('.course').length;
   });
 
   document.getElementById('totalCount').textContent = total;
@@ -333,465 +3059,28 @@ function filterCourses() {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelector('[data-cat="all"]').classList.add('active');
     renderCourses('all');
-    var oldSection = document.getElementById('updateSearchSection');
-    if (oldSection) oldSection.remove();
     return;
   }
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   renderCourses('all');
-  // Hide non-matching courses
   let count = 0;
+  // 搜索时强制展开所有 details，保证命中的内容可见
+  document.querySelectorAll('details').forEach(d => d.open = true);
   document.querySelectorAll('.course').forEach(el => {
     const keywords = (el.dataset.keywords || '').toLowerCase();
-    const cat = (el.dataset.cat || '').toLowerCase();
-    if (keywords.includes(kw) || cat.includes(kw)) {
-      el.style.display = '';
-      count++;
-    } else {
-      el.style.display = 'none';
-    }
+    if (keywords.includes(kw)) { el.style.display = ''; count++; }
+    else { el.style.display = 'none'; }
   });
-  // Hide empty sections
-  document.querySelectorAll('.section').forEach(sec => {
-    const visible = sec.querySelectorAll('.course[style*="display:"]').length;
+  document.querySelectorAll('.section.root-details').forEach(sec => {
     const total = sec.querySelectorAll('.course').length;
-    if (visible === total) sec.style.display = 'none';
-    else sec.style.display = '';
+    const hidden = sec.querySelectorAll('.course[style*="display: none"]').length;
+    sec.style.display = (hidden === total) ? 'none' : '';
   });
-  count += renderUpdateSearchResults(kw);
   document.getElementById('totalCount').textContent = count;
 }
 
-function getUpdateSearchMatches(kw) {
-  var matches = [];
-  var days = window.UPDATE_DAYS || [];
-  for (var i = 0; i < days.length; i++) {
-    var day = days[i];
-    for (var j = 0; j < day.courses.length; j++) {
-      var course = day.courses[j];
-      var text = [course.name, course.type, day.title, day.date, day.summary].join(' ').toLowerCase();
-      if (text.indexOf(kw) >= 0) {
-        matches.push({
-          date: day.date,
-          title: day.title,
-          name: course.name,
-          type: course.type,
-          link: course.link
-        });
-      }
-    }
-  }
-  return matches;
-}
-
-function renderUpdateSearchResults(kw) {
-  var container = document.getElementById('courseContainer');
-  var oldSection = document.getElementById('updateSearchSection');
-  if (oldSection) oldSection.remove();
-  if (!kw) return 0;
-  var matches = getUpdateSearchMatches(kw);
-  if (!matches.length) return 0;
-
-  var section = document.createElement('div');
-  section.className = 'section';
-  section.id = 'updateSearchSection';
-  var html = '<div class="section-title">📅 每日更新命中';
-  html += '<span style="font-size:12px;color:var(--muted);font-weight:400;">（' + matches.length + '个）</span>';
-  html += '</div>';
-
-  for (var i = 0; i < matches.length; i++) {
-    var item = matches[i];
-    html += '<div class="course">';
-    html += '<span class="course-num">' + String(i + 1).padStart(2, '0') + '</span>';
-    html += '<span class="course-name">' + item.name + '</span>';
-    html += '<span class="course-tag tag-update">' + item.title + '</span>';
-    if (item.type) html += '<span class="course-tag tag-update">' + item.type + '</span>';
-    html += '<span class="course-links">';
-    if (item.link) html += '<a class="link-btn link-quark" href="' + item.link + '" target="_blank">点击转存</a>';
-    html += '</span></div>';
-  }
-
-  section.innerHTML = html;
-  container.prepend(section);
-  return matches.length;
-}
-
-function trackClick(cat, type) {
-  console.log('点击：' + cat + ' | ' + type);
-  // 这里以后可以接入统计
-}
-
-// "全部" 按钮绑定事件
-document.querySelector('[data-cat="all"]').addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelector('[data-cat="all"]').classList.add('active');
-    document.getElementById('search').value = '';
-    renderCourses('all');
-  });
-
-
-
+// Init
 renderCourses('all');
-
-// ============ 填充更新日历 ============
-(function fillCalendar() {
-  window.UPDATE_DAYS = [
-    {date:"2026-08-03", title:"8月3日更新", summary:"🆕 新增 1 门 + 🔄 更新 10 门", courses:[
-      {name:"2027年FB【超值7+1】理论刷题课（很多人想要的） — 更新网课&答案", type:"🔄 更新", link:"https://pan.quark.cn/s/9f35f3491df3"},
-      {name:"2027国省考季花生十三飞扬系统班 — 更言语1000词11 / 更飞扬申论11", type:"🔄 更新", link:"https://pan.quark.cn/s/663f291e10aa"},
-      {name:"2027小马哥行测申论360全程班 — 更霍克判断01-03", type:"🔄 更新", link:"https://pan.quark.cn/s/f2942b1053c4"},
-      {name:"2027天晓综合应用能力（A类）系统理论课 — 更新06-08讲", type:"🔄 更新", link:"https://pan.quark.cn/s/f04d56707b63"},
-      {name:"2027年政治理论素养课-跟着杨攀老师学《求是》 — 更新03节", type:"🔄 更新", link:"https://pan.quark.cn/s/d5e48b579ea3"},
-      {name:"2027上岸村天琦申论大作文技巧课 — 更 申论写作金句与用典素材 / 更语言训练册&高频主题高分框架库", type:"🆕 新增", link:"https://pan.quark.cn/s/b6f07ced5d59"},
-      {name:"更新第二阶段15 — 更新第二阶段15", type:"🔄 更新", link:"https://pan.quark.cn/s/af0b16e53683"},
-      {name:"2027国考大懒猫言语刷题课一期 — 更09节", type:"🔄 更新", link:"https://pan.quark.cn/s/4cc47cba319d"},
-      {name:"2027年上岸村王兰亭综A理论筑基 — 更新14节", type:"🔄 更新", link:"https://pan.quark.cn/s/a6cc263bb096"},
-      {name:"2027超格行测+申论夸夸刷刷题营 — 更牟立志资料10 / 更冰哥＆李崇立申论09", type:"🔄 更新", link:"https://pan.quark.cn/s/ad1433eb1ddc"},
-      {name:"2027陈怀安行测圣经判断推理系统课 — 更05讲-定义判断", type:"🔄 更新", link:"https://pan.quark.cn/s/29b9381f7db1"}
-    ]},
-    {date:"2026-08-02", title:"8月2日更新", summary:"🆕 新增 0 门 + 🔄 更新 7 门", courses:[
-      {name:"2027国省考季花生十三飞扬系统班 — 更数量04", type:"🔄 更新", link:"https://pan.quark.cn/s/94222946ac9e"},
-      {name:"2027上岸村行测专项提升【二阶段】 — 更张弓03-06节 / 更数量林凡-05讲", type:"🔄 更新", link:"https://pan.quark.cn/s/f6fd95f1abd3"},
-      {name:"2027年FB千词计划：1000词精讲训练营 — 更11-12讲", type:"🔄 更新", link:"https://pan.quark.cn/s/25ad0b6bcb15"},
-      {name:"2027年FB行测高阶难题精刷540题 — 更言语04-05", type:"🔄 更新", link:"https://pan.quark.cn/s/b0a52b6addeb"},
-      {name:"2027小马哥行测申论360全程班 — 更霍克言语10", type:"🔄 更新", link:"https://pan.quark.cn/s/72096c256359"},
-      {name:"2027超格行测+申论夸夸刷刷题营 — 更牟立志资料09 / 更程意&何炜健判断08 / 更冰哥＆李崇立申论08 / 更刘义恒图推08", type:"🔄 更新", link:"https://pan.quark.cn/s/4fd7f1d15a7f"},
-      {name:"2027年上岸村王兰亭综A理论筑基 — 更新13节", type:"🔄 更新", link:"https://pan.quark.cn/s/f7231f9c3a8b"}
-    ]},
-    {date:"2026-08-01", title:"8月1日更新", summary:"🆕 新增 0 门 + 🔄 更新 8 门", courses:[
-      {name:"2027国省考季花生十三飞扬系统班 — 更砚宁言语1000词10 / 更君涛政治理论习题05 / 更数量03", type:"🔄 更新", link:"https://pan.quark.cn/s/93765f9ff38b"},
-      {name:"2027考季大懒猫言语刷刷刷直播课 — 更第23讲", type:"🔄 更新", link:"https://pan.quark.cn/s/30d9a4dbf453"},
-      {name:"2027年事考超格综A夸夸刷刷题营 — 更新05节", type:"🔄 更新", link:"https://pan.quark.cn/s/4accca889dc0"},
-      {name:"2027年国省考上岸村天琦申论26真题带练 — 更新07节", type:"🔄 更新", link:"https://pan.quark.cn/s/2603332c140b"},
-      {name:"2027陈怀安行测圣经判断推理系统课 — 更0725&0729直播答疑", type:"🔄 更新", link:"https://pan.quark.cn/s/caa9524fc4dc"},
-      {name:"2027天晓综合应用能力（A类）系统理论课 — 更新02-03讲", type:"🔄 更新", link:"https://pan.quark.cn/s/b1ac1f5b489b"},
-      {name:"2027小马哥行测申论360全程班 — 更霍克言语9", type:"🔄 更新", link:"https://pan.quark.cn/s/0e65b03166bc"},
-      {name:"2027国考大懒猫言语刷题课一期 — 更07-08节", type:"🔄 更新", link:"https://pan.quark.cn/s/bb05af7b3fd0"}
-    ]},
-    {date:"2026-07-30", title:"7月30日更新", summary:"🆕 新增 4 门 + 🔄 更新 9 门", courses:[
-      {name:"2027国省考季花生十三飞扬系统班 — 更砚宁言语1000词06-07 / 更君涛政治理论习题01-02 / 更数量01", type:"🔄 更新", link:"https://pan.quark.cn/s/8b96a1e7dc08"},
-      {name:"2027袁东大作文专项班 — 更新16-17讲", type:"🔄 更新", link:"https://pan.quark.cn/s/dff39e4c668e"},
-      {name:"2027超格国考行测+申论实战桶阶段二酷酷刷 — 更厂长资料01讲", type:"🔄 更新", link:"https://pan.quark.cn/s/18bc99ea4a92"},
-      {name:"2027考季FB行测2800题 — 更新大量视频", type:"🔄 更新", link:"https://pan.quark.cn/s/468e2bd16442"},
-      {name:"2027年FB行测高阶难题精刷540题", type:"🆕 新增", link:"https://pan.quark.cn/s/c9df98240f2c"},
-      {name:"2027考季大懒猫言语刷刷刷直播课 — 更第22讲", type:"🔄 更新", link:"https://pan.quark.cn/s/21f590ba9964"},
-      {name:"2027年上岸村王兰亭综A理论筑基 — 更新10节", type:"🔄 更新", link:"https://pan.quark.cn/s/0889e73a86d4"},
-      {name:"2027年政治理论素养课-跟着杨攀老师学《求是》", type:"🆕 新增", link:"https://pan.quark.cn/s/0aae3c42dee1"},
-      {name:"花生十三｜27年言语1000词笔记", type:"🆕 新增", link:"https://pan.quark.cn/s/13d1e87d3ae1"},
-      {name:"花生十三｜27年逻辑判断思维导图 — 更思维导图7", type:"🔄 更新", link:"https://pan.quark.cn/s/8551ebdc6274"},
-      {name:"2027超格行测+申论夸夸刷刷题营 — 更判断07", type:"🔄 更新", link:"https://pan.quark.cn/s/95343c9736f8"},
-      {name:"2027陈怀安行测圣经判断推理系统课 — 更03讲-立体图推上", type:"🔄 更新", link:"https://pan.quark.cn/s/aec38ae35fae"},
-      {name:"2027伯洁的常识判断", type:"🆕 新增", link:"https://pan.quark.cn/s/96f8b9066950"}
-    ]},
-    {date:"2026-07-28", title:"7月28日更新", summary:"🆕 新增 1 门 + 🔄 更新 8 门", courses:[
-      {name:"2027年FB千词计划：1000词精讲训练营", type:"🆕 新增", link:"https://pan.quark.cn/s/0929d7efaeb6"},
-      {name:"2027考季大懒猫言语刷刷刷直播课 — 更第21讲", type:"🔄 更新", link:"https://pan.quark.cn/s/6aef424af4cd"},
-      {name:"2027年白宁国省考公专 — 更新系统课23-28&公专答疑15&6月时政", type:"🔄 更新", link:"https://pan.quark.cn/s/7346dc6647c5"},
-      {name:"2027超格行测+申论夸夸刷刷题营 — 更牟立志资料分析07", type:"🔄 更新", link:"https://pan.quark.cn/s/0b84df69b169"},
-      {name:"2027上岸村林凡资料分析筑基11层 — 更新17-18节", type:"🔄 更新", link:"https://pan.quark.cn/s/45c8b2ef8306"},
-      {name:"未命名资料6 — 更：36-53讲", type:"🔄 更新", link:"https://pan.quark.cn/s/9483e0fbc428"},
-      {name:"更新第二阶段13-14 — 更新第二阶段13-14", type:"🔄 更新", link:"https://pan.quark.cn/s/c9e8bd3381ab"},
-      {name:"2026超格时政讲练班 — 更6月下&7月上", type:"🔄 更新", link:"https://pan.quark.cn/s/ad52d91a2cbc"},
-      {name:"2027年事考超格综A夸夸刷刷题营 — 更新04讲", type:"🔄 更新", link:"https://pan.quark.cn/s/4b0e79f6df84"}
-    ]},
-    {date:"2026-07-27", title:"7月27日更新", summary:"🆕 新增 2 门 + 🔄 更新 10 门", courses:[
-      {name:"2027上岸村行测专项提升【二阶段】 — 更张弓01节&资料分析唐宋", type:"🔄 更新", link:"https://pan.quark.cn/s/72b15f84c788"},
-      {name:"2027超格行测+申论夸夸刷刷题营", type:"🔄 更新", link:"https://pan.quark.cn/s/1f39ed74191c"},
-      {name:"更新第二阶段09-12 — 更新第二阶段09-12", type:"🔄 更新", link:"https://pan.quark.cn/s/a81182eae3c4"},
-      {name:"高照速算题本更新新速算2193-2202", type:"🔄 更新", link:"https://pan.quark.cn/s/ce53cecd8f5d"},
-      {name:"2027袁东大作文专项班 — 更新13-15讲&赠送刷题课", type:"🔄 更新", link:"https://pan.quark.cn/s/1f02051a5757"},
-      {name:"花生十三｜27年逻辑判断思维导图 — 更思维导图5", type:"🔄 更新", link:"https://pan.quark.cn/s/8dacf8db9228"},
-      {name:"2027刘义恒图推大拖把", type:"🆕 新增", link:"https://pan.quark.cn/s/1a795ec4532d"},
-      {name:"2027国省考季花生十三飞扬系统班 — 更琪琪&野子言语1000词01讲", type:"🔄 更新", link:"https://pan.quark.cn/s/4fc6886af1f6"},
-      {name:"2027小马哥行测申论360全程班 — 更霍克言语5-7", type:"🔄 更新", link:"https://pan.quark.cn/s/4caf61944696"},
-      {name:"2027年事考超格综A夸夸刷刷题营", type:"🆕 新增", link:"https://pan.quark.cn/s/b58deb38a0fa"},
-      {name:"2027年上岸村王兰亭综A理论筑基 — 更新08节", type:"🔄 更新", link:"https://pan.quark.cn/s/c001d4186468"},
-      {name:"2027陈怀安行测圣经判断推理系统课 — 更02讲-平面图推下", type:"🔄 更新", link:"https://pan.quark.cn/s/acd3675f5b3c"}
-    ]},
-    {date:"2026-07-25", title:"7月25日更新", summary:"🆕 新增 1 门 + 🔄 更新 9 门", courses:[
-      {name:"2027国省考季花生十三飞扬系统班 — 更言语速通课", type:"🔄 更新", link:"https://pan.quark.cn/s/7b0abf28a034"},
-      {name:"2027小马哥行测申论360全程班 — 更霍克言语4", type:"🔄 更新", link:"https://pan.quark.cn/s/3a4f5b3a931f"},
-      {name:"雨菲言语·27言语带背800词 — 更新16讲", type:"🔄 更新", link:"https://pan.quark.cn/s/16e5d6c1a2e2"},
-      {name:"2027上岸村林凡资料分析筑基11层 — 更新16节", type:"🔄 更新", link:"https://pan.quark.cn/s/9a6233882418"},
-      {name:"2027考季大懒猫言语刷刷刷直播课 — 更第20讲", type:"🔄 更新", link:"https://pan.quark.cn/s/0619b7710439"},
-      {name:"2027年刘义恒图推夸夸刷复盘笔记更04讲", type:"🔄 更新", link:"https://pan.quark.cn/s/ce143f26b4cc"},
-      {name:"花生十三｜27年逻辑判断思维导图 — 更思维导图4", type:"🔄 更新", link:"https://pan.quark.cn/s/37d6a35de057"},
-      {name:"2027超格行测+申论夸夸刷刷题营 — 更牟立志资料分析06 / 更程意&何炜健判断05", type:"🔄 更新", link:"https://pan.quark.cn/s/dec260c70ec6"},
-      {name:"2027年花生十三行测600题精讲课 — 更数量关系600题59-60套", type:"🔄 更新", link:"https://pan.quark.cn/s/fe43e250526a"},
-      {name:"2027上岸村行测专项提升讲义", type:"🆕 新增", link:"https://pan.quark.cn/s/a6df7302fff4"}
-    ]},
-    {date:"2026-07-24", title:"7月24日更新", summary:"🆕 新增 2 门 + 🔄 更新 8 门", courses:[
-      {name:"2027国省事考小黑政治理论常识全家桶 — 更专项提升02", type:"🔄 更新", link:"https://pan.quark.cn/s/f16e2224d03c"},
-      {name:"2027年国省考上岸村天琦申论26真题带练", type:"🆕 新增", link:"https://pan.quark.cn/s/4a789bd32d0e"},
-      {name:"2027小马哥行测申论360全程班 — 更霍克言语3", type:"🔄 更新", link:"https://pan.quark.cn/s/b0d762bafac2"},
-      {name:"雨菲言语·27言语带背800词 — 更新15讲", type:"🔄 更新", link:"https://pan.quark.cn/s/10147b79cdef"},
-      {name:"2027上岸村林凡资料分析筑基11层 — 更新15节", type:"🔄 更新", link:"https://pan.quark.cn/s/fd79226ac394"},
-      {name:"2027年王炎数量关系大满贯 — 更新30节", type:"🔄 更新", link:"https://pan.quark.cn/s/d589f01b24ec"},
-      {name:"2027小P公考国省考数资判系统班 — 更资料理论21&资料刷题06&数量14", type:"🔄 更新", link:"https://pan.quark.cn/s/4363c92b2909"},
-      {name:"2027超格行测+申论夸夸刷刷题营 — 更冰哥＆李崇立申论05 / 更刘义恒图推05", type:"🔄 更新", link:"https://pan.quark.cn/s/2fec452f7435"},
-      {name:"2027超格国考行测+申论实战桶阶段二酷酷", type:"🆕 新增", link:"https://pan.quark.cn/s/b100b31501f6"},
-      {name:"2027年超格国省考行测+申论全家桶课程（实战桶） — 更常识16", type:"🔄 更新", link:"https://pan.quark.cn/s/85f7d6182e60"}
-    ]},
-    {date:"2026-07-23", title:"7月23日更新", summary:"🆕 新增 3 门 + 🔄 更新 14 门", courses:[
-      {name:"2027国省考季花生十三飞扬系统班 — 更逻辑2&加课&速通课&课后作业 / 更逻辑3&速通课&课后作业&言语1000词", type:"🔄 更新", link:"https://pan.quark.cn/s/44979921076c"},
-      {name:"2027小马哥行测申论360全程班 — 更霍克言语2", type:"🔄 更新", link:"https://pan.quark.cn/s/242d00cafe86"},
-      {name:"2027年王炎数量关系大满贯 — 更新28-29节", type:"🔄 更新", link:"https://pan.quark.cn/s/377731395241"},
-      {name:"2027考季大懒猫言语刷刷刷直播课 — 更第19讲", type:"🔄 更新", link:"https://pan.quark.cn/s/43191ef97712"},
-      {name:"2026年人民日报时评精析更新至7月第三周", type:"🔄 更新", link:"https://pan.quark.cn/s/6b9e08eb2085"},
-      {name:"2027年军队文职", type:"🆕 新增", link:"https://pan.quark.cn/s/cf97535860ef"},
-      {name:"2027年超格国省考行测+申论全家桶课程（实战桶） — 更常识14-15", type:"🔄 更新", link:"https://pan.quark.cn/s/5b2c0e7fff93"},
-      {name:"雨菲言语·27言语带背800词 — 更新14讲", type:"🔄 更新", link:"https://pan.quark.cn/s/aa0145ee9f9d"},
-      {name:"2027上岸村林凡资料分析筑基11层 — 更新14节", type:"🔄 更新", link:"https://pan.quark.cn/s/18d64acdbae5"},
-      {name:"2027超格行测+申论夸夸刷刷题营 — 更牟立志资料分析05 / 更程意&何炜健判断04", type:"🔄 更新", link:"https://pan.quark.cn/s/b15ddd3d9545"},
-      {name:"花生十三｜高频成语1000词记忆版", type:"🆕 新增", link:"https://pan.quark.cn/s/47c0f04e8e0c"},
-      {name:"2027年刘义恒图推夸夸刷复盘笔记更03讲", type:"🆕 新增", link:"https://pan.quark.cn/s/4774633eb768"},
-      {name:"2027国省事考小黑政治理论常识全家桶 — 更专项提升01", type:"🔄 更新", link:"https://pan.quark.cn/s/e0c65aff5579"},
-      {name:"2027陈怀安行测圣经判断推理系统课 — 更01讲-平面图推上", type:"🔄 更新", link:"https://pan.quark.cn/s/82525d1503f6"},
-      {name:"2027年超哥国省考政治理论刷题课 — 更求是100刷题（九", type:"🔄 更新", link:"https://pan.quark.cn/s/ad41cf146ad0"},
-      {name:"2027年上岸村王兰亭综A理论筑基 — 更新05节", type:"🔄 更新", link:"https://pan.quark.cn/s/4054ea42f8ca"},
-      {name:"2027花生十三资料分析思维导图", type:"🔄 更新", link:"https://pan.quark.cn/s/4d5a772d8212"}
-    ]},
-    {date:"2026-07-22", title:"7月22日更新", summary:"🆕 新增 0 门 + 🔄 更新 14 门", courses:[
-      {name:"2027国省考季花生十三飞扬系统班 — 更言语总结课&课后作业&判断课后作业 / 更政治理论课件&PPT&背诵手册", type:"🔄 更新", link:"https://pan.quark.cn/s/8de292bd818b"},
-      {name:"2027年超格国省考行测+申论全家桶课程（实战桶） — 更周泰然&小胖丫申论16", type:"🔄 更新", link:"https://pan.quark.cn/s/b8da44b4f144"},
-      {name:"2027超格综应A类实战桶 — 更新11-13讲", type:"🔄 更新", link:"https://pan.quark.cn/s/8c55c85d01f4"},
-      {name:"2027年白宁国省考公专 — 更新系统课22&公专答疑13", type:"🔄 更新", link:"https://pan.quark.cn/s/522a29234ffb"},
-      {name:"2027小马哥行测申论360全程班 — 更刘文超数量12讲＆霍克言语1", type:"🔄 更新", link:"https://pan.quark.cn/s/5b1a81c5b36b"},
-      {name:"2027年桐哥讲公专全程班 — 更1阶段课后题", type:"🔄 更新", link:"https://pan.quark.cn/s/d6503686953f"},
-      {name:"雨菲言语·27言语带背800词 — 更新13讲", type:"🔄 更新", link:"https://pan.quark.cn/s/e8df320296ce"},
-      {name:"2027年王炎数量关系大满贯 — 更新26-27节", type:"🔄 更新", link:"https://pan.quark.cn/s/eb2aacbb5ea9"},
-      {name:"2027上岸村林凡资料分析筑基11层 — 更新12-13节", type:"🔄 更新", link:"https://pan.quark.cn/s/443381688a04"},
-      {name:"2027超格行测+申论夸夸刷刷题营 — 更刘义恒图推04讲 / 更申论04讲", type:"🔄 更新", link:"https://pan.quark.cn/s/ea3fbba23dd2"},
-      {name:"2027年花生十三行测600题精讲课 — 更数量关系600题53-58套", type:"🔄 更新", link:"https://pan.quark.cn/s/60255c07cc03"},
-      {name:"2027年超哥国省考政治理论刷题课 — 更求是100刷题（八", type:"🔄 更新", link:"https://pan.quark.cn/s/f3193790f0c7"},
-      {name:"2027超哥政治理论时政热点小锦囊 — 更2026世界人工智能大会", type:"🔄 更新", link:"https://pan.quark.cn/s/66276064ed9c"},
-      {name:"2027年上岸村王兰亭综A理论筑基 — 更新03-04节", type:"🔄 更新", link:"https://pan.quark.cn/s/507667955288"}
-    ]},
-    {date:"2026-07-21", title:"7月21日更新", summary:"🆕 新增 0 门 + 🔄 更新 9 门", courses:[
-      {name:"2027国省考季花生十三飞扬系统班 — 更政治理论24&判断01&速通课 / 更牟立志资料04讲＆程意判断03 / 更45-49讲 / 更数量关系600题51-52套", type:"🔄 更新", link:"https://pan.quark.cn/s/632429027458"},
-      {name:"2027国省考季花生十三飞扬系统班 — 更政治理论24&判断01&速通课 / 更牟立志资料04讲＆程意判断03 / 更45-49讲 / 更数量关系600题51-52套", type:"🔄 更新", link:"https://pan.quark.cn/s/38fdd4a76650"},
-      {name:"2027国省考季花生十三飞扬系统班 — 更政治理论24&判断01&速通课 / 更牟立志资料04讲＆程意判断03 / 更45-49讲 / 更数量关系600题51-52套", type:"🔄 更新", link:"https://pan.quark.cn/s/cc48695d6736"},
-      {name:"2027国省考季花生十三飞扬系统班 — 更政治理论24&判断01&速通课 / 更牟立志资料04讲＆程意判断03 / 更45-49讲 / 更数量关系600题51-52套", type:"🔄 更新", link:"https://pan.quark.cn/s/2b64104491b7"},
-      {name:"2027小马哥行测申论360全程班 — 更新刘文超-数量11讲", type:"🔄 更新", link:"https://pan.quark.cn/s/3b640f5947c4"},
-      {name:"2027考季大懒猫言语刷刷刷直播课 — 更第18讲", type:"🔄 更新", link:"https://pan.quark.cn/s/b2a1496cd713"},
-      {name:"2027年王炎数量关系大满贯 — 更新25节", type:"🔄 更新", link:"https://pan.quark.cn/s/b37c9d2687b8"},
-      {name:"2027年波波公专更第22讲", type:"🔄 更新", link:"https://pan.quark.cn/s/52e712c70509"},
-      {name:"2027年上岸村王兰亭综A理论筑基 — 更新02节", type:"🔄 更新", link:"https://pan.quark.cn/s/832305ad68db"}
-    ]},
-    {date:"2026-07-20", title:"7月20日更新", summary:"🆕 新增 0 门 + 🔄 更新 5 门", courses:[
-      {name:"2027国省考季花生十三飞扬系统班 — 更政治理论23&申论07-08 / 更判断推理&判断先导课", type:"🔄 更新", link:"https://pan.quark.cn/s/f2d42c5c5acc"},
-      {name:"2026上岸村小黑全年时政 — 更七月上", type:"🔄 更新", link:"https://pan.quark.cn/s/13e6d446c522"},
-      {name:"2027袁东大作文专项班 — 更新09讲", type:"🔄 更新", link:"https://pan.quark.cn/s/d8340ee4bb80"},
-      {name:"2027超格行测+申论夸夸刷刷题营 — 更冰哥&李崇立申论03 / 更课件同步 / 更刘义恒图推03", type:"🔄 更新", link:"https://pan.quark.cn/s/038bf3086942"},
-      {name:"2027上岸村林凡资料分析筑基11层 — 更新10-11节", type:"🔄 更新", link:"https://pan.quark.cn/s/f3d1926c09fa"}
-    ]},
-    {date:"2026-07-19", title:"7月19日更新", summary:"🆕 新增 2 门 + 🔄 更新 19 门", courses:[
-      {name:"2027年上岸村王兰亭综A理论筑基 — 更新01节", type:"🔄 更新", link:"https://pan.quark.cn/s/e1aa7eed2952"},
-      {name:"2027年超哥国省考政治理论刷题课 — 更求是100刷题（七", type:"🔄 更新", link:"https://pan.quark.cn/s/ecf2cd1bdf58"},
-      {name:"雨菲言语·27言语带背800词 — 更新11讲", type:"🔄 更新", link:"https://pan.quark.cn/s/454482e4db9b"},
-      {name:"2027年王炎数量关系大满贯 — 更新22-23节", type:"🔄 更新", link:"https://pan.quark.cn/s/684a68cbb2fb"},
-      {name:"高照速算题本 — 更7月", type:"🔄 更新", link:"https://pan.quark.cn/s/0740833f897b"},
-      {name:"牟立志老师｜资料分析知识框架默写", type:"🔄 更新", link:"https://pan.quark.cn/s/9e489096ce44"},
-      {name:"2027年超格国省考行测+申论全家桶课程（实战桶） — 更仲春之阳数量15 / 更周泰然&小胖丫申论15", type:"🔄 更新", link:"https://pan.quark.cn/s/5c3d4cb3ddce"},
-      {name:"2027袁东大作文专项班 — 更新08讲", type:"🔄 更新", link:"https://pan.quark.cn/s/3d91d330166b"},
-      {name:"2027国省考季花生十三飞扬系统班 — 更政治理论22", type:"🔄 更新", link:"https://pan.quark.cn/s/102435007cf0"},
-      {name:"2027国省考上岸村行测&申论全家桶（整理版） — 更判断推理28-35", type:"🔄 更新", link:"https://pan.quark.cn/s/f370cf6265b9"},
-      {name:"花生十三｜27年言语理解思维导图更08", type:"🔄 更新", link:"https://pan.quark.cn/s/af2fa3b13880"},
-      {name:"2027考季大懒猫言语刷刷刷直播课 — 更第17讲", type:"🔄 更新", link:"https://pan.quark.cn/s/b5e7e6ea2727"},
-      {name:"2027小马哥行测申论360全程班 — 更新刘文超-数量08-10讲", type:"🔄 更新", link:"https://pan.quark.cn/s/3ca93f03737c"},
-      {name:"2027超格璐璐政治理论碎碎念（磨耳朵） — 更新12-18", type:"🔄 更新", link:"https://pan.quark.cn/s/85a2fa15bd7b"},
-      {name:"句号老师行测经验贴", type:"🔄 更新", link:"https://pan.quark.cn/s/a439ae8079fe"},
-      {name:"2026年人民日报时评精析（彩色版） — 更新7月第二周", type:"🆕 新增", link:"https://pan.quark.cn/s/83ac670648a1"},
-      {name:"2027柴玉玲综应B类系统理论课", type:"🆕 新增", link:"https://pan.quark.cn/s/b9dea1c49f39"},
-      {name:"2027年白宁国省考公专 — 更新公安答疑专场", type:"🔄 更新", link:"https://pan.quark.cn/s/c02c0f49e8b6"},
-      {name:"2027上岸村林凡资料分析筑基11层 — 更新09节", type:"🔄 更新", link:"https://pan.quark.cn/s/77b065940da3"},
-      {name:"2027年花生十三行测600题精讲课 — 更数量关系600题49-50套", type:"🔄 更新", link:"https://pan.quark.cn/s/9fce647ed2d5"},
-      {name:"2027上岸村王永恒资料分析母题研究 — 更新08讲", type:"🔄 更新", link:"https://pan.quark.cn/s/ae757cf636f4"}
-    ]},
-    {date:"2026-07-17", title:"7月17日更新", summary:"🆕 新增 6 门 + 🔄 更新 15 门", courses:[
-      {name:"01】2027国省考季花生十三飞扬系统班 — 更言语课后作业4-5 / 更方法精讲讲义&申论规范词 / 更言语8＆政治理论21", type:"🔄 更新", link:"https://pan.quark.cn/s/77c3a374c324"},
-      {name:"2027超格行测+申论夸夸刷 — 更刘义恒图推02 / 更冰哥&李崇立申论02", type:"🔄 更新", link:"https://pan.quark.cn/s/14d79c4fd389"},
-      {name:"05】2027薛睿公考逻辑必刷678题库", type:"🆕 新增", link:"https://pan.quark.cn/s/b67c8b143590"},
-      {name:"花生十三｜27年言语理解思维导图", type:"🆕 新增", link:"https://pan.quark.cn/s/bf8f3b435c41"},
-      {name:"2027年上岸村王兰亭综A理论筑基", type:"🆕 新增", link:"https://pan.quark.cn/s/487a3a01dd23"},
-      {name:"政治理论】2027超哥国省考政治理论刷题课 — 更求是100刷题（六", type:"🔄 更新", link:"https://pan.quark.cn/s/3f828ffc3ae9"},
-      {name:"刘义恒、图推夸夸刷笔记", type:"🔄 更新", link:"https://pan.quark.cn/s/1707d6772cd5"},
-      {name:"02】2027花生十三600题讲解 — 更数量关系600题45-48套", type:"🔄 更新", link:"https://pan.quark.cn/s/d156b2c5ce85"},
-      {name:"2027上岸村王永恒 — 更新06-07讲", type:"🔄 更新", link:"https://pan.quark.cn/s/92b53e0a1ec7"},
-      {name:"2026年千君时政月月谈", type:"🔄 更新", link:"https://pan.quark.cn/s/112edd7dfa35"},
-      {name:"01】27陈怀安行测圣经 — 更9讲", type:"🔄 更新", link:"https://pan.quark.cn/s/8c3aefaed27d"},
-      {name:"2027上岸村林凡 — 更新06-08节", type:"🔄 更新", link:"https://pan.quark.cn/s/5ec0b75cecf7"},
-      {name:"卷心菜每晚直播逐字稿 .pdf", type:"🔄 更新", link:"https://pan.quark.cn/s/8fd309b0b490"},
-      {name:"2027行测申论360全程班 — 更新刘文超-数量07讲", type:"🔄 更新", link:"https://pan.quark.cn/s/36479c1b2a14"},
-      {name:"07】2027超格言语逻辑填空400词 — 更新1-3讲", type:"🔄 更新", link:"https://pan.quark.cn/s/c9d79a4d84d7"},
-      {name:"2027考季大懒猫言语刷刷刷直播课 — 更第15讲", type:"🔄 更新", link:"https://pan.quark.cn/s/e47fc0c6c39d"},
-      {name:"018】2027年国省考、选调笔试基础通关课【津仕】", type:"🆕 新增", link:"https://pan.quark.cn/s/e16642fb503a"},
-      {name:"2027年高照", type:"🔄 更新", link:"https://pan.quark.cn/s/64277b9f883d"},
-      {name:"2027年超格国省考行测+申论全家桶课程（实战桶） — 更仲春之阳数量13 / 更常识12", type:"🔄 更新", link:"https://pan.quark.cn/s/a2e0779cc7c8"},
-      {name:"050】2027年公考刘杰判断推理15天提速带刷营（一期）", type:"🆕 新增", link:"https://pan.quark.cn/s/70562ad8a079"},
-      {name:"049】2027年公考张伟男数量关系系统课", type:"🆕 新增", link:"https://pan.quark.cn/s/e05b140f7e54"}
-    ]},
-    {date:"2026-07-15", title:"7月15日更新", summary:"🆕 新增 0 门 + 🔄 更新 11 门", courses:[
-      {name:"01】2027国省考季花生十三飞扬系统班 — 更言语6＆政治理论19", type:"🔄 更新", link:"https://pan.quark.cn/s/5848e455acea"},
-      {name:"2027超格行测+申论夸夸刷 — 更冰哥＆李崇立申论01讲&班会 / 更刘义恒图推01讲 / 更判断推理01", type:"🔄 更新", link:"https://pan.quark.cn/s/1cdfc99c7691"},
-      {name:"2027行测申论360全程班 — 更新刘文超-数量06讲", type:"🔄 更新", link:"https://pan.quark.cn/s/297077e64a70"},
-      {name:"2027年王炎数量关系大满贯 — 更新15节", type:"🔄 更新", link:"https://pan.quark.cn/s/eb5b9d9a7771"},
-      {name:"雨菲言语·27言语带背800词 — 更新08讲", type:"🔄 更新", link:"https://pan.quark.cn/s/e80678fd02ac"},
-      {name:"001】2027国省事考小黑政治理论常识全家桶 — 更常识笔记15-21&思维导图", type:"🔄 更新", link:"https://pan.quark.cn/s/74f5c123dcd2"},
-      {name:"2027上岸村王永恒 — 更新05讲", type:"🔄 更新", link:"https://pan.quark.cn/s/1f0a24fe39c8"},
-      {name:"01】27陈怀安行测圣经 — 更7.14直播答疑", type:"🔄 更新", link:"https://pan.quark.cn/s/4b438e1e08d1"},
-      {name:"刘义恒、图推夸夸刷笔记", type:"🔄 更新", link:"https://pan.quark.cn/s/ba99b6bccced"},
-      {name:"03】2027江苏省考系统班 — 更新第二阶段", type:"🔄 更新", link:"https://pan.quark.cn/s/8cf1eb786970"},
-      {name:"2027年超格国省考行测+申论全家桶课程（实战桶） — 更伯洁常识10-11 / 更热忱判断14-16 / 更周泰然&小胖丫申论13", type:"🔄 更新", link:"https://pan.quark.cn/s/3b18ae5d00ea"}
-    ]},
-    {date:"2026-07-14", title:"7月14日", summary:"🆕 新增 0 门 + 🔄 更新 9 门", courses:[
-      {name:"【01】2027国省考季花生十三飞扬系统班 — 更言语理解作业05&速通课05&政治18）", type:"🔄 更新", link:"https://pan.quark.cn/s/c549a2e94096"},
-      {name:"2027超哥政治理论时政热点小锦囊 — 更庆祝建D105周年大会&国家科学技术奖励大会", type:"🔄 更新", link:"https://pan.quark.cn/s/b1674678a778"},
-      {name:"2027行测申论360全程班 — 更新刘文超-数量05讲", type:"🔄 更新", link:"https://pan.quark.cn/s/b05f07073fb7"},
-      {name:"2027超格夸夸刷 — 更资料分析01讲", type:"🔄 更新", link:"https://pan.quark.cn/s/2ac24a9aff24"},
-      {name:"2027上岸村林凡资料分析筑基11层 — 更新05节", type:"🔄 更新", link:"https://pan.quark.cn/s/10e352273956"},
-      {name:"笔记", type:"🔄 更新", link:"https://pan.quark.cn/s/ddad251a5ca8"},
-      {name:"【02】2027花生十三600题讲解 — 更数量关系600题43-44套）", type:"🔄 更新", link:"https://pan.quark.cn/s/94b9d0865f1e"},
-      {name:"2027年王炎数量关系大满贯 — 更新12-14节", type:"🔄 更新", link:"https://pan.quark.cn/s/8ffd6fd1a232"},
-      {name:"2027考季大懒猫言语刷刷刷直播课 — 更第14讲", type:"🔄 更新", link:"https://pan.quark.cn/s/a17509df737d"}
-    ]},
-    {date:"2026-07-13", title:"7月13日", summary:"🆕 新增 6 门 + 🔄 更新 11 门", courses:[
-      {name:"【01】2027国省考季花生十三飞扬系统班 — 更言语理解作业04&速通课04）", type:"🔄 更新", link:"https://pan.quark.cn/s/7e3cee45922f"},
-      {name:"雨菲言语·27言语带背800词 — 更新07讲", type:"🔄 更新", link:"https://pan.quark.cn/s/80480035cfa4"},
-      {name:"【02】2027花生十三600题讲解 — 更数量关系600题41-42套）", type:"🔄 更新", link:"https://pan.quark.cn/s/108842819c95"},
-      {name:"高照老师｜2027年数量关系公式默写表", type:"🆕 新增", link:"https://pan.quark.cn/s/f25544da5980"},
-      {name:"花生十三｜27年言语理解思维导图", type:"🆕 新增", link:"https://pan.quark.cn/s/325699bf933a"},
-      {name:"2027行测申论360全程班 — 更刘文超&李威猛&录播课", type:"🔄 更新", link:"https://pan.quark.cn/s/a78e1c5d025e"},
-      {name:"刘义恒图推-27版思维导图", type:"🔄 更新", link:"https://pan.quark.cn/s/f2aa80cb806c"},
-      {name:"2027上岸村林凡资料分析筑基11层 — 更新04节", type:"🔄 更新", link:"https://pan.quark.cn/s/78c91ff9df6f"},
-      {name:"2027超格璐璐政治理论碎碎念（磨耳朵） — 更新10-11", type:"🔄 更新", link:"https://pan.quark.cn/s/d37558189a16"},
-      {name:"【政治理论】2027超哥国省考政治理论刷题课 — 更求是100刷题（三）", type:"🔄 更新", link:"https://pan.quark.cn/s/3df16afd307f"},
-      {name:"2027上岸村王永恒资料分析母题研究", type:"🆕 新增", link:"https://pan.quark.cn/s/490ce1ef65cd"},
-      {name:"2027国考超格刘义恒以练代背 — 更PPT完整版）", type:"🔄 更新", link:"https://pan.quark.cn/s/886d19c2dd1b"},
-      {name:"2027年王炎数量关系大满贯 — 更新10-11节", type:"🔄 更新", link:"https://pan.quark.cn/s/2046e3cb8e4d"},
-      {name:"2026河南特岗冲刺", type:"🔄 更新", link:"https://pan.quark.cn/s/3b1b8d518755"},
-      {name:"【05】2027年桐哥讲公专全程班", type:"🆕 新增", link:"https://pan.quark.cn/s/06f14d23d502"},
-      {name:"【06】2027年张薇公专理论课【上岸村】", type:"🆕 新增", link:"https://pan.quark.cn/s/b2ac393f6fe7"},
-      {name:"【15】2027年国省考上岸村杨天明申论母题爆破班（100题）", type:"🆕 新增", link:"https://pan.quark.cn/s/d816da6110c7"}
-    ]},
-    {date:"2026-07-11", title:"7月11日", summary:"🔄 更新 13 门", courses:[
-      {name:"2027年超格国省考行测+申论全家桶课程（实战桶） — 更伯洁常识08-09 / 更周泰然&小胖丫申论10-11", type:"🔄 更新", link:"https://pan.quark.cn/s/239e5be5fe47"},
-      {name:"【01】2027小P公考国省考数资判系统班 — 更资料刷题01-03&刷题册讲义", type:"🔄 更新", link:"https://pan.quark.cn/s/26a170c85ad3"},
-      {name:"雨菲言语·27言语带背800词 — 更新05讲", type:"🔄 更新", link:"https://pan.quark.cn/s/9f22e0c809d1"},
-      {name:"2027年王炎数量关系大满贯 — 更新08-09节", type:"🔄 更新", link:"https://pan.quark.cn/s/2f3d7abb1ff9"},
-      {name:"2027考季大懒猫言语刷刷刷直播课 — 更第14讲", type:"🔄 更新", link:"https://pan.quark.cn/s/078dead1bb57"},
-      {name:"2027年唐宋算经-九章算术一阶段·数量夯基 — 更新15-18讲", type:"🔄 更新", link:"https://pan.quark.cn/s/2c46f846a283"},
-      {name:"【政治理论】2027超哥国省考政治理论刷题课 — 更新29-求是刷题", type:"🔄 更新", link:"https://pan.quark.cn/s/3a13a856670d"},
-      {name:"【02】2027花生十三600题讲解 — 更数量关系600题39-40套", type:"🔄 更新", link:"https://pan.quark.cn/s/d3e19b12931d"},
-      {name:"【01】27陈怀安行测圣经资料分析系统课 — 更0707&0709直播答疑", type:"🔄 更新", link:"https://pan.quark.cn/s/8cc29d93a071"},
-      {name:"2026广东三支一扶佛脚手册 — 更新视频", type:"🔄 更新", link:"https://pan.quark.cn/s/58ac7c1b9c8d"},
-      {name:"鹤峰常识判断磨耳朵 — 更新20-21讲", type:"🔄 更新", link:"https://pan.quark.cn/s/0841cbc2acb1"},
-      {name:"2027国考超格刘义恒以练代背 — 更14讲", type:"🔄 更新", link:"https://pan.quark.cn/s/7995b707afa7"},
-      {name:"花生十三｜27年言语理解思维导图", type:"🔄 更新", link:"https://pan.quark.cn/s/1c634687edb2"}
-    ]},
-        {date:"2026-07-10", title:"7月10日", summary:"🆕 新增 1 门 + 🔄 更新 15 门", courses:[
-      {name:"2026广东三支一扶佛脚手册", type:"🆕 新增", link:"https://pan.quark.cn/s/d2a5cc0276e2"},
-      {name:"【01】2027国省考季花生十三飞扬系统班 — 更言语04&作业&速通课&政治理论15 / 政治背诵清单&言语课件&申论素材", type:"🔄 更新", link:"https://pan.quark.cn/s/2de6ff8ef66f"},
-      {name:"2027年国省考CG行测+申论全家桶（精讲桶）— 更璐璐政治理论08讲 / 高照＆牟立志15讲", type:"🔄 更新", link:"https://pan.quark.cn/s/56f4e9eef27d"},
-      {name:"2027年超格国省考行测+申论全家桶（实战桶）— 更仲春之阳数量07-10 / 热忱判断11-13", type:"🔄 更新", link:"https://pan.quark.cn/s/0b99ee7d9b96"},
-      {name:"【05】2027上岸村 — 更判断推理-何聘25讲", type:"🔄 更新", link:"https://pan.quark.cn/s/6eb52b35c831"},
-      {name:"2027国考超格刘义恒以练代背 — 更13讲", type:"🔄 更新", link:"https://pan.quark.cn/s/df6f6ea98c36"},
-      {name:"【01】2026年李铁河南三支一扶全家桶 — 更时政梳理34考前陪伴", type:"🔄 更新", link:"https://pan.quark.cn/s/462ffa4dae42"},
-      {name:"【00】2027公基系统班 — 更新第三和四阶段", type:"🔄 更新", link:"https://pan.quark.cn/s/d4d6f96d126a"},
-      {name:"2027年王炎数量关系大满贯 — 更新06-07节", type:"🔄 更新", link:"https://pan.quark.cn/s/dc0db487da15"},
-      {name:"花生十三｜27年言语理解思维导图", type:"🔄 更新", link:"https://pan.quark.cn/s/203e13615dd3"},
-      {name:"2027超格夸夸刷 — 更新课表&打卡表", type:"🔄 更新", link:"https://pan.quark.cn/s/39b1a20e2dd4"},
-      {name:"2027上岸村林凡资料分析筑基11层 — 更新01节", type:"🔄 更新", link:"https://pan.quark.cn/s/7beb5f7ce7dc"},
-      {name:"雨菲言语·27言语带背800词 — 更新04讲", type:"🔄 更新", link:"https://pan.quark.cn/s/d4412cc1aece"},
-      {name:"【时政】2026李铁全年时政 — 更新26年7月&讲义", type:"🔄 更新", link:"https://pan.quark.cn/s/96e72ff11b19"},
-      {name:"【时政】2027超哥事业编三支考前时政最后50题", type:"🔄 更新", link:"https://pan.quark.cn/s/20b6a4c1f3ed"},
-      {name:"【11】2026三支一扶&事业编小黑考前必刷50题", type:"🔄 更新", link:"https://pan.quark.cn/s/2bb855b50503"}
-    ]},
-    {date:"2026-07-09", title:"7月9日", summary:"🆕 新增 5 门 + 🔄 更新 14 门", courses:[
-      {name:"【07】2027超格言语逻辑填空400词", type:"🆕 新增", link:"https://pan.quark.cn/s/25a3b32b343c"},
-      {name:"2027年【超值7+1】理论刷题课", type:"🆕 新增", link:"https://pan.quark.cn/s/811e9b80dc55"},
-      {name:"2027年粉刷刷合集", type:"🆕 新增", link:"https://pan.quark.cn/s/068f00bd9479"},
-      {name:"【公基】2026事业编三支小黑公基考前冲刺班", type:"🆕 新增", link:"https://pan.quark.cn/s/fc1762e143e6"},
-      {name:"【时政】2027超哥事业编三支考前时政最后50题", type:"🆕 新增", link:"https://pan.quark.cn/s/d22fee436eda"},
-      {name:"【01】2027国省考季花生十三飞扬系统班", type:"🔄 更新", link:"https://pan.quark.cn/s/78f07a2d5d00"},
-      {name:"2027多省联考系统班", type:"🔄 更新", link:"https://pan.quark.cn/s/940039c5fbb3"},
-      {name:"【01】2027小P公考国省考数资判系统班", type:"🔄 更新", link:"https://pan.quark.cn/s/da421ccf16cf"},
-      {name:"2027国考超格刘义恒以练代背", type:"🔄 更新", link:"https://pan.quark.cn/s/0d516c414b92"},
-      {name:"2027年唐宋算经·数量夯基", type:"🔄 更新", link:"https://pan.quark.cn/s/7e996edcccd0"},
-      {name:"花生十三 | 27年言语理解思维导图", type:"🔄 更新", link:"https://pan.quark.cn/s/3d41482883ef"},
-      {name:"【04】2027年白宁国省考公专", type:"🔄 更新", link:"https://pan.quark.cn/s/453fd1352cbe"},
-      {name:"2027年国省考CG行测+申论全家桶（精讲桶）", type:"🔄 更新", link:"https://pan.quark.cn/s/b28434ff543a"},
-      {name:"2027年王炎数量关系大满贯", type:"🔄 更新", link:"https://pan.quark.cn/s/cb926b1e6772"},
-      {name:"2027国省考大懒猫言语理论课", type:"🔄 更新", link:"https://pan.quark.cn/s/73667f742718"},
-      {name:"2027考季大懒猫言语刷刷刷直播课", type:"🔄 更新", link:"https://pan.quark.cn/s/306c4dd453ac"},
-      {name:"雨菲言语·27言语带背800词", type:"🔄 更新", link:"https://pan.quark.cn/s/72c1e471b342"},
-      {name:"26河北特岗冲刺", type:"🔄 更新", link:"https://pan.quark.cn/s/db852b51591c"},
-      {name:"2026河南特岗冲刺", type:"🔄 更新", link:"https://pan.quark.cn/s/8aabb861cf72"}
-    ]},
-{date:"2026-07-08", title:"7月8日", summary:"🆕 新增 2 门 + 🔄 更新 12 门", courses:[
-      {name:"2027超格夸夸刷 — 讲义&思维导图", type:"🆕 新增", link:"https://pan.quark.cn/s/2f292a1f6a7b"},
-      {name:"2027超格璐璐政治理论碎碎念（磨耳朵）", type:"🆕 新增", link:"https://pan.quark.cn/s/3b67274283d7"},
-      {name:"花生十三飞扬系统班 — 言语02+政治理论13+资料讲义", type:"🔄 更新", link:"https://pan.quark.cn/s/96195bae2f2b"},
-      {name:"刘义恒图推以练代背 — 11讲", type:"🔄 更新", link:"https://pan.quark.cn/s/62fa45ac486a"},
-      {name:"王炎数量关系大满贯 — 03讲", type:"🔄 更新", link:"https://pan.quark.cn/s/6ff81d3007e1"},
-      {name:"雨菲言语带背800词 — 02讲", type:"🔄 更新", link:"https://pan.quark.cn/s/2b9c3c6a7282"},
-      {name:"陈怀安资料分析系统课 — 05讲", type:"🔄 更新", link:"https://pan.quark.cn/s/211558db531a"},
-      {name:"李铁河南三支一扶全家桶 — 报纸理解17+时政梳理33", type:"🔄 更新", link:"https://pan.quark.cn/s/dd39ef5d328e"},
-      {name:"相丽君申论解题思维趣学营 — 08-09讲", type:"🔄 更新", link:"https://pan.quark.cn/s/373967f981dd"},
-      {name:"小黑全年时政 — 农业农村现代化十五五", type:"🔄 更新", link:"https://pan.quark.cn/s/d6735b07945c"},
-      {name:"袁东大作文专项班 — 06-07讲", type:"🔄 更新", link:"https://pan.quark.cn/s/19ac7c26c2cc"},
-      {name:"上岸村行测&申论全家桶 — 判断推理何聘26-27讲", type:"🔄 更新", link:"https://pan.quark.cn/s/6d091a9edd15"},
-      {name:"超哥国省考政治理论刷题课 — 28节", type:"🔄 更新", link:"https://pan.quark.cn/s/a626fbaa8b95"},
-      {name:"2027国考980系统班", type:"🔄 更新", link:"https://pan.quark.cn/s/905ad7538987"}
-    ]},
-    {date:"2026-07-07", title:"7月7日", summary:"🆕 新增 2 门 + 🔄 更新 13 门", courses:[
-      {name:"上岸村林凡资料分析筑基11层", type:"🆕 新增", link:"https://pan.quark.cn/s/5142f7699c6c"},
-      {name:"凯叔河南三支一扶考前冲刺5套卷", type:"🆕 新增", link:"https://pan.quark.cn/s/54d8c3bd4b84"},
-      {name:"花生十三飞扬系统班 — 更言语01", type:"🔄 更新", link:"https://pan.quark.cn/s/077c6dbd17df"},
-      {name:"2027国考980系统班", type:"🔄 更新", link:"https://pan.quark.cn/s/13255933de20"},
-      {name:"多省联考系统班 — 25-30讲", type:"🔄 更新", link:"https://pan.quark.cn/s/8aa57ae46553"},
-      {name:"刘义恒以练代背 — 10讲", type:"🔄 更新", link:"https://pan.quark.cn/s/1c56a152b142"},
-      {name:"李铁河南三支一扶 — 公基时政刷题53", type:"🔄 更新", link:"https://pan.quark.cn/s/2d4c1c41f89e"},
-      {name:"超格综应A类实战桶 — 10讲", type:"🔄 更新", link:"https://pan.quark.cn/s/a66c5c9632b8"},
-      {name:"唐宋算经·数量夯基 — 11-12讲", type:"🔄 更新", link:"https://pan.quark.cn/s/4e4d92e9e777"},
-      {name:"雨菲言语带背800词 — 01讲", type:"🔄 更新", link:"https://pan.quark.cn/s/cfe21809b18e"},
-      {name:"超格事业单位综应A类精讲桶 — 17讲", type:"🔄 更新", link:"https://pan.quark.cn/s/479774b054b0"},
-      {name:"花生十三600题讲解 — 29-32套", type:"🔄 更新", link:"https://pan.quark.cn/s/8c7c326602bf"},
-      {name:"大懒猫言语刷刷刷直播课 — 12讲", type:"🔄 更新", link:"https://pan.quark.cn/s/e164ce342783"},
-      {name:"白宁公安联考公专 — 21-22讲", type:"🔄 更新", link:"https://pan.quark.cn/s/0da7550d95d6"},
-      {name:"王炎数量关系大满贯 — 02讲", type:"🔄 更新", link:"https://pan.quark.cn/s/d383bd9a6a6d"}
-    ]}
-  ];
-  var days = window.UPDATE_DAYS;
-
-  var html = "";
-  for (var i = 0; i < days.length; i++) {
-    var d = days[i];
-    html += "<div class=\"day\">";
-    html += "<div class=\"day-header\" onclick=\"this.parentElement.classList.toggle(&#39;open&#39;)\">";
-    html += "<div><span class=\"day-title\">" + d.title + "</span>";
-    html += "<span class=\"day-summary\"> · " + d.summary + "</span></div>";
-    html += "<span class=\"arrow\">▶</span></div>";
-    html += "<div class=\"day-body\">";
-    for (var j = 0; j < d.courses.length; j++) {
-      var c = d.courses[j];
-      html += "<div class=\"course\"><span class=\"course-name\">" + c.name + "</span>";
-      if (c.type) html += "<span class=\"course-tag tag-update\">" + c.type + "</span>";
-      if (c.link) html += "<a class=\"link-btn link-quark\" href=\"" + c.link + "\" target=\"_blank\">点击转存</a>";
-      html += "</div>";
-    }
-    html += "</div></div>";
-  }
-  var calBody = document.getElementById("calBody");
-  if (calBody) calBody.innerHTML = html;
-  var latest = days[0];
-  var latestText = latest ? latest.date : "--";
-  var lastUpdateEl = document.getElementById("calendarLastUpdate");
-  if (lastUpdateEl) lastUpdateEl.textContent = "最近更新：" + latestText;
-  var updateDateEl = document.getElementById("updateDate");
-  if (updateDateEl) updateDateEl.textContent = latestText;
-})();
-
 </script>
 
 <!-- 侧边联系栏（桌面端） -->
@@ -807,8 +3096,7 @@ renderCourses('all');
 <!-- 底部联系栏（手机端） -->
 <div class="mobile-contact">
   <span>🏖️ 上岸码头</span>
-  <a class="sc-btn" id="mbQqBtn" href="#" onclick="var s=document.getElementById('mbQqCopy');if(s.style.display==='block'){s.style.display='none';this.textContent='🐧 QQ群'}else{s.style.display='block';this.textContent='🐧 563208874'};return false">🐧 QQ群</a>
-  <div id="mbQqCopy" style="display:none;position:fixed;bottom:60px;left:50%;transform:translateX(-50%);background:#fef3c7;border-radius:20px;padding:8px 16px;font-size:14px;font-weight:700;color:#d97706;cursor:pointer;z-index:1000;box-shadow:0 4px 12px rgba(0,0,0,0.15);" onclick="navigator.clipboard.writeText('563208874');this.textContent='✅ 已复制！';setTimeout(()=>{this.style.display='none'},1500)">563208874（点击复制）</div>
+  <a class="sc-btn" href="#" onclick="navigator.clipboard.writeText('563208874');this.textContent='🐧 QQ群已复制！';setTimeout(()=>{this.textContent='🐧 QQ群：563208874'},1500);return false">🐧 QQ群：563208874</a>
 </div>
 
 </body>
