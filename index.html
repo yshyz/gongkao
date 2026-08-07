@@ -3751,7 +3751,7 @@ function renderCourses(filter) {
     html += '<summary class="folder-root">';
     html += (CAT_ICONS[root.root]||'📁') + ' ' + root.root;
     html += ' <span style="font-size:12px;color:var(--muted);font-weight:400;">（' + root.sections.length + ' 个分区）</span>';
-    if (root.rootLink) html += ' ' + linkBtn(root.rootLink, 'link-folder', '📥 根目录');
+    if (root.rootLink) html += ' ' + linkBtn(root.rootLink, 'link-folder', '📥 夸克网盘');
     else html += ' ' + '<span class="link-btn link-pending">📁 待补链接</span>';
     if (root.baidu) html += ' ' + linkBtn(root.baidu, 'link-baidu', '📥 百度网盘');
     html += '</summary><div class="root-body">';
@@ -3760,7 +3760,7 @@ function renderCourses(filter) {
       html += '<details class="sec-details" data-sec="' + sec.name + '"' + (filter === 'all' ? '' : ' open') + '>';
       html += '<summary class="section-title">';
       html += '<span class="sec-name">📁 ' + sec.name + '</span>';
-      if (sec.link) html += ' ' + linkBtn(sec.link, 'link-folder', '📥 文件夹');
+      if (sec.link) html += ' ' + linkBtn(sec.link, 'link-folder', '📥 夸克网盘');
       if (sec.baidu) html += ' ' + linkBtn(sec.baidu, 'link-baidu', '📥 百度网盘');
       html += '<span style="font-size:11px;color:var(--muted);font-weight:400;">（' + sec.items.length + '项）</span>';
       html += '</summary><div class="sec-body">';
