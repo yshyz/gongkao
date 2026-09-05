@@ -87,9 +87,15 @@ details[open] .folder-root summary::before { transform:rotate(90deg); }
 .side-contact .sc-btn { display:block; background:linear-gradient(135deg,#e74c3c,#f97316); color:#fff; padding:8px 0; border-radius:20px; font-size:12px; font-weight:700; text-decoration:none; margin-bottom:6px; cursor:pointer; border:none; width:100%; }
 .side-contact .sc-btn:hover { opacity:0.9; }
 .side-contact .sc-tip { font-size:10px; color:var(--muted); }
+#scTab { position:fixed; right:0; top:50%; transform:translateY(-50%); z-index:999; background:linear-gradient(135deg,#e74c3c,#f97316); color:#fff; border:none; border-radius:10px 0 0 10px; padding:12px 7px; font-size:12px; font-weight:700; cursor:pointer; writing-mode:vertical-rl; letter-spacing:3px; box-shadow:0 4px 16px rgba(0,0,0,.18); }
+#scTab.hidden { display:none; }
+.side-contact { transition:transform .25s ease; }
+.side-contact.collapsed { transform:translateY(-50%) translateX(calc(100% + 20px)); }
+.sc-collapse { position:absolute; top:4px; right:6px; border:none; background:none; color:#9ca3af; font-size:14px; cursor:pointer; padding:2px 6px; }
+.sc-collapse:hover { color:#e74c3c; }
 
 @media (max-width:768px) {
-  .side-contact { display:none; }
+  .side-contact, #scTab { display:none; }
   .mobile-contact { display:flex !important; }
 }
 .mobile-contact { display:none; position:fixed; bottom:0; left:0; right:0; z-index:999; background:linear-gradient(90deg,#fef3c7,#fee2e2); padding:10px 16px; align-items:center; justify-content:center; gap:10px; border-top:2px solid #fca5a5; }
@@ -6561,8 +6567,10 @@ function resetDailyAndResults() {
 renderCourses('all');
 </script>
 
-<!-- 侧边联系栏（桌面端） -->
+<!-- 侧边联系栏（桌面端，可收起到右侧） -->
+<button id="scTab" class="hidden" title="展开联系栏">🐧加群第一时间获取更新内容</button>
 <div class="side-contact">
+  <button class="sc-collapse" id="scCollapse" title="收起到侧边">✕</button>
   <div class="sc-title">🏖️ 上岸码头</div>
   <div class="sc-desc">需要课程资料？<br>告诉我，帮你找到上传</div>
   <a class="sc-btn" id="sideQqBtn" href="#" onclick="var s=document.getElementById('sideQqCopy');if(s.style.display==='block'){s.style.display='none';this.textContent='🐧 QQ群加入'}else{s.style.display='block';this.textContent='🐧 QQ群：563208874'};return false">🐧 QQ群加入</a>
@@ -6576,6 +6584,19 @@ renderCourses('all');
   <span>🏖️ 上岸码头</span>
   <a class="sc-btn" href="#" onclick="navigator.clipboard.writeText('563208874');this.textContent='🐧 QQ群已复制！';setTimeout(()=>{this.textContent='🐧 QQ群：563208874'},1500);return false">🐧 QQ群：563208874</a>
 </div>
+
+<script>
+(function(){
+  var p=document.querySelector('.side-contact'),tab=document.getElementById('scTab'),btn=document.getElementById('scCollapse');
+  if(!p||!tab||!btn)return;
+  var collapsed=true;
+  try{collapsed=localStorage.getItem('scCollapsed')!=='0';}catch(e){}
+  function apply(){p.classList.toggle('collapsed',collapsed);tab.classList.toggle('hidden',!collapsed);}
+  btn.onclick=function(){collapsed=true;try{localStorage.setItem('scCollapsed','1');}catch(e){}apply();};
+  tab.onclick=function(){collapsed=false;try{localStorage.setItem('scCollapsed','0');}catch(e){}apply();};
+  apply();
+})();
+</script>
 
 </body>
 </html>
