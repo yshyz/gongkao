@@ -97,7 +97,9 @@ details[open] .folder-root summary::before { transform:rotate(90deg); }
 @media (max-width:768px) {
   .side-contact, #scTab { display:none; }
   .mobile-contact { display:flex !important; }
+  .wx-qr { width:180px !important; height:180px !important; }
 }
+.wx-save-tip { display:block; font-size:11px; color:#d97706; font-weight:700; margin-top:2px; }
 .mobile-contact { display:none; position:fixed; bottom:0; left:0; right:0; z-index:999; background:linear-gradient(90deg,#fef3c7,#fee2e2); padding:10px 16px; align-items:center; justify-content:center; gap:10px; border-top:2px solid #fca5a5; }
 .mobile-contact .sc-btn { background:linear-gradient(135deg,#e74c3c,#f97316); color:#fff; padding:8px 18px; border-radius:20px; font-size:13px; font-weight:700; text-decoration:none; border:none; cursor:pointer; }
 .mobile-contact span { font-size:12px; color:#dc2626; font-weight:600; }
@@ -115,7 +117,7 @@ details[open] .folder-root summary::before { transform:rotate(90deg); }
 <div class="header">
   <h1>📚 公考补给站</h1>
   <p class="sub">网盘目录导航 · 全部资料分享链接</p>
-  <span class="badge">📦 已收录 1063 个资料入口</span>
+  <span class="badge">📦 已收录 1064 个资料入口</span>
   <span class="badge green">🐧 加群获取更新</span>
 </div>
 
@@ -2883,8 +2885,9 @@ details[open] .folder-root summary::before { transform:rotate(90deg); }
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;align-items:center;">
       <a class="cta" style="font-size:14px;" href="#" onclick="navigator.clipboard.writeText('563208874');this.textContent='🐧 QQ群已复制！';setTimeout(()=>{this.textContent='🐧 QQ群：563208874'},1500);return false">🐧 QQ群：563208874（点击复制）</a>
       <div style="text-align:center;">
-        <img src="wx-group.jpg" alt="微信群二维码" style="width:120px;height:120px;border-radius:8px;display:block;">
+        <img class="wx-qr" src="wx-group.jpg" alt="微信群二维码，长按可保存" style="width:120px;height:120px;border-radius:8px;display:block;">
         <span style="font-size:11px;color:#6b7280;">📱 扫码加微信群</span>
+        <span class="wx-save-tip">👆 长按二维码保存到手机</span>
       </div>
     </div>
     <p style="font-size:11px;color:#9ca3af;margin-top:10px;">👆 QQ群直接搜索加入，一起交流备考</p>
@@ -2997,6 +3000,11 @@ const COURSE_TREE = [
       "name": "【12】2027年FB行测高阶难题精刷（540题）",
       "link": "https://pan.quark.cn/s/6f3dbf6d0988",
       "baidu": "https://pan.baidu.com/s/1lxxoCcVCN_F8adbHLl8lxw?pwd=4974"
+     },
+     {
+      "name": "2026年四川省考笔试资料",
+      "link": "https://pan.quark.cn/s/3c1baa4aa219",
+      "baidu": "https://pan.baidu.com/s/1I7ocK-tDO8GcHZ13y6_ddQ?pwd=0000"
      }
     ]
    },
