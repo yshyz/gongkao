@@ -87,6 +87,10 @@ details[open] .folder-root summary::before { transform:rotate(90deg); }
 .side-contact .sc-btn { display:block; background:linear-gradient(135deg,#e74c3c,#f97316); color:#fff; padding:8px 0; border-radius:20px; font-size:12px; font-weight:700; text-decoration:none; margin-bottom:6px; cursor:pointer; border:none; width:100%; }
 .side-contact .sc-btn:hover { opacity:0.9; }
 .side-contact .sc-tip { font-size:10px; color:var(--muted); }
+.print-ad { margin-top:10px; padding-top:10px; border-top:1px dashed #fca5a5; }
+.print-ad .pa-title { font-size:12px; font-weight:700; color:#1a1a2e; }
+.print-ad .pa-desc { font-size:11px; color:#d97706; font-weight:700; margin-top:2px; line-height:1.5; }
+.print-ad img { width:100%; border-radius:8px; margin-top:6px; display:block; }
 #scTab { position:fixed; right:0; top:50%; transform:translateY(-50%); z-index:999; background:linear-gradient(135deg,#e74c3c,#f97316); color:#fff; border:none; border-radius:10px 0 0 10px; padding:12px 7px; font-size:12px; font-weight:700; cursor:pointer; writing-mode:vertical-rl; letter-spacing:3px; box-shadow:0 4px 16px rgba(0,0,0,.18); }
 #scTab.hidden { display:none; }
 .side-contact { transition:transform .25s ease; }
@@ -3377,6 +3381,7 @@ const COURSE_TREE = [
     "name": "【00】2026年人民日报晨读系列",
     "link": "https://pan.quark.cn/s/3bf0edb7fd19",
     "baidu": "https://pan.baidu.com/s/1iwe-UQc8_zMjWKW1SdgjhA?pwd=8682",
+    "image": "",
     "items": [
      {
       "name": "【00】2026年人民日报时评精析",
@@ -3404,6 +3409,7 @@ const COURSE_TREE = [
     "name": "【01】2027粉笔1280",
     "link": "https://pan.quark.cn/s/70343da75f12",
     "baidu": "https://pan.baidu.com/s/1IZd3rz_1ACKP3KUMmLMkhw?pwd=2170",
+    "image": "",
     "items": [
      {
       "name": "【00】2027国考笔试系统班",
@@ -3496,6 +3502,7 @@ const COURSE_TREE = [
     "name": "【02】2027四海（花生十三）",
     "link": "https://pan.quark.cn/s/0a253f189e55",
     "baidu": "https://pan.baidu.com/s/1T0WKqFQsazt9BonSOGCEcg?pwd=6518",
+    "image": "",
     "items": [
      {
       "name": "【01】2027国省考季花生十三飞扬系统班",
@@ -3548,6 +3555,7 @@ const COURSE_TREE = [
     "name": "【03】2027超格（高照）",
     "link": "https://pan.quark.cn/s/cf36b14d277e",
     "baidu": "https://pan.baidu.com/s/1a0mCwaytY0i6fyaWe070wA?pwd=9754",
+    "image": "",
     "items": [
      {
       "name": "【04】2027超格行测+申论酷酷刷",
@@ -3620,6 +3628,7 @@ const COURSE_TREE = [
     "name": "【04】2027小黑",
     "link": "https://pan.quark.cn/s/556946c1c260",
     "baidu": "https://pan.baidu.com/s/1gpllpaSzRGUbZE_w5jlKJQ?pwd=7871",
+    "image": "",
     "items": [
      {
       "name": "【000】2026事业编三支·小黑公基考前冲刺班",
@@ -3642,6 +3651,7 @@ const COURSE_TREE = [
     "name": "【05】2027上岸村",
     "link": "https://pan.quark.cn/s/21ea7f0d440a",
     "baidu": "https://pan.baidu.com/s/1KWbS2GTggMtYmvJW-r0pLA?pwd=7256",
+    "image": "",
     "items": [
      {
       "name": "2027年国省考上岸村天琦申论26真题带练课",
@@ -3674,6 +3684,7 @@ const COURSE_TREE = [
     "name": "【06】2027袁东",
     "link": "https://pan.quark.cn/s/61f8fff152c9",
     "baidu": "https://pan.baidu.com/s/12lZ1tGxMp0dUFXXC9K_n7Q?pwd=6800",
+    "image": "",
     "items": [
      {
       "name": "【01】2027年国省考季袁东申论方法实战班",
@@ -3706,6 +3717,7 @@ const COURSE_TREE = [
     "name": "【07】2027郭熙",
     "link": "https://pan.quark.cn/s/4e7c540115c5",
     "baidu": "https://pan.baidu.com/s/1z2RxLeIQjWegr53skZdX6A?pwd=5591",
+    "image": "",
     "items": [
      {
       "name": "2027郭熙言语高分“十二技”",
@@ -3718,6 +3730,7 @@ const COURSE_TREE = [
     "name": "【08】2027大懒猫",
     "link": "https://pan.quark.cn/s/8fef9350f283",
     "baidu": "https://pan.baidu.com/s/13WKrVo8XHslDJAsLCb8Pfg?pwd=7050",
+    "image": "",
     "items": [
      {
       "name": "【01】2027考季大懒猫言语刷刷刷直播课",
@@ -3745,6 +3758,7 @@ const COURSE_TREE = [
     "name": "【09】2027小P公考",
     "link": "https://pan.quark.cn/s/9257af30bd43",
     "baidu": "https://pan.baidu.com/s/1gSD10jhMby1qVQgN_qfZ1A?pwd=2697",
+    "image": "",
     "items": [
      {
       "name": "【001】2027小P公考国省考数资判系统班",
@@ -3757,6 +3771,7 @@ const COURSE_TREE = [
     "name": "【10】2027超哥政治理论",
     "link": "https://pan.quark.cn/s/7e73785445cb",
     "baidu": "https://pan.baidu.com/s/1HJzIc7oudtxEsDPdOgHB0A?pwd=7016",
+    "image": "",
     "items": [
      {
       "name": "【时政】2026超格时政讲练班",
@@ -3784,6 +3799,7 @@ const COURSE_TREE = [
     "name": "【11】2027雨菲",
     "link": "https://pan.quark.cn/s/8f5e7089f3ca",
     "baidu": "https://pan.baidu.com/s/1zOd0EcZ4l_5XdsSOl1MH_g?pwd=1935",
+    "image": "",
     "items": [
      {
       "name": "2027雨菲言语选词填空大满贯",
@@ -3801,6 +3817,7 @@ const COURSE_TREE = [
     "name": "【12】2027相丽君",
     "link": "https://pan.quark.cn/s/3c8f6a6c51b4",
     "baidu": "https://pan.baidu.com/s/1uArHwmaWy_c_hQXkFEyOyQ?pwd=1299",
+    "image": "",
     "items": [
      {
       "name": "【01】2027年国省考相丽君申论解题思维趣学营",
@@ -3818,6 +3835,7 @@ const COURSE_TREE = [
     "name": "【13】2027牟立志",
     "link": "https://pan.quark.cn/s/f69fd9ca16fc",
     "baidu": "https://pan.baidu.com/s/1rJzK-_NSegY3wUDS52Sg7Q?pwd=6077",
+    "image": "",
     "items": [
      {
       "name": "【00】2027牟立志公益课-数资夜生活",
@@ -3835,6 +3853,7 @@ const COURSE_TREE = [
     "name": "【14】2027陈怀安",
     "link": "https://pan.quark.cn/s/dd7b5499f135",
     "baidu": "https://pan.baidu.com/s/1vqeoXG60giMqzpyXGUT_nw?pwd=3712",
+    "image": "",
     "items": [
      {
       "name": "【01】2027陈怀安行测圣经-资料分析",
@@ -3857,6 +3876,7 @@ const COURSE_TREE = [
     "name": "【15】2027半月谈",
     "link": "https://pan.quark.cn/s/4dc517916424",
     "baidu": "https://pan.baidu.com/s/156gj3O4hNlO_ssdSXsCxUg?pwd=3551",
+    "image": "",
     "items": [
      {
       "name": "2026半月谈抄出申论80+第三季",
@@ -3869,6 +3889,7 @@ const COURSE_TREE = [
     "name": "【16】2027天琦",
     "link": "https://pan.quark.cn/s/8fac4e819870",
     "baidu": "https://pan.baidu.com/s/1tCpnOc9Pb5ujhfT0DiogkQ?pwd=7273",
+    "image": "",
     "items": [
      {
       "name": "【01】2027上岸村天琦申论高分的规则",
@@ -3886,6 +3907,7 @@ const COURSE_TREE = [
     "name": "【17】2027王永恒",
     "link": "https://pan.quark.cn/s/e88bfd9283f0",
     "baidu": "https://pan.baidu.com/s/1DOawx6sSSrivuip2hdB8Zw?pwd=5396",
+    "image": "",
     "items": [
      {
       "name": "2027上岸村王永恒资料分析母题研究",
@@ -3903,6 +3925,7 @@ const COURSE_TREE = [
     "name": "【18】2027齐麟",
     "link": "https://pan.quark.cn/s/6f3093c1eb86",
     "baidu": "https://pan.baidu.com/s/1bwyZfhro0ZjpGOg21irU0Q?pwd=6441",
+    "image": "",
     "items": [
      {
       "name": "齐麟刷题组合集",
@@ -3915,6 +3938,7 @@ const COURSE_TREE = [
     "name": "【19】2027王炎",
     "link": "https://pan.quark.cn/s/f8d35ab1c957",
     "baidu": "https://pan.baidu.com/s/1XEcUrkX2TTTExjhOF7yEYg?pwd=5330",
+    "image": "",
     "items": [
      {
       "name": "2027年王炎数量关系大满贯",
@@ -3927,6 +3951,7 @@ const COURSE_TREE = [
     "name": "【20】2027薛睿",
     "link": "https://pan.quark.cn/s/5304a19afd3f",
     "baidu": "https://pan.baidu.com/s/1aXLDciajsTGMcM1m8_bC1Q?pwd=3774",
+    "image": "",
     "items": [
      {
       "name": "【027】2027年公考薛睿一拖五系统课（实战应用指南）",
@@ -3954,12 +3979,14 @@ const COURSE_TREE = [
     "name": "【21】2027李焕",
     "link": "https://pan.quark.cn/s/88d88625f2f7",
     "baidu": "https://pan.baidu.com/s/1s86s43jU0YLeH-7bOOC9uw?pwd=2056",
+    "image": "",
     "items": []
    },
    {
     "name": "【22】2027星光公考",
     "link": "https://pan.quark.cn/s/bf7edc8abd82",
     "baidu": "https://pan.baidu.com/s/10ponq1KYGlYfWfRiY9K4SQ?pwd=7811",
+    "image": "",
     "items": [
      {
       "name": "2027年星光公考国省考行测申论五合一提分系统班",
@@ -3972,6 +3999,7 @@ const COURSE_TREE = [
     "name": "【23】2027朱曦",
     "link": "https://pan.quark.cn/s/7803e928123c",
     "baidu": "https://pan.baidu.com/s/12WHAL9MSvDZ66WWMX8h1XQ?pwd=4999",
+    "image": "",
     "items": [
      {
       "name": "【031】2027年公考朱曦数量关系系统课",
@@ -3984,6 +4012,7 @@ const COURSE_TREE = [
     "name": "【24】2027海绵公考",
     "link": "https://pan.quark.cn/s/0e71cbd10585",
     "baidu": "https://pan.baidu.com/s/1GvbNRIO0r_5zehrgbxgrsw?pwd=8970",
+    "image": "",
     "items": [
      {
       "name": "【030】2027年公考船长申论系统精讲班",
@@ -4021,6 +4050,7 @@ const COURSE_TREE = [
     "name": "【25】2027Kiwi申论",
     "link": "https://pan.quark.cn/s/187d78c26c8a",
     "baidu": "https://pan.baidu.com/s/10R3uNZBt4WPhux2Lzugphg?pwd=2462",
+    "image": "",
     "items": [
      {
       "name": "【09】2027kiwi申论全程班",
@@ -4033,6 +4063,7 @@ const COURSE_TREE = [
     "name": "【26】2027小马哥",
     "link": "https://pan.quark.cn/s/84d670844a63",
     "baidu": "https://pan.baidu.com/s/17dHG2czOwbY3-hbv_d5JzQ?pwd=6047",
+    "image": "",
     "items": [
      {
       "name": "2027行测申论360全程班",
@@ -4045,6 +4076,7 @@ const COURSE_TREE = [
     "name": "【27】2027苏金鹏",
     "link": "https://pan.quark.cn/s/725550b8b77d",
     "baidu": "https://pan.baidu.com/s/1LKv8oFZ_cbpbZqKhMaTivA?pwd=1773",
+    "image": "",
     "items": [
      {
       "name": "【01】2027苏金朋判断推理系统课（图推逻辑类比定义）",
@@ -4057,6 +4089,7 @@ const COURSE_TREE = [
     "name": "【28】2027站长",
     "link": "https://pan.quark.cn/s/990dc2f2aacb",
     "baidu": "https://pan.baidu.com/s/1JIudDgY-cSrLGK-GUpOncQ?pwd=7100",
+    "image": "",
     "items": [
      {
       "name": "【01】2027站长申论基础班",
@@ -4069,6 +4102,7 @@ const COURSE_TREE = [
     "name": "【29】2027瞪哥",
     "link": "https://pan.quark.cn/s/50a1e7e88925",
     "baidu": "https://pan.baidu.com/s/1V6lccAqMSrAvma0MuCjv3Q?pwd=9386",
+    "image": "",
     "items": [
      {
       "name": "【01】2027瞪哥院长私人定制上岸班",
@@ -4081,6 +4115,7 @@ const COURSE_TREE = [
     "name": "【98】2027公基系统班",
     "link": "https://pan.quark.cn/s/b75a1565f00c",
     "baidu": "https://pan.baidu.com/s/1_K_a3bbsnHVVDYhUIJjH_g?pwd=6222",
+    "image": "",
     "items": [
      {
       "name": "第二阶段-导图梳理（4.24开课）",
@@ -4108,6 +4143,7 @@ const COURSE_TREE = [
     "name": "【99】2027公安招聘",
     "link": "https://pan.quark.cn/s/0467bdd6b690",
     "baidu": "https://pan.baidu.com/s/1HyJ-8BZFbGvZwsKOjCrU_Q?pwd=9095",
+    "image": "",
     "items": [
      {
       "name": "【01】2027年母志文公专",
@@ -4145,42 +4181,49 @@ const COURSE_TREE = [
     "name": "2027天晓综合应用能力（A类）系统理论课",
     "link": "https://pan.quark.cn/s/1054b890f9c9",
     "baidu": "https://pan.baidu.com/s/1JVrsjs-tV7ucpMsDOC7Tiw?pwd=x3f8",
+    "image": "",
     "items": []
    },
    {
     "name": "2027年唐宋算经-九章算术二阶段",
     "link": "https://pan.quark.cn/s/2e03d4089e92#/list/share",
     "baidu": "https://pan.baidu.com/s/1961TIHnJtWUDsvjWyaBNBw?pwd=x3f8",
+    "image": "",
     "items": []
    },
    {
     "name": "2026年河南李铁三支一扶全家桶",
     "link": "https://pan.quark.cn/s/113956ec6575",
     "baidu": "https://pan.baidu.com/s/1-irmPFp8lsUelLkapL7_gA?pwd=0000",
+    "image": "",
     "items": []
    },
    {
     "name": "刘义恒｜27图推3+3规律汇总",
     "link": "https://pan.quark.cn/s/938409b4b6bb",
     "baidu": "https://pan.baidu.com/s/1SdSBA0Vw5B5BitnH1dr-wg?pwd=x3f8",
+    "image": "",
     "items": []
    },
    {
     "name": "2026年千君时政月月谈",
     "link": "https://pan.quark.cn/s/236fc06f3fb0",
     "baidu": "https://pan.baidu.com/s/13PNuvBsz3AaJW5wHWGpTqw?pwd=0000",
+    "image": "",
     "items": []
    },
    {
     "name": "【05】2027薛睿公考逻辑必刷678题库",
     "link": "https://pan.quark.cn/s/7c547fefbb9a",
     "baidu": "https://pan.baidu.com/s/1q8ALzN48ILUgFBqcyUaz7w?pwd=3202",
+    "image": "",
     "items": []
    },
    {
     "name": "龙飞",
     "link": "",
     "baidu": "https://pan.baidu.com/s/1fhGTCkAmLZwPxgKyqlck-w?pwd=8327",
+    "image": "",
     "items": [
      {
       "name": "【01】2027年国考龙飞百大图形推理",
@@ -4198,6 +4241,7 @@ const COURSE_TREE = [
     "name": "句号｜行测精讲复盘笔记",
     "link": "https://pan.quark.cn/s/d303a21eedb5",
     "baidu": "https://pan.baidu.com/s/10vC6lP_8T02t7JqjhT3toA?pwd=x3f8",
+    "image": "",
     "items": [
      {
       "name": "句号行测全模块学习经验汇总",
@@ -4210,48 +4254,56 @@ const COURSE_TREE = [
     "name": "2027年时政是条线理论课（小Y在日记）",
     "link": "https://pan.quark.cn/s/08fd3e3fad44",
     "baidu": "https://pan.baidu.com/s/1Z_0XIpw1Xe5_xfYUmF1beQ?pwd=5744",
+    "image": "",
     "items": []
    },
    {
     "name": "2027年黑马·言语理解实战500题",
     "link": "https://pan.quark.cn/s/5a5914ee3608",
     "baidu": "https://pan.baidu.com/s/1u3wVXFygeIfIo55mlVAtlA?pwd=x3f8",
+    "image": "",
     "items": []
    },
    {
     "name": "2027年璐璐马原带背刷题",
     "link": "https://pan.quark.cn/s/eff9c936d476",
     "baidu": "https://pan.baidu.com/s/1eSu-LBVSHk60XFN9tBi7Ag?pwd=x3f8",
+    "image": "",
     "items": []
    },
    {
     "name": "2027年李陈·定义判断方法论",
     "link": "https://pan.quark.cn/s/7123a06b420e",
     "baidu": "https://pan.baidu.com/s/1utHSuxj8tMZH_1LKVptL7g?pwd=x3f8",
+    "image": "",
     "items": []
    },
    {
     "name": "【01】2027版行测申论三色笔记",
     "link": "https://pan.quark.cn/s/cb63ce6fa5cd",
     "baidu": "https://pan.baidu.com/s/1-u-PYhPCm9oeDe7cVhbJtg?pwd=x3f8",
+    "image": "",
     "items": []
    },
    {
     "name": "2027羊圈圈不背成语600词",
     "link": "https://pan.quark.cn/s/7bf555e8322c",
     "baidu": "https://pan.baidu.com/s/1jFXppPc6nsXToPLIYIz_JA?pwd=x3f8",
+    "image": "",
     "items": []
    },
    {
     "name": "【07】2027年启霖公安专业知识笔试系统班【CG】",
     "link": "https://pan.quark.cn/s/b81711fbf403",
     "baidu": "https://pan.baidu.com/s/1mAJB7kEkiBioxsC2dDBdBw?pwd=6606",
+    "image": "",
     "items": []
    },
    {
     "name": "李梦圆申论大作文专项课程",
     "link": "https://pan.quark.cn/s/bf7856cc7e2b",
     "baidu": "https://pan.baidu.com/s/1-8p2T5B9JBN0X5QaaNwwnA?pwd=0000",
+    "image": "",
     "items": [
      {
       "name": "【01】2027年李梦圆申论理筑根基课",
@@ -4274,18 +4326,21 @@ const COURSE_TREE = [
     "name": "【全国事业单位联考真题ABCDE类（2015-2026）】",
     "link": "https://pan.quark.cn/s/77ae2533b6f7",
     "baidu": "https://pan.baidu.com/s/1cmeOiNYPw0vsE_DIQLYC2Q?pwd=0000",
+    "image": "",
     "items": []
    },
    {
     "name": "【02】2027年波波公专",
     "link": "https://pan.quark.cn/s/a615cbd5d96b",
     "baidu": "https://pan.baidu.com/s/1YFiUbwFlt9bkyWkO731NyQ?pwd=4035",
+    "image": "",
     "items": []
    },
    {
     "name": "【01】2027年岳飞资料分析理论技巧班",
     "link": "https://pan.quark.cn/s/77032d0fa8bc",
     "baidu": "https://pan.baidu.com/s/1UxXmOWxkLvFBMcqdnDDBkg?pwd=5639",
+    "image": "",
     "items": [
      {
       "name": "【34】2027岳飞",
@@ -4298,6 +4353,7 @@ const COURSE_TREE = [
     "name": "2027草莓熊广东公考申论全程班",
     "link": "https://pan.quark.cn/s/243c4d9cd1a4",
     "baidu": "https://pan.baidu.com/s/1eQM6TC0_8Cax46nD4KpkDQ?pwd=x3f8",
+    "image": "",
     "items": []
    }
   ]
@@ -4311,6 +4367,7 @@ const COURSE_TREE = [
     "name": "【32】各省份三支一扶资料",
     "link": "https://pan.quark.cn/s/44c63ce7b493",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "2025湖南三支一扶",
@@ -4448,6 +4505,7 @@ const COURSE_TREE = [
     "name": "【名师资料分析速算技巧】",
     "link": "https://pan.quark.cn/s/83d7d884fca1",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【高照资料分析速算】",
@@ -4505,6 +4563,7 @@ const COURSE_TREE = [
     "name": "0、2026国考资料(附带岗位表）",
     "link": "https://pan.quark.cn/s/bf89f91e9bde",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【01】2026年国考岗位表",
@@ -4547,6 +4606,7 @@ const COURSE_TREE = [
     "name": "2025年三支一扶",
     "link": "https://pan.quark.cn/s/9eeea96e8a60",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【多机构】三支一扶各省省情★★★",
@@ -4624,6 +4684,7 @@ const COURSE_TREE = [
     "name": "2026公安",
     "link": "https://pan.quark.cn/s/421ef8398e68",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【014】2026年多省联考公安时政【警考通】",
@@ -4656,6 +4717,7 @@ const COURSE_TREE = [
     "name": "2026公考名师",
     "link": "https://pan.quark.cn/s/ab2163f1cea1",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": " （87）【言语+申论】2026年国考过了暖冬笔试系统班",
@@ -5568,6 +5630,7 @@ const COURSE_TREE = [
     "name": "2026国考",
     "link": "https://pan.quark.cn/s/e0f26cb06054",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【刷题】齐麟数资刷题组（2023-2026）",
@@ -5595,6 +5658,7 @@ const COURSE_TREE = [
     "name": "2026年事业单位课程",
     "link": "https://pan.quark.cn/s/779127e22222",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【001】李铁公基12000题刷题课（近五年最新公基真题）",
@@ -5732,6 +5796,7 @@ const COURSE_TREE = [
     "name": "2026张弓言语合集",
     "link": "https://pan.quark.cn/s/2f9541ecbdfd",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "2026国考第1期3节张弓刷题课（全）",
@@ -5779,6 +5844,7 @@ const COURSE_TREE = [
     "name": "白鹭",
     "link": "https://pan.quark.cn/s/7e81ad7c0055",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【1】2026白鹭申论扎马步+易行",
@@ -5811,6 +5877,7 @@ const COURSE_TREE = [
     "name": "超格【高照】",
     "link": "https://pan.quark.cn/s/1493d9c03f95",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【00】高照速算",
@@ -5868,6 +5935,7 @@ const COURSE_TREE = [
     "name": "大宝小宝",
     "link": "https://pan.quark.cn/s/2a11b0e16b77",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【182】2026年多省联考大宝小宝言语新春焕新刷题班",
@@ -5890,6 +5958,7 @@ const COURSE_TREE = [
     "name": "粉笔980",
     "link": "https://pan.quark.cn/s/3a5a5b32c619",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【00】2026FB国考配套29册图书电子版",
@@ -5987,6 +6056,7 @@ const COURSE_TREE = [
     "name": "郭熙合集",
     "link": "https://pan.quark.cn/s/984d015b21ca",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【01】2026言语-郭熙",
@@ -6059,6 +6129,7 @@ const COURSE_TREE = [
     "name": "花生十三",
     "link": "https://pan.quark.cn/s/16f39ac6d297",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【01】2026年花生十三飞扬笔试系统班",
@@ -6116,6 +6187,7 @@ const COURSE_TREE = [
     "name": "叽叽喳喳",
     "link": "https://pan.quark.cn/s/4fead2186869",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "2026数量关系冲刺课【叽叽喳喳的公考】",
@@ -6153,6 +6225,7 @@ const COURSE_TREE = [
     "name": "李梦娇合集",
     "link": "https://pan.quark.cn/s/ee1903610584",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "（最新）2024李梦娇每月时政",
@@ -6275,6 +6348,7 @@ const COURSE_TREE = [
     "name": "刘文超\u0026阿里木江",
     "link": "https://pan.quark.cn/s/8e3a9bfd7e15",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【基础课】2025国考省考笔试全程班（阿里木江\u0026刘文超\u0026李威猛）",
@@ -6307,6 +6381,7 @@ const COURSE_TREE = [
     "name": "刘义恒",
     "link": "https://pan.quark.cn/s/c017483924ba",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "（104）图形推理（刘义恒大神）",
@@ -6344,6 +6419,7 @@ const COURSE_TREE = [
     "name": "龙飞图推",
     "link": "https://pan.quark.cn/s/14e1a83b7250",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【05】2026省考龙飞判断试题精讲定义判断",
@@ -6376,6 +6452,7 @@ const COURSE_TREE = [
     "name": "毛娃儿",
     "link": "https://pan.quark.cn/s/92d4ffbde46a",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【数量】2025毛娃儿数量关系系统课",
@@ -6413,6 +6490,7 @@ const COURSE_TREE = [
     "name": "面试课程",
     "link": "https://pan.quark.cn/s/6b0aea75e35a",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【公安面试】",
@@ -6450,6 +6528,7 @@ const COURSE_TREE = [
     "name": "聂佳",
     "link": "https://pan.quark.cn/s/473d2aa292d0",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【2019】2019聂佳判断（最强版本）",
@@ -6487,6 +6566,7 @@ const COURSE_TREE = [
     "name": "事业单位",
     "link": "https://pan.quark.cn/s/7dbebc832724",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "（9）2026年相丽君综应A金卷预测班",
@@ -6724,6 +6804,7 @@ const COURSE_TREE = [
     "name": "天晓合集",
     "link": "https://pan.quark.cn/s/1158252e21bf",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【面试】2025天晓公务员事业编结构化面试理论课",
@@ -6801,6 +6882,7 @@ const COURSE_TREE = [
     "name": "网友红领巾",
     "link": "https://pan.quark.cn/s/4be7bd9ff886",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【01】红领巾合集",
@@ -6878,6 +6960,7 @@ const COURSE_TREE = [
     "name": "相丽君",
     "link": "https://pan.quark.cn/s/deff9ae7925a",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "（1）【申论】2026相丽君申论技巧趣学班",
@@ -6945,6 +7028,7 @@ const COURSE_TREE = [
     "name": "小黑政治理论",
     "link": "https://pan.quark.cn/s/999ef1c96d8e",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "2026小黑合集",
@@ -6962,12 +7046,14 @@ const COURSE_TREE = [
     "name": "小p公考",
     "link": "https://pan.quark.cn/s/097f51d30675",
     "baidu": "",
+    "image": "",
     "items": []
    },
    {
     "name": "小p公考 ",
     "link": "",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【事业单位】2025小P江苏事业单位逻辑判断理论+刷题课",
@@ -7005,6 +7091,7 @@ const COURSE_TREE = [
     "name": "雨菲（上岸村）",
     "link": "https://pan.quark.cn/s/7ced0270668a",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【186】2026年省考\u0026事业编雨菲言语冲刺预测班",
@@ -7047,6 +7134,7 @@ const COURSE_TREE = [
     "name": "袁东",
     "link": "https://pan.quark.cn/s/e49d1ea7ce19",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "【003】2026年省考袁东十大话题押题预测范文",
@@ -7149,6 +7237,7 @@ const COURSE_TREE = [
     "name": "真题",
     "link": "https://pan.quark.cn/s/66f3ebfaa325",
     "baidu": "",
+    "image": "",
     "items": [
      {
       "name": "公务员真题",
@@ -7168,84 +7257,98 @@ const COURSE_TREE = [
     "name": "2026事业单位",
     "link": "",
     "baidu": "https://pan.baidu.com/s/1jp2GDnPnbbdCVeMdjjx62A?pwd=3836",
+    "image": "",
     "items": []
    },
    {
     "name": "【001】2027年事业单位综应A类理论实战班（王一一）【CG】",
     "link": "https://pan.quark.cn/s/a7147053c049",
     "baidu": "https://pan.baidu.com/s/1-pndXDP87gplDnP7FCHayw?pwd=4104",
+    "image": "",
     "items": []
    },
    {
     "name": "【002】2027年事业单位综应A类理论实战班（小乐）【CG】",
     "link": "https://pan.quark.cn/s/415b4d4c7d59",
     "baidu": "https://pan.baidu.com/s/1e9SGjzPMYqoMtPm-kTOR-w?pwd=7289",
+    "image": "",
     "items": []
    },
    {
     "name": "【003】2027年张兰亭事业单位综A理论筑基课",
     "link": "https://pan.quark.cn/s/b3d80f5d5d3b",
     "baidu": "https://pan.baidu.com/s/1SPKtB6Nh1Q7pOYWiL98zkg?pwd=7823",
+    "image": "",
     "items": []
    },
    {
     "name": "【004】2027年柴玉玲事业单位综应B类理论课",
     "link": "https://pan.quark.cn/s/42262cc85280",
     "baidu": "https://pan.baidu.com/s/1DBd5N3zMRnBHKKwr4UGhJg?pwd=9309",
+    "image": "",
     "items": []
    },
    {
     "name": "【005】2027年事业单位综A夸夸刷刷题营【CG】",
     "link": "https://pan.quark.cn/s/53a98a477618",
     "baidu": "https://pan.baidu.com/s/14BIrku9T2CFEFX2edB_kog?pwd=9268",
+    "image": "",
     "items": []
    },
    {
     "name": "【006】2027年天晓事业单位综A系统理论课",
     "link": "https://pan.quark.cn/s/96043164f961",
     "baidu": "https://pan.baidu.com/s/1BvTOnS3aZ_7w4QbhHbguwQ?pwd=3036",
+    "image": "",
     "items": []
    },
    {
     "name": "【007】♥2027粉笔江苏事业系统班：综合知识和能力素质",
     "link": "https://pan.quark.cn/s/dc4c971aa2d4",
     "baidu": "https://pan.baidu.com/s/1B3YyNzVhF9ZXB5F9g36meg?pwd=4921",
+    "image": "",
     "items": []
    },
    {
     "name": "【008】2027粉笔 职测综合ABCDE类",
     "link": "https://pan.quark.cn/s/fae9b296724d",
     "baidu": "https://pan.baidu.com/s/1zxqFQ4YOhU1Sk9H7FZge3w?pwd=1036",
+    "image": "",
     "items": []
    },
    {
     "name": "【009】2027粉笔浙江事业单位系统班",
     "link": "https://pan.quark.cn/s/f7e4d8df4456",
     "baidu": "https://pan.baidu.com/s/1rWfVhvfX_qymaApPuMMsIA?pwd=4060",
+    "image": "",
     "items": []
    },
    {
     "name": "【010】2027粉笔四川事业单位系统班",
     "link": "https://pan.quark.cn/s/ba9008fecc1d",
     "baidu": "https://pan.baidu.com/s/1ZmkUxAXXEI0mrpAvltWnBg?pwd=9051",
+    "image": "",
     "items": []
    },
    {
     "name": "【011】2027粉笔广东事业公开招聘（基本能力）",
     "link": "https://pan.quark.cn/s/146d4d58f6c8",
     "baidu": "https://pan.baidu.com/s/1VUFYXYNnH6dBHp9mJtOBIw?pwd=1342",
+    "image": "",
     "items": []
    },
    {
     "name": "【012】2027粉笔山东事业单位系统班：职业能力倾向测验+综合应用能力",
     "link": "https://pan.quark.cn/s/b9a9cdae2b25",
     "baidu": "https://pan.baidu.com/s/1f7bDTm2zxS2k5iU-vZEylg?pwd=7630",
+    "image": "",
     "items": []
    },
    {
     "name": "【13】2027年FB事业单位(含ABCDE)",
     "link": "https://pan.quark.cn/s/f0e99a168af1",
     "baidu": "https://pan.baidu.com/s/1VmTwFLMePHIEX-FRYBIjWA?pwd=5097",
+    "image": "",
     "items": []
    }
   ]
@@ -7259,78 +7362,105 @@ const COURSE_TREE = [
     "name": "【010】2026年林英全年时政",
     "link": "https://pan.quark.cn/s/e5dae16a87e8",
     "baidu": "https://pan.baidu.com/s/13rbhFmaVHM6UMobjLInQUQ?pwd=6248",
+    "image": "",
     "items": []
    },
    {
     "name": "【011】2026年每月时政热点【HT】",
     "link": "https://pan.quark.cn/s/2b9a7f81b6e7",
     "baidu": "https://pan.baidu.com/s/17BomDdVnfQvJ081mLoVPMw?pwd=9624",
+    "image": "",
     "items": []
    },
    {
     "name": "【012】2026年政治理论\u0026全年时政【JS】",
     "link": "https://pan.quark.cn/s/9576ce3859ec",
     "baidu": "https://pan.baidu.com/s/1ZQ3BOX9okPWBda8Kww2m2A?pwd=3024",
+    "image": "",
     "items": []
    },
    {
     "name": "【013】2026年张薇公安时政点兵营【上岸村】",
     "link": "https://pan.quark.cn/s/42c6250baf4e",
     "baidu": "https://pan.baidu.com/s/1K6cA6BR-l91lbi9tfKfWyg?pwd=6263",
+    "image": "",
     "items": []
    },
    {
     "name": "【01】2026年时政讲练班【CG】",
     "link": "https://pan.quark.cn/s/fb24e6ad7a7d",
     "baidu": "https://pan.baidu.com/s/1xfhD5aTddgKIa0xs4y1Vow?pwd=2185",
+    "image": "",
     "items": []
    },
    {
     "name": "【02】2026年秦明时政热点专项课",
     "link": "https://pan.quark.cn/s/d9d21d699034",
     "baidu": "https://pan.baidu.com/s/1YUvljbDPPckfPDEXoQxQLw?pwd=3127",
+    "image": "",
     "items": []
    },
    {
     "name": "【03】2026年小黑全年时政",
     "link": "https://pan.quark.cn/s/7025376af25c",
     "baidu": "https://pan.baidu.com/s/1VIp1dxYdqXgpIrtngFf22w?pwd=9463",
+    "image": "",
     "items": []
    },
    {
     "name": "【04】2026年每月时政【FB】",
     "link": "https://pan.quark.cn/s/c60b2637d32f",
     "baidu": "https://pan.baidu.com/s/1vqYHopJjyrxKdfCpQAXLKw?pwd=2760",
+    "image": "",
     "items": []
    },
    {
     "name": "【05】2026年马克时政梳理",
     "link": "https://pan.quark.cn/s/2f5825ff82aa",
     "baidu": "https://pan.baidu.com/s/1meJdLqaWgsNxlgJKCzuxFw?pwd=1458",
+    "image": "",
     "items": []
    },
    {
     "name": "【06】2026年四海公考全年时政",
     "link": "https://pan.quark.cn/s/61ebeb4cae2c",
     "baidu": "https://pan.baidu.com/s/11xa7rhtYfO11ax-4Kg43gQ?pwd=9856",
+    "image": "",
     "items": []
    },
    {
     "name": "【07】2026年李铁每月时政",
     "link": "https://pan.quark.cn/s/7764bc65a75d",
     "baidu": "https://pan.baidu.com/s/16irOz-nqnzYqexvAF5k6bA?pwd=4900",
+    "image": "",
     "items": []
    },
    {
     "name": "【08】2026年李three时政热点",
     "link": "https://pan.quark.cn/s/9d30eac4ab8a",
     "baidu": "https://pan.baidu.com/s/1oOd8R58IQV-2eM7oMNAFLg?pwd=5157",
+    "image": "",
     "items": []
    },
    {
     "name": "【09】2026年千君常识时政专项梳理",
     "link": "https://pan.quark.cn/s/46e3f890ad9c",
     "baidu": "https://pan.baidu.com/s/1Lmdi2UW396D_fs2wxtsz8A?pwd=6652",
+    "image": "",
+    "items": []
+   }
+  ]
+ },
+ {
+  "root": "资料打印",
+  "rootLink": "",
+  "baidu": "",
+  "sections": [
+   {
+    "name": "小猴云印·线上打印",
+    "link": "",
+    "baidu": "",
+    "image": "print-ad.jpg",
     "items": []
    }
   ]
@@ -7386,7 +7516,7 @@ function renderCourses(filter) {
     html += (CAT_ICONS[root.root]||'📁') + ' ' + esc(root.root);
     html += ' <span style="font-size:12px;color:var(--muted);font-weight:400;">（' + root.sections.length + ' 个分区）</span>';
     if (root.rootLink) html += ' ' + linkBtn(root.rootLink, 'link-folder', '📥 夸克网盘');
-    else html += ' ' + '<span class="link-btn link-pending">📁 待补链接</span>';
+    else if (!root.sections.some(s => s.image)) html += ' ' + '<span class="link-btn link-pending">📁 待补链接</span>';
     if (root.baidu) html += ' ' + linkBtn(root.baidu, 'link-baidu', '📥 百度网盘');
     html += '</summary><div class="root-body">';
 
@@ -7394,6 +7524,13 @@ function renderCourses(filter) {
       html += '<details class="sec-details" data-sec="' + esc(sec.name) + '">';
       html += '<summary class="section-title">';
       html += '<span class="sec-name">📁 ' + esc(sec.name) + '</span>';
+      if (sec.image) {
+        // 图片分区（广告）：直接展示图片，不带按钮和课程
+        html += '</summary><div class="sec-body">';
+        html += '<img src="' + esc(sec.image) + '" alt="' + esc(sec.name) + '" loading="lazy" style="width:100%;max-width:520px;border-radius:10px;display:block;margin:4px auto;">';
+        html += '</div></details>';
+        return;
+      }
       if (sec.link) html += ' ' + linkBtn(sec.link, 'link-folder', '📥 夸克网盘');
       if (sec.baidu) html += ' ' + linkBtn(sec.baidu, 'link-baidu', '📥 百度网盘');
       html += '<span style="font-size:11px;color:var(--muted);font-weight:400;">' + (sec.items.length ? '（' + sec.items.length + '项）' : '') + '</span>';
